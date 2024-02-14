@@ -1,0 +1,19 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component WorkshopClient inherits Window {
+    in-out property<int> counter: 42;
+    callback request-increase-value();
+    width: 1400px; //Set to desired width
+    height: self.width / (16/9); //Always assure that you have 16:9 resolution
+    VerticalBox {
+        Text {
+            text: "Counter: \{root.counter}";
+        }
+        Button {
+            text: "Increase value";
+            clicked => {
+                root.request-increase-value();
+            }
+        }
+    }
+}
