@@ -1,10 +1,18 @@
+/*
+
+    Author: Justin Rauch
+    Date: 2024-03-01
+    Description: A simple button component
+
+*/
+
 export component Button inherits Rectangle {
     in-out property text <=> txt.text;
     callback clicked <=> touch.clicked;
-    border-radius: root.height / 2;
+    border-radius: root.height / 4;
     border-width: 1px;
     border-color: root.background.darker(25%);
-    background: touch.pressed ? #895bf5be : touch.has-hover ? #885bf5 :  #885bf5;
+    background: touch.pressed ? #218dbb : touch.has-hover ? #219fd5 :  #219fd5;
     height: txt.preferred-height * 1.33;
     min-width: txt.preferred-width + 20px;
     txt := Text {

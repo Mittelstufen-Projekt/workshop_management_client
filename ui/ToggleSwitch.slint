@@ -1,3 +1,11 @@
+/*
+
+    Author: Justin Rauch
+    Date: 2024-03-01
+    Description: A simple toggle switch
+
+*/
+
 export component ToggleSwitch inherits Rectangle {
     callback toggled;
     in-out property <string> text;
@@ -14,7 +22,7 @@ export component ToggleSwitch inherits Rectangle {
             border-width: 1px;
             border-radius: root.height / 2;
             border-color: self.background.darker(25%);
-            background: root.enabled ? (root.checked ? #885bf5 : white)  : white;
+            background: root.enabled ? (root.checked ? #219fd5 : #3f3f3f)  : #3f3f3f;
             animate background { duration: 100ms; }
 
             bubble := Rectangle {
@@ -24,7 +32,7 @@ export component ToggleSwitch inherits Rectangle {
                 y: 4px;
                 x: 4px + self.a * (indicator.width - bubble.width - 8px);
                 property <float> a: root.checked ? 1 : 0;
-                background: root.checked ? white : (root.enabled ? #885bf5 : gray);
+                background: root.checked ? white : (root.enabled ? #219fd5 : gray);
                 animate a, background { duration: 200ms; easing: ease;}
             }
         }

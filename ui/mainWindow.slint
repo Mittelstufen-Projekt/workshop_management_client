@@ -1,11 +1,20 @@
-import { VerticalBox } from "std-widgets.slint";
+/*
+
+    Author: Justin Rauch, Jasha Pierre
+    Date: 2024-03-01
+    Description: Main Window for the WorkshopClient
+
+*/
+
+import { VerticalBox, ComboBox } from "std-widgets.slint";
 import { Button } from "Button.slint";
 import { ToggleSwitch } from "ToggleSwitch.slint";
+import { CheckBox } from "CheckBox.slint";
 
 export component WorkshopClient inherits Window {
     in-out property<int> counter: 42;
     callback request-increase-value();
-    width: 1400px; //Set to desired width
+    width: 500px; //Set to desired width
     height: self.width / (16/9); //Always assure that you have 16:9 resolution
     background: #262626;
     VerticalBox {
@@ -19,6 +28,18 @@ export component WorkshopClient inherits Window {
                 root.request-increase-value();
             }
             width: 200px;
+        }
+        ToggleSwitch {
+            text: "Toggle me";
+            toggled => {
+                //Do something
+            }
+        }
+        CheckBox {
+            text: "Check me";
+            checked => {
+                //Do something
+            }
         }
     }
 }
