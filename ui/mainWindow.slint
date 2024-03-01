@@ -1,12 +1,16 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { VerticalBox } from "std-widgets.slint";
+import { Button } from "Button.slint";
+import { ToggleSwitch } from "ToggleSwitch.slint";
 
 export component WorkshopClient inherits Window {
     in-out property<int> counter: 42;
     callback request-increase-value();
     width: 1400px; //Set to desired width
     height: self.width / (16/9); //Always assure that you have 16:9 resolution
+    background: #262626;
     VerticalBox {
         Text {
+            color: white;
             text: "Counter: \{root.counter}";
         }
         Button {
@@ -14,6 +18,7 @@ export component WorkshopClient inherits Window {
             clicked => {
                 root.request-increase-value();
             }
+            width: 200px;
         }
     }
 }
