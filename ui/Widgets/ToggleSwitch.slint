@@ -24,7 +24,7 @@ export component ToggleSwitch inherits Rectangle {
             border-width: 1px;
             border-radius: root.height / 2;
             border-color: self.background.darker(25%);
-            background: root.enabled ? (root.checked ? Palette.accent-color : #3f3f3f)  : #3f3f3f;
+            background: root.enabled ? (root.checked ? Palette.accent-color : Palette.control-color)  : Palette.control-color;
             animate background { duration: 100ms; }
 
             bubble := Rectangle {

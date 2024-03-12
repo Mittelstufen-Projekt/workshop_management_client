@@ -31,7 +31,7 @@ export component CheckBox inherits Rectangle {
                 height: checkMark.width;
                 border-radius: root.height / 5;
                 property <float> a: root.toggled ? 1 : 0;
-                background: root.toggled ? Palette.accent-color : (root.enabled ? #3f3f3f : gray);
+                background: root.toggled ? Palette.accent-color : (root.enabled ? Palette.control-color : gray);
                 Rectangle {
                     border-radius: 5px;
                     width: checkMark.width * 0.5;

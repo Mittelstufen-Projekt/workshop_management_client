@@ -18,12 +18,18 @@ export component LoginView {
     in-out property<string> password <=> password.text;
     callback request-login();
     VerticalBox {
-        username := TextField {
-            placeholderText: "Username";
+        Text {
+            text: "Username";
+            color: Palette.text-color;
         }
-        password := TextField {
-            placeholderText: "Password";
+        username := TextField {}
+
+        Text {
+            text: "Password";
+            color: Palette.text-color;
         }
+        password := TextField {}
+        
         HorizontalBox {
             Rectangle {} // Spacer
             Button {
