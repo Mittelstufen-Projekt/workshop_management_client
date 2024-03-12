@@ -6,40 +6,27 @@
 
 */
 
+import { Palette } from "Palette.slint";
 import { VerticalBox, ComboBox } from "std-widgets.slint";
-import { Button } from "Button.slint";
-import { ToggleSwitch } from "ToggleSwitch.slint";
-import { CheckBox } from "CheckBox.slint";
+import { Button } from "Widgets/Button.slint";
+import { ToggleSwitch } from "Widgets/ToggleSwitch.slint";
+import { CheckBox } from "Widgets/CheckBox.slint";
+
+import { LoginView } from "Views/LoginView.slint";
+import { ProjectView } from "Views/ProjectView.slint";
 
 export component WorkshopClient inherits Window {
     in-out property<int> counter: 42;
-    callback request-increase-value();
-    width: 500px; //Set to desired width
+    callback request-login();
+    width: 900px; //Set to desired width
     height: self.width / (16/9); //Always assure that you have 16:9 resolution
-    background: #262626;
-    VerticalBox {
-        Text {
-            color: white;
-            text: "Counter: \{root.counter}";
-        }
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
-            }
-            width: 200px;
-        }
-        ToggleSwitch {
-            text: "Toggle me";
-            toggled => {
-                //Do something
-            }
-        }
-        CheckBox {
-            text: "Check me";
-            checked => {
-                //Do something
-            }
-        }
+    background: Palette.background-color;
+    title: "Workshop Management Client";
+    LoginView {
+        request-login => {root.request-login()}
+        visible: false;
+    }
+    ProjectView {
+        visible: true;
     }
 }

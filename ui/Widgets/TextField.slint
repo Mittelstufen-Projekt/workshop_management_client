@@ -1,0 +1,24 @@
+/*
+
+    Author: Justin Rauch
+    Date: 2024-03-12
+    Description: LineEdit implementation with out styles
+
+*/
+
+import { Palette } from "../Palette.slint";
+import { LineEdit } from "std-widgets.slint";
+
+export component TextField inherits Rectangle {
+    in-out property <string> text <=> lineEdit.text; // Text in the line edit
+    in-out property <string> placeholderText <=> lineEdit.placeholder-text; // Placeholder text in the line edit
+    Rectangle {
+        lineEdit := LineEdit {
+            height: parent.height - 2px;
+            width: parent.width - 2px;
+        }
+        border-color: Palette.accent-color;
+        border-width: 1px;
+        border-radius: 5px;
+    }
+}

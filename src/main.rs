@@ -13,7 +13,7 @@ slint::include_modules!();
 fn main() -> Result<(), slint::PlatformError> {
     let ui = WorkshopClient::new()?;
 
-    ui.on_request_increase_value({
+    ui.on_request_login({
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();

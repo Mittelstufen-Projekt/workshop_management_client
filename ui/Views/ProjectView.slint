@@ -1,0 +1,46 @@
+/*
+
+    Author: Justin Rauch, Jasha Pierre
+    Date: 2024-03-12
+    Description: Main Project Overview for the Client
+
+*/
+
+import { Palette } from "../Palette.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { Button } from "../Widgets/Button.slint";
+import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { CheckBox } from "../Widgets/CheckBox.slint";
+
+export component ProjectView {
+    HorizontalBox {
+        VerticalBox {
+            HorizontalBox {
+                VerticalBox {
+                    width: 300px;
+                    Button {
+                        text: "Project Overview";
+                        height: 50px;
+                        width: 200px;
+                    }
+                    Button {
+                        text: "Warehouse Management";
+                        height: 50px;
+                        width: 200px;
+                    }
+                }
+                Text {
+                    text: "Workshop Management \n              System";
+                    color: Palette.text-color;
+                    font-size: 24px;
+                }
+            }
+        }
+        VerticalBox {
+            Button {
+                text: "Logout";
+            }
+        }
+    }
+}

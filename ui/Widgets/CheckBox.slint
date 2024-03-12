@@ -6,11 +6,13 @@
 
 */
 
+import { Palette } from "../Palette.slint";
+
 export component CheckBox inherits Rectangle {
-    callback checked;
-    in-out property <string> text;
-    in-out property <bool> toggled;
-    in-out property<bool> enabled <=> touch-area.enabled;
+    callback checked; // Called when the checkbox is toggled
+    in-out property <string> text; // The text to display next to the checkbox
+    in-out property <bool> toggled; // Whether the checkbox is checked or not
+    in-out property<bool> enabled <=> touch-area.enabled; // Whether the checkbox is enabled or not
     height: 20px;
     horizontal-stretch: 0;
     vertical-stretch: 0;
@@ -22,14 +24,14 @@ export component CheckBox inherits Rectangle {
             border-width: 1px;
             border-radius: root.height / 5;
             border-color: self.background.darker(25%);
-            background: root.enabled ? #219fd5 : #3f3f3f;
+            background: root.enabled ? Palette.accent-color : #3f3f3f;
 
             checkMark := Rectangle {
                 width: root.height;
                 height: checkMark.width;
                 border-radius: root.height / 5;
                 property <float> a: root.toggled ? 1 : 0;
-                background: root.toggled ? #219fd5 : (root.enabled ? #3f3f3f : gray);
+                background: root.toggled ? Palette.accent-color : (root.enabled ? #3f3f3f : gray);
                 Rectangle {
                     border-radius: 5px;
                     width: checkMark.width * 0.5;
@@ -45,7 +47,7 @@ export component CheckBox inherits Rectangle {
             min-width: max(100px, self.preferred-width);
             text: root.text;
             vertical-alignment: center;
-            color: root.enabled ? white : gray;
+            color: root.enabled ? Palette.text-color : gray;
         }
 
     }

@@ -1,0 +1,40 @@
+/*
+
+    Author: Justin Rauch, Jasha Pierre
+    Date: 2024-03-12
+    Description: Login Window for the Workshop Client
+
+*/
+
+import { Palette } from "../Palette.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { Button } from "../Widgets/Button.slint";
+import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { CheckBox } from "../Widgets/CheckBox.slint";
+
+export component LoginView {
+    in-out property<string> username <=> username.text;
+    in-out property<string> password <=> password.text;
+    callback request-login();
+    VerticalBox {
+        username := TextField {
+            placeholderText: "Username";
+        }
+        password := TextField {
+            placeholderText: "Password";
+        }
+        HorizontalBox {
+            Rectangle {} // Spacer
+            Button {
+                text: "Login";
+                clicked => {
+                    root.request-login();
+                }
+                width: 100px;
+                height: 50px;
+            }
+            Rectangle {} // Spacer
+        }
+    }
+}
