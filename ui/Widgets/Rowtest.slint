@@ -1,0 +1,52 @@
+import { Palette } from "../Palette.slint";
+import { HorizontalBox } from "std-widgets.slint";
+
+
+export component RowBox inherits Rectangle {
+    in-out property <string> label;
+    HorizontalBox {
+        Rectangle {
+            border-radius: 8px;
+            border-color: black;
+            background: white;
+            border-width: 2px;
+            height: 50px;
+            width: 100px;
+            Text {text: label;}
+        }
+    }
+}
+
+
+// TODO(jmeusel): Labels auslagern (von außen reingeben)
+export component RowTest inherits Rectangle {
+
+    in property <string> text;
+
+    HorizontalBox {
+        alignment: LayoutAlignment.space-between;
+        RowBox {
+            label: "Project";
+        }
+        Rectangle {
+            width: 25px;
+        }
+       RowBox {
+        label: "Client";
+    }
+        Rectangle {
+            width: 25px;
+        }
+        RowBox {
+            label: "Current costs";
+        }
+        Rectangle {
+            width: 25px;
+        }
+        RowBox {
+            label: "Deadline";
+        }
+    }
+}
+
+

@@ -24,9 +24,9 @@ export component WorkshopClient inherits Window {
     title: "Workshop Management Client";
     LoginView {
         request-login => {root.request-login()}
-        visible: true;
+        visible: false;
     }
     ProjectView {
-        visible: false;
+        visible: true;
     }
 }
