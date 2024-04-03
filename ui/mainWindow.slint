@@ -17,17 +17,45 @@ import { LoginView } from "Views/LoginView.slint";
 import { ProjectView } from "Views/ProjectView.slint";
 
 export component WorkshopClient inherits Window {
+    // Properties
     in-out property<int> counter: 42;
+
+    // Signals
     callback request-login();
-    width: 900px; //Set to desired width
+
+    // Variables for the window itself
+    width: 1500px; //Set to desired width
     height: self.width / (16/9); //Always assure that you have 16:9 resolution
     background: Palette.background-color;
     title: "Workshop Management Client";
+
+    // Bar in the accent color for design purposes
+    VerticalLayout {
+        padding: 10px;
+        Rectangle {
+            width: parent.width - 20px;
+            height: 2px;
+            background: Palette.accent-color;
+        }
+    }
+
+    // Actual content
     LoginView {
         request-login => {root.request-login()}
         visible: false;
     }
     ProjectView {
         visible: true;
+    }
+
+    // Bar in the accent color for design purposes
+    VerticalLayout {
+        padding-top: parent.height - 10px;
+        padding: 10px;
+        Rectangle {
+            width: parent.width - 20px;
+            height: 2px;
+            background: Palette.accent-color;
+        }
     }
 }
