@@ -8,40 +8,54 @@
 
 import { Palette } from "../Palette.slint";
 
-import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
 
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
+import { Button } from "../Widgets/Button.slint";
 
-export component LoginView {
+export component LoginView inherits Rectangle {
     in-out property<string> username <=> username.text;
     in-out property<string> password <=> password.text;
     callback request-login();
-    VerticalBox {
-        Text {
-            text: "Username";
-            color: Palette.text-color;
-        }
-        username := TextField {}
+    HorizontalBox {
+        alignment: center;
+        VerticalBox {
+            alignment: center;
 
-        Text {
-            text: "Password";
-            color: Palette.text-color;
-        }
-        password := TextField {}
-        
-        HorizontalBox {
-            Rectangle {} // Spacer
+            Text {
+                text: "Username";
+                color: Palette.text-color;
+                font-size: Palette.font-size * 1.2px;
+            }
+            username := TextField {
+                height: root.width * 0.03;
+                width: root.width * 0.2;
+            }
+    
+            Text {
+                text: "Password";
+                color: Palette.text-color;
+                font-size: Palette.font-size * 1.2px;
+            }
+            password := TextField {
+                height: root.width * 0.03;
+                width: root.width * 0.2;
+            }
+            
+            HorizontalBox {
+                Rectangle {} // Spacer
+            }
+    
             Button {
                 text: "Login";
                 clicked => {
                     root.request-login();
                 }
-                width: 100px;
-                height: 50px;
+                width: root.width * 0.2;
+                height: root.width * 0.04;
             }
-            Rectangle {} // Spacer
         }
     }
 }

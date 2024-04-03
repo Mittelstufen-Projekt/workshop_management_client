@@ -44,6 +44,7 @@ export component CheckBox inherits Rectangle {
         }
 
         txt := Text {
+            font-size: Palette.font-size * 1px;
             min-width: max(100px, self.preferred-width);
             text: root.text;
             vertical-alignment: center;

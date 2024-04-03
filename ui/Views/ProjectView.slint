@@ -8,12 +8,13 @@
 
 import { Palette } from "../Palette.slint";
 
-import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
 
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
 import { RowTest } from "../Widgets/Rowtest.slint";
+import { Button } from "../Widgets/Button.slint";
 
 export component ProjectView {
     HorizontalBox {
@@ -33,6 +34,7 @@ export component ProjectView {
                     }
                     Text {
                         text: "Latest Projects:";
+                        font-size: Palette.font-size * 1px;
                         color: Palette.text-color;
                     }
                     VerticalBox {
@@ -44,7 +46,7 @@ export component ProjectView {
                 Text {
                     text: "Workshop Management \n              System";
                     color: Palette.text-color;
-                    font-size: 24px;
+                    font-size: Palette.font-size * 1.2px;
                 }
             }
         }

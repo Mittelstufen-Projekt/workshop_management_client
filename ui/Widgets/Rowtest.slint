@@ -12,7 +12,10 @@ export component RowBox inherits Rectangle {
             border-width: 2px;
             height: 50px;
             width: 100px;
-            Text {text: label;}
+            Text {
+                font-size: Palette.font-size * 1px;
+                text: label;
+            }
         }
     }
 }
