@@ -2,52 +2,59 @@ import { Palette } from "../Palette.slint";
 import { HorizontalBox } from "std-widgets.slint";
 
 
-export component RowBox inherits Rectangle {
+export component RowBox inherits HorizontalBox {
     in-out property <string> label;
-    HorizontalBox {
         Rectangle {
             border-radius: 8px;
             border-color: black;
-            background: white;
+            background: Palette.accent-color;
             border-width: 2px;
             height: 50px;
-            width: 100px;
+            width: 150px;
             Text {
+                //padding-right: 20px;
                 font-size: Palette.font-size * 1px;
-                text: label;
+                text: label;  
             }
         }
-    }
 }
 
 
 // TODO(jmeusel): Labels auslagern (von außen reingeben)
 export component RowTest inherits Rectangle {
 
+    // TODO(jmeusel): types anpassen
     in property <string> text;
+    in-out property <string> project;
+    in-out property <string> client;
+    in-out property <string> costs;
+    in-out property <string> deadline;
 
+    border-color: green;
+    border-width: 2px;
     HorizontalBox {
+        width: 200px;
         alignment: LayoutAlignment.space-between;
         RowBox {
-            label: "Project";
+            label: project;
         }
         Rectangle {
             width: 25px;
         }
        RowBox {
-        label: "Client";
+        label: client;
     }
         Rectangle {
             width: 25px;
         }
         RowBox {
-            label: "Current costs";
+            label: costs;
         }
         Rectangle {
             width: 25px;
         }
         RowBox {
-            label: "Deadline";
+            label: deadline;
         }
     }
 }

@@ -1,0 +1,32 @@
+import { HorizontalBox } from "std-widgets.slint";
+import { Palette } from "ui/Palette.slint";
+
+
+export component ProjectOverViewRowShort inherits Rectangle {
+    
+    property <length> txt;
+    txt: Palette.font-size * 1px;
+    in-out property <string> project;
+    in-out property <string> client;
+    in-out property <string> costs;
+    in-out property <string> deadline;
+    callback clicked <=> touch.clicked; // The callback for when the button is clicked
+    background: touch.pressed ? Palette.accent-color.darker(10%) : touch.has-hover ? Palette.accent-color :  Palette.accent-color;
+
+    border-color: gray;
+    border-width: 3px;
+    Rectangle {
+        touch := TouchArea { }
+        HorizontalBox {
+            alignment: LayoutAlignment.start;
+            height: txt + 80px;
+            Text {text: root.project;font-size: txt;vertical-alignment: center;}
+            Rectangle {}
+            Text {text: root.client; font-size: txt;vertical-alignment: center;}
+            Rectangle {}
+            Text {text: root.costs;font-size: txt;vertical-alignment: center;}
+            Rectangle {}
+            Text {text: root.deadline;font-size: txt;vertical-alignment: center;}
+        }
+    }
+}
