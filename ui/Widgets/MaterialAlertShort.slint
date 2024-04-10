@@ -1,6 +1,8 @@
 import { HorizontalBox } from "std-widgets.slint";
 import { Palette } from "ui/Palette.slint";
 
+
+
 export  component MaterialAlertShort inherits HorizontalBox {
 
     in-out property <string> materialName;
@@ -13,9 +15,21 @@ export  component MaterialAlertShort inherits HorizontalBox {
         border-color: grey;
         border-width: 3px;
         HorizontalBox {
-            Text {text: root.materialName;font-size: txt; color: Palette.accent-color; vertical-alignment: center;}
-            Rectangle {}
-            Text {text: root.count; font-size: txt;color: Palette.accent-color;vertical-alignment: center;}
+            Text {
+                text: root.materialName;
+                font-size: txt;
+                color: Palette.accent-color;
+                vertical-alignment: center;
+            }
+
+            Rectangle { }
+
+            Text {
+                text: root.count;
+                font-size: txt;
+                color: Palette.accent-color;
+                vertical-alignment: center;
+            }
         }
     }
 }

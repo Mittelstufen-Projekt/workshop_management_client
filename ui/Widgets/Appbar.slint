@@ -1,0 +1,28 @@
+import { HorizontalBox, VerticalBox } from "std-widgets.slint";
+import { TextField } from "TextField.slint";
+import { Button } from "Button.slint";
+import { Palette } from "../Palette.slint";
+export component Appbar inherits Rectangle {
+    
+    in-out property <string> buttonText;
+        //height: txt + 30px;
+        border-color: grey;
+        border-width: 3px;
+        VerticalLayout {alignment: center;}
+    VerticalBox {
+        HorizontalBox {
+            alignment: space-around;
+            padding: 25px;
+           searchField:= TextField {width: 130px;}
+           Button {text: buttonText;}
+           Button {
+            text: "<";
+           }
+           
+        }
+        Rectangle {height: 2px; width: parent.width; background: Palette.accent-color;}
+    }
+
+
+
+}
