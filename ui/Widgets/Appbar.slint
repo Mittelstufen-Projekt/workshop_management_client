@@ -13,7 +13,10 @@ export component Appbar inherits Rectangle {
         HorizontalBox {
             alignment: space-around;
             padding: 25px;
-           searchField:= TextField {width: 130px;}
+            HorizontalBox {
+                Text {text: "Search:"; color: Palette.accent-color;}
+                searchField:= TextField {width: 130px;}
+            }
            Button {text: buttonText;}
            Button {
             text: "<";

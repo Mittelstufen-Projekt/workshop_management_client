@@ -1,17 +1,58 @@
 import { HorizontalBox, VerticalBox } from "std-widgets.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
+import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
 
 
 
 
+// TODO(jmeusel): Liste von Projekten
+export component ProjectManagement inherits Rectangle {
 
-export component ProjectManagement inherits Rectangle{
-
-    HorizontalBox {
-        VerticalBox {
-            
+    VerticalBox {
+        Appbar {buttonText: "Create new Project";}
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
+        }
+        ProjectOverViewRowShort{
+            project: "ProjectName";
+            client: "Client";
+            costs: "curent costs";
+            deadline: "deadline";
         }
     }
+    // TODO(jmeusel): schleife
 
-        Appbar {buttonText: "Create new Project"; }
 }
