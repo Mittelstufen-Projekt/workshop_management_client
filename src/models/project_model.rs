@@ -1,5 +1,7 @@
 //Change Later
 
+use super::material_model::Material;
+
 struct ProjectModel {
     name: String,
     client: String,
