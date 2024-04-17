@@ -1,3 +1,3 @@
 # workshop_management_client
 ###
-Flutter is waaaaaaay better then this shitty Slint!
+The Client written in Rust with the Slint frontend for the Workshop Management System
