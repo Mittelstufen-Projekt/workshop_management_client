@@ -6,8 +6,8 @@ import { ProjectView } from "ProjectView.slint";
 
 
 
-export component ProjectDetailView {
-    in-out property <string> projectController;
+export component ProjectDetailView inherits VerticalLayout {
+    in-out property <string> projectController <=> name.text;
     in-out property <string> clientController;
     in-out property <string> eMailController;
     in-out property <string> phoneController;
@@ -18,17 +18,91 @@ export component ProjectDetailView {
 
     // TODO(jmeusel): refactor
     in property <ProjectModel> project;
-    
-    VerticalLayout {
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project.name";
+        name := TextField {
+
+        }
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
+        }
+    }
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project.client";
+        TextField {}
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
+        }
+    }
+    HorizontalBox {
+        padding: 0;
         ProjectDetailRow {
             width: 300px; //klappt....
-            title: project.name;
+            title: "project.Email";
             TextField {}
             Button {
                 width: 30px;
                 text: "X";
                 clicked => {}
             }
+        }
+        ProjectDetailRow {
+            width: 300px; //klappt....
+            title: "project.Tel.:";
+            TextField {}
+            Button {
+                width: 30px;
+                text: "X";
+                clicked => {}
+            }
+        }
+    }
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project.Project-start";
+        TextField {}
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
+        }
+    }
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project-deadline";
+        TextField {}
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
+        }
+    }
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project.calculated costs";
+        TextField {}
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
+        }
+    }
+    ProjectDetailRow {
+        width: 300px; //klappt....
+        title: "project.currentcosts";
+        TextField {
+
+        }
+        Button {
+            width: 30px;
+            text: "X";
+            clicked => {}
         }
     }
 }
