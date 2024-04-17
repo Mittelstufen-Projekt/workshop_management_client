@@ -1,0 +1,34 @@
+import { ProjectDetailRow } from "../Widgets/ProjectDetailRow.slint";
+import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { ProjectModel } from "../models/ProjectModel.slint";
+import { ProjectView } from "ProjectView.slint";
+
+
+
+export component ProjectDetailView {
+    in-out property <string> projectController;
+    in-out property <string> clientController;
+    in-out property <string> eMailController;
+    in-out property <string> phoneController;
+    in-out property <string> projectStartController;
+    in-out property <string> deadlineController;
+    in-out property <string> calcCostsController;
+    in-out property <string> currentCostsController;
+
+    // TODO(jmeusel): refactor
+    in property <ProjectModel> project;
+    
+    VerticalLayout {
+        ProjectDetailRow {
+            width: 300px; //klappt....
+            title: project.name;
+            TextField {}
+            Button {
+                width: 30px;
+                text: "X";
+                clicked => {}
+            }
+        }
+    }
+}

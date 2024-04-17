@@ -4,7 +4,7 @@ import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slin
 
 
 
-
+//Refactor
 // TODO(jmeusel): Liste von Projekten
 export component ProjectManagement inherits Rectangle {
 
@@ -56,3 +56,17 @@ export component ProjectManagement inherits Rectangle {
     // TODO(jmeusel): schleife
 
 }
+
+
+/*
+
+in property <[ProjectModel]> projectList;
+
+for model[i] in projectList:  ProjectDetailRow {
+            width: 300px;
+            title: projectList[i].name;
+            TextField {}
+
+        }
+
+*/

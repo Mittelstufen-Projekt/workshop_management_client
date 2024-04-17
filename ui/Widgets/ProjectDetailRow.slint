@@ -1,0 +1,16 @@
+
+import { HorizontalBox, VerticalBox, Button } from "std-widgets.slint";
+import { TextField } from "TextField.slint";
+import { Palette } from "../Palette.slint";
+export component ProjectDetailRow inherits HorizontalBox {
+
+    in-out property <string> title;
+    in-out property <string> controller;
+    property <length> customHeight;
+    //customHeight: 50px;
+    Text {
+        vertical-alignment: center;
+        text: title;
+        color: Palette.accent-color;
+    }
+}

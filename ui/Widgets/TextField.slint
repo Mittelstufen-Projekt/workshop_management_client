@@ -10,9 +10,11 @@ import { Palette } from "../Palette.slint";
 import { TextEdit } from "std-widgets.slint";
 
 export component TextField inherits Rectangle {
+    property <length> customHeight;
+    customHeight: 30px;
     in-out property <string> text <=> lineEdit.text; // Text in the line edit
     width: 150px;
-    height: 30px;
+    height: customHeight;
     border-color: Palette.accent-color;
     border-width: 1px;
     border-radius: 5px;

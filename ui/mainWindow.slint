@@ -16,6 +16,7 @@ import { CheckBox } from "Widgets/CheckBox.slint";
 import { LoginView } from "Views/LoginView.slint";
 import { ProjectView } from "Views/ProjectView.slint";
 import { ProjectManagement } from "Views/ProjectManagement.slint";
+import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 
 export component WorkshopClient inherits Window {
     // Properties
@@ -49,6 +50,9 @@ export component WorkshopClient inherits Window {
         visible: false;
     }
     ProjectManagement {
+        visible: false;
+    }
+    ProjectDetailView {
         visible: true;
     }
 
