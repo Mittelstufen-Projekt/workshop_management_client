@@ -10,7 +10,7 @@ use serde::{Serialize, Deserialize};
 use super::material_model::Material;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct ProjectModel {
+pub struct Project {
     pub name: String,
     pub client: String,
     pub email: String,

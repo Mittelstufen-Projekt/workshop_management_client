@@ -13,7 +13,7 @@ use std::sync::{Arc, Mutex};
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::error_dialog::show_error;
 use crate::utils::workshop_service::WorkshopService;
-use crate::models::project_model::ProjectModel;
+use crate::models::project_model::Project;
 use crate::models::material_model::Material;
 
 slint::include_modules!();

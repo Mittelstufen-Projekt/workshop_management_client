@@ -5,7 +5,7 @@
 
 */
 
-use crate::models::project_model::ProjectModel;
+use crate::models::project_model::Project;
 use crate::models::material_model::Material;
 
 //TODO: Change this to the actual API URL
@@ -13,7 +13,7 @@ const API_URL: &str = "http://localhost:8000/api";
 
 #[derive(Clone)]
 pub struct WorkshopService {
-    pub projects: Vec<ProjectModel>,
+    pub projects: Vec<Project>,
     pub materials: Vec<Material>,
 }
 
@@ -48,7 +48,7 @@ impl WorkshopService {
     }
 
     #[tokio::main]
-    pub async fn add_project(&mut self, project: ProjectModel) {
+    pub async fn add_project(&mut self, project: Project) {
         let response = reqwest::Client::new()
             .post(&format!("{}/projects", API_URL))
             .json(&project)
