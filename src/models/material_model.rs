@@ -5,11 +5,9 @@
 
 */
 
-//Change Later
-
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Material {
     pub id: i32,
     pub name: String,

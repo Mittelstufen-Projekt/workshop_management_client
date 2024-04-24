@@ -11,42 +11,63 @@ use crate::models::material_model::Material;
 //TODO: Change this to the actual API URL
 const API_URL: &str = "http://localhost:8000/api";
 
-pub async fn get_projects() -> Result<Vec<ProjectModel>, reqwest::Error> {
-    let response = reqwest::get(&format!("{}/projects", API_URL)).await?;
-    let projects: Vec<ProjectModel> = response.json().await?;
-    Ok(projects)
+#[derive(Clone)]
+pub struct WorkshopService {
+    pub projects: Vec<ProjectModel>,
+    pub materials: Vec<Material>,
 }
 
-pub async fn get_project(id: i32) -> Result<ProjectModel, reqwest::Error> {
-    let response = reqwest::get(&format!("{}/projects/{}", API_URL, id)).await?;
-    let project: ProjectModel = response.json().await?;
-    Ok(project)
-}
+impl WorkshopService {
+    pub fn new() -> WorkshopService {
+        WorkshopService {
+            projects: Vec::new(),
+            materials: Vec::new(),
+        }
+    }
 
-pub async fn create_project(project: ProjectModel) -> Result<ProjectModel, reqwest::Error> {
-    let response = reqwest::Client::new()
-        .post(&format!("{}/projects", API_URL))
-        .json(&project)
-        .send()
-        .await?;
-    let project: ProjectModel = response.json().await?;
-    Ok(project)
-}
+    #[tokio::main]
+    pub async fn get_projects(&mut self) {
+        let response = reqwest::Client::new()
+            .get(&format!("{}/projects", API_URL))
+            .send()
+            .await
+            .expect("Failed to get projects");
 
-pub async fn update_project(id: i32, project: ProjectModel) -> Result<ProjectModel, reqwest::Error> {
-    let response = reqwest::Client::new()
-        .put(&format!("{}/projects/{}", API_URL, id))
-        .json(&project)
-        .send()
-        .await?;
-    let project: ProjectModel = response.json().await?;
-    Ok(project)
-}
+        self.projects = response.json().await.expect("Failed to parse projects");
+    }
 
-pub async fn delete_project(id: i32) -> Result<(), reqwest::Error> {
-    reqwest::Client::new()
-        .delete(&format!("{}/projects/{}", API_URL, id))
-        .send()
-        .await?;
-    Ok(())
+    #[tokio::main]
+    pub async fn get_materials(&mut self) {
+        let response = reqwest::Client::new()
+            .get(&format!("{}/materials", API_URL))
+            .send()
+            .await
+            .expect("Failed to get materials");
+
+        self.materials = response.json().await.expect("Failed to parse materials");
+    }
+
+    #[tokio::main]
+    pub async fn add_project(&mut self, project: ProjectModel) {
+        let response = reqwest::Client::new()
+            .post(&format!("{}/projects", API_URL))
+            .json(&project)
+            .send()
+            .await
+            .expect("Failed to add project");
+
+        self.projects.push(response.json().await.expect("Failed to parse project"));
+    }
+
+    #[tokio::main]
+    pub async fn add_material(&mut self, material: Material) {
+        let response = reqwest::Client::new()
+            .post(&format!("{}/materials", API_URL))
+            .json(&material)
+            .send()
+            .await
+            .expect("Failed to add material");
+
+        self.materials.push(response.json().await.expect("Failed to parse material"));
+    }
 }

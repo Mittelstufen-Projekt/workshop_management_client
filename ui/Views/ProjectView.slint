@@ -22,6 +22,8 @@ export component ProjectView inherits Rectangle {
     property <length> txt;
     txt: Palette.font-size * 1px;
 
+    callback request-logout;
+
     // TODO(jmeusel): bedarf klären aufgrund der Datentypen (müsste eigentlich eine Map sein)
     in-out property <[string]> recentProjects;
     recentProjects:  ["Project", "Client", "current costs", "deadline"];
@@ -29,7 +31,12 @@ export component ProjectView inherits Rectangle {
     VerticalBox {
           HorizontalBox {
             alignment: LayoutAlignment.end;
-            Button {text: "Logout";}
+            Button {
+                text: "Logout";
+                clicked => {
+                    root.request-logout();
+                }
+            }
           }
           HorizontalBox {
             //alignment: LayoutAlignment.start;

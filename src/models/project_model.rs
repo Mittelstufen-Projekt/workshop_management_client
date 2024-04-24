@@ -5,13 +5,11 @@
 
 */
 
-//Change Later
-
 use serde::{Serialize, Deserialize};
 
 use super::material_model::Material;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ProjectModel {
     pub name: String,
     pub client: String,

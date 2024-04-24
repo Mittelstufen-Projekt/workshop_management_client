@@ -20,10 +20,18 @@ import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 
 export component WorkshopClient inherits Window {
     // Properties
-    in-out property<int> counter: 42;
-        
+    in-out property<string> username;
+    in-out property<string> password;
+
+    // Bools for views
+    in-out property <bool> loginView: true;
+    in-out property <bool> projectView: false;
+    in-out property <bool> projectManagementView: false;
+    in-out property <bool> projectDetailView: false;
+
     // Signals
     callback request-login();
+    callback request-logout();
 
     // Variables for the window itself
     width: 900px; //Set to desired width
@@ -41,21 +49,24 @@ export component WorkshopClient inherits Window {
         }
     }
 
+
     // Actual content
     LoginView {
         request-login => {root.request-login();}
-        visible: true;
+        username <=> root.username;
+        password <=> root.password;
+        visible <=> root.loginView;
     }
     ProjectView {
-        visible: false;
+        request-logout => {root.request-logout();}
+        visible <=> root.projectView;
     }
     ProjectManagement {
-        visible: false;
+        visible <=> root.projectManagementView;
     }
     ProjectDetailView {
-        visible: false;
+        visible <=> root.projectDetailView;
     }
-
 
 
     // Bar in the accent color for design purposes

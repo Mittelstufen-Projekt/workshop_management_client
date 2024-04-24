@@ -7,9 +7,9 @@
 
 use error_window::dialog::{self, DialogBox}; 
 
-pub fn show_error(message: String) {
+pub fn show_error(title: String, message: String) {
     dialog::Message::new(message)
-        .title("Attention")
+        .title(title)
         .show()
         .expect("Could not display dialog box");
 }
