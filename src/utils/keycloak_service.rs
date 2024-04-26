@@ -5,11 +5,10 @@
 
 */
 
-// TODO: Change the API_URL, REALM, CLIENT_ID, and CLIENT_SECRET to match your Keycloak configuration
-const API_URL: &str = "http://localhost:8000/api";
-const REALM: &str = "workshop";
-const CLIENT_ID: &str = "workshop-client";
-const CLIENT_SECRET: &str = "workshop";
+const API_URL: &str = "http://localhost:8180/";
+const REALM: &str = "WMS";
+const CLIENT_ID: &str = "workshop_client";
+const CLIENT_SECRET: &str = "Ip7GUqM8mRuIHMcq3tOuuHCaejSwSk3S";
 
 #[derive(Clone)]
 pub struct Keycloak {
@@ -29,7 +28,6 @@ impl Keycloak {
 
     #[tokio::main]
     pub async fn login_user(username: &str, password: &str) -> Result<String, reqwest::Error> {
-        /*
         let response = reqwest::Client::new()
             .post(&format!("{}/realms/{}/protocol/openid-connect/token", API_URL, REALM))
             .form(&[
@@ -41,10 +39,13 @@ impl Keycloak {
             ])
             .send()
             .await?;
-        let token: serde_json::Value = response.json().await?;
-        Ok(token["access_token"].as_str().unwrap().to_string())
-        */
-        Ok("token".to_string())
+        match response.error_for_status_ref().err() {
+            Some(err) => Err(err),
+            None => {
+                let token: serde_json::Value = response.json().await?;
+                Ok(token["access_token"].as_str().unwrap().to_string())
+            }
+        }
     }
 
     pub fn set_token(&mut self, token: String) {

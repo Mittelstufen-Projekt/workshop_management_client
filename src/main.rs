@@ -47,13 +47,14 @@ fn main() -> Result<(), slint::PlatformError> {
             let token = Keycloak::login_user(&user, &password);
 
             match token {
+                Err(e) => {
+                    show_error("Login Failed".to_string(), e.to_string());
+                }
                 Ok(token) => {
                     keycloak_handle.lock().unwrap().set_token(token);
+                    keycloak_handle.lock().unwrap().set_username(user.to_string());
                     ui.set_loginView(false);
                     ui.set_projectView(true);
-                }
-                Err(_) => {
-                    show_error("Login Failed".to_string(), "Invalid username or password".to_string());
                 }
             }
         }
@@ -69,6 +70,8 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.set_projectView(false);
             ui.set_projectManagementView(false);
             ui.set_projectDetailView(false);
+            ui.set_username("".into());
+            ui.set_password("".into());
             keycloak_handle.lock().unwrap().clear();
         }
     });
