@@ -22,6 +22,7 @@ export component WorkshopClient inherits Window {
     // Properties
     in-out property<string> username;
     in-out property<string> password;
+    in-out property<string> login_error;
 
     // Bools for views
     in-out property <bool> loginView: true;
@@ -34,8 +35,6 @@ export component WorkshopClient inherits Window {
     callback request-logout();
 
     // Variables for the window itself
-    width: 900px; //Set to desired width
-    height: self.width / (16/9); //Always assure that you have 16:9 resolution
     background: Palette.background-color;
     title: "Workshop Management Client";
 
@@ -55,6 +54,7 @@ export component WorkshopClient inherits Window {
         request-login => {root.request-login();}
         username <=> root.username;
         password <=> root.password;
+        login_error <=> root.login_error;
         visible <=> root.loginView;
     }
     ProjectView {

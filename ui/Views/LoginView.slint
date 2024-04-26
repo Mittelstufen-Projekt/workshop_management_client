@@ -18,6 +18,7 @@ import { Button } from "../Widgets/Button.slint";
 export component LoginView inherits Rectangle {
     in-out property<string> username <=> username.text;
     in-out property<string> password <=> password.text;
+    in-out property<string> login_error <=> login_error.text;
     callback request-login();
     HorizontalBox {
         alignment: center;
@@ -30,7 +31,7 @@ export component LoginView inherits Rectangle {
                 font-size: Palette.font-size * 1.2px;
             }
             username := TextField {
-                height: root.width * 0.03;
+                height: root.width * 0.027;
                 width: root.width * 0.2;
             }
     
@@ -40,14 +41,20 @@ export component LoginView inherits Rectangle {
                 font-size: Palette.font-size * 1.2px;
             }
             password := TextField {
-                height: root.width * 0.03;
+                height: root.width * 0.027;
                 width: root.width * 0.2;
             }
             
-            HorizontalBox {
-                Rectangle {} // Spacer
+            Rectangle {
+                height: root.width * 0.02;
+                login_error := Text {
+                    color: red;
+                    font-size: Palette.font-size * 0.5px;
+                    horizontal-alignment: center;
+                    overflow: elide; 
+                }    
             }
-    
+
             Button {
                 text: "Login";
                 clicked => {

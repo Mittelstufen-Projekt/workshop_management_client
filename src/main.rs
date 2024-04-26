@@ -11,7 +11,6 @@ mod models;
 use std::sync::{Arc, Mutex};
 
 use crate::utils::keycloak_service::Keycloak;
-use crate::utils::error_dialog::show_error;
 use crate::utils::workshop_service::WorkshopService;
 use crate::models::project_model::Project;
 use crate::models::material_model::Material;
@@ -19,6 +18,9 @@ use crate::models::material_model::Material;
 slint::include_modules!();
 
 fn main() -> Result<(), slint::PlatformError> {
+    // Make the window fullscreen
+    std::env::set_var("SLINT_FULLSCREEN", "1");
+
     let ui = WorkshopClient::new()?;
 
     // Need to use the services as mutex arcs so that we can move and still edit the memory
@@ -40,7 +42,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let password = ui.get_password();
 
             if user.is_empty() || password.is_empty() {
-                show_error("Error".to_string(), "Please enter a username and password".to_string());
+                ui.set_login_error("Please enter a username and password.".into());
                 return;
             }
 
@@ -48,13 +50,14 @@ fn main() -> Result<(), slint::PlatformError> {
 
             match token {
                 Err(e) => {
-                    show_error("Login Failed".to_string(), e.to_string());
+                    ui.set_login_error(e.to_string().into());
                 }
                 Ok(token) => {
                     keycloak_handle.lock().unwrap().set_token(token);
                     keycloak_handle.lock().unwrap().set_username(user.to_string());
                     ui.set_loginView(false);
                     ui.set_projectView(true);
+                    ui.set_login_error("".into());
                 }
             }
         }
