@@ -1,0 +1,43 @@
+import { ListView, ComboBox, TextEdit } from "std-widgets.slint";
+import { Palette } from "../Palette.slint";
+import { TextField } from "TextField.slint";
+import { MaterialTypeModel } from "../models/MaterialTypeModel.slint";
+
+
+
+export component MaterialDetailCard inherits HorizontalLayout {
+
+    in property <[MaterialTypeModel]> materialTypes;
+    in property <string> materialName;
+    in property <int> count;
+
+    Text {
+        text: materialName;
+        color: Palette.accent-color;
+        font-size: Palette.font-size * 1px;
+        vertical-alignment: center;
+    }
+    Rectangle {width: 10px;}
+        ComboBox {
+            //x: 90px;
+            width: self.preferred-width + 50px;
+            height: self.preferred-height + 10px;
+            model: ["Type", "Type_1", "Type_2", "Type_3", "Type_4", "LangesWortZumVerhaltensTest"];
+            current-value: "TYPE:";
+        
+        }
+    Rectangle {width: 10px;}
+    Rectangle {
+        width: 45px;
+        height: 30px;
+        border-radius: 5px;
+        border-color: Palette.accent-color;        
+        border-width: 1px;
+        Text {
+            text: count;
+            font-size: Palette.font-size *1px;
+            color: Palette.accent-color;
+    }
+    }
+    
+}

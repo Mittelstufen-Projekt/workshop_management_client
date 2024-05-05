@@ -19,6 +19,9 @@ import { ProjectManagement } from "Views/ProjectManagement.slint";
 import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 
 export component WorkshopClient inherits Window {
+width: 1920px;
+height: 1080px;
+
     // Properties
     in-out property<string> username;
     in-out property<string> password;
@@ -55,17 +58,20 @@ export component WorkshopClient inherits Window {
         username <=> root.username;
         password <=> root.password;
         login_error <=> root.login_error;
-        visible <=> root.loginView;
+        visible: false;
     }
     ProjectView {
         request-logout => {root.request-logout();}
-        visible <=> root.projectView;
+        //visible <=> root.projectView;
+        visible: false;
     }
     ProjectManagement {
-        visible <=> root.projectManagementView;
+        //visible <=> root.projectManagementView;
+        visible: false;
     }
     ProjectDetailView {
-        visible <=> root.projectDetailView;
+        //visible <=> root.projectDetailView;
+        visible: true;
     }
 
 

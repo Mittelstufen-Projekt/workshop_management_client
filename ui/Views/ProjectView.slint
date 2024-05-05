@@ -16,7 +16,7 @@ import { Button } from "../Widgets/Button.slint";
 import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
 import { MaterialAlertShort } from "../Widgets/MaterialAlertShort.slint";
 
-// TODO(jmeusel): Ein Show-more- Button fehlt noch um auf den ProjektScreen zu Navigieren
+// TODO(jmeusel): Ein Button zur Zurücknavigation fehlt noch
 export component ProjectView inherits Rectangle {
 
     property <length> txt;
@@ -26,10 +26,10 @@ export component ProjectView inherits Rectangle {
 
     // TODO(jmeusel): bedarf klären aufgrund der Datentypen (müsste eigentlich eine Map sein)
     in-out property <[string]> recentProjects;
-    recentProjects:  ["Project", "Client", "current costs", "deadline"];
+    recentProjects: ["Project", "Client", "current costs", "deadline"];
 
     VerticalBox {
-          HorizontalBox {
+        HorizontalBox {
             alignment: LayoutAlignment.end;
             Button {
                 text: "Logout";
@@ -37,83 +37,127 @@ export component ProjectView inherits Rectangle {
                     root.request-logout();
                 }
             }
-          }
-          HorizontalBox {
+        }
+
+        HorizontalBox {
             //alignment: LayoutAlignment.start;
             VerticalBox {
                 Button {
                     max-width: 300px;
                     text: "Project - management";
                 }
+
                 Button {
                     max-width: 300px;
                     text: "Warehouse - management";
                 }
             }
-            Rectangle {} //Leeres Rectangle um das Alignment zu beeinflussen
-            Text {text: "Stupid Carpenter\nmanagement"; font-size: Palette.font-size * 1px;}
-            Rectangle {}  
+
+            Rectangle { }
+
+            //Leeres Rectangle um das Alignment zu beeinflussen
+            Text {
+                text: "Stupid Carpenter\nmanagement";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle { }
         }
-        HorizontalBox {
+
+        HorizontalLayout {
             height: txt + 50px;
             // TODO(jmeusel): ändern
-            padding-left: root.padding-left +20px;
-            Text {text: "Latest Projects:"; font-size: Palette.font-size * 1.5px; vertical-alignment: center;}
-            Rectangle {}
-            Text {text: "Material-alert"; font-size: txt;}
+            padding-left: root.padding-left + 20px;
+            HorizontalBox {
+                Text {
+                    text: "Latest Projects:";
+                    font-size: Palette.font-size * 1.5px;
+                    vertical-alignment: center;
+                    color: Palette.accent-color;
+                }
+            }
+
+            // TODO(jmeusel): anders lösen (responsive)
+            Rectangle {
+                width: 250px;
+            }
+
+            HorizontalBox {
+                Text {
+                    text: "Material-alert:";
+                    font-size: Palette.font-size * 1.5px;
+                    color: Palette.accent-color;
+                }
+            }
         }
+
         // TODO(jmeusel): durch schleifen umsetzen
           HorizontalBox {
-              VerticalBox {
-                  ProjectOverViewRowShort{
+            VerticalBox {
+                ProjectOverViewRowShort {
                     project: "ProjectName";
                     client: "Client";
                     costs: "curent costs";
                     deadline: "deadline";
                 }
-                ProjectOverViewRowShort{
+
+                ProjectOverViewRowShort {
                     project: "ProjectName";
                     client: "Client";
                     costs: "curent costs";
                     deadline: "deadline";
                 }
-                ProjectOverViewRowShort{
+
+                ProjectOverViewRowShort {
                     project: "ProjectName";
                     client: "Client";
                     costs: "curent costs";
                     deadline: "deadline";
                 }
-                Rectangle {}
+
+                Rectangle { }
             }
+
             VerticalBox {
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
                 }
+
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
                 }
+
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
                 }
+
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
                 }
+
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
                 }
+
                 MaterialAlertShort {
                     materialName: "Material";
                     count: 5;
+                }
+
+                Button {
+                    text: "Show more";
+                    clicked => {
+                        // TODO(jmeusel): implement route to MaterialAlert
+                }
                 }
             }
-            
-          }
-     }
+        }
+    }
 }
 
 /*

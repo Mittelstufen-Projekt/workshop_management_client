@@ -1,108 +1,145 @@
-import { ProjectDetailRow } from "../Widgets/ProjectDetailRow.slint";
+import { ProjectDetailRow, ProjectDetailRowTwoBoxes } from "../Widgets/ProjectDetailRow.slint";
 import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
 import { ProjectView } from "ProjectView.slint";
-
+import { Constants } from "../Constants.slint";
+import { MaterialDetailCard } from "../Widgets/MaterialDetailCard.slint";
+import { Palette } from "../Palette.slint";
+import { Appbar } from "../Widgets/Appbar.slint";
 
 
 export component ProjectDetailView inherits VerticalLayout {
-    in-out property <string> projectController <=> name.text;
-    in-out property <string> clientController;
-    in-out property <string> eMailController;
-    in-out property <string> phoneController;
-    in-out property <string> projectStartController;
-    in-out property <string> deadlineController;
-    in-out property <string> calcCostsController;
-    in-out property <string> currentCostsController;
+    in-out property <ProjectModel> project;
+    // TODO(jmeusel): richtiges model
+    project: {
+        name: "project",
+        client: "Client",
+        email: "whyDoesntThisWork",
+        tel: "08006666999",
+        project_start: "2024-04-18",
+        project-deadline: "2024-06-12",
+        calculated_costs:"299.99",
+        current_costs: "127.48",
+        mats: ["Ahorn-platte", "Schraube 6x25"],
+    };
 
-    // TODO(jmeusel): refactor
-    in property <ProjectModel> project;
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project.name";
-        name := TextField {
+    in-out property <string> projectController:project.name;
+    in-out property <string> clientController:project.client;
+    in-out property <string> phoneController: project.tel;
+    in-out property <string> eMailController:project.email;
+    in-out property <string> projectStartController:project.project-start;
+    in-out property <string> deadlineController:project.project-deadline;
+    in-out property <string> calcCostsController:project.calculated-costs;
+    in-out property <string> currentCostsController:project.current-costs;
 
-        }
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
-        }
-    }
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project.client";
-        TextField {}
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
-        }
-    }
-    HorizontalBox {
-        padding: 0;
-        ProjectDetailRow {
-            width: 300px; //klappt....
-            title: "project.Email";
-            TextField {}
-            Button {
-                width: 30px;
-                text: "X";
-                clicked => {}
+    property <string> suffix: ": ";
+    property <length> topPadding: 20px;
+
+    HorizontalLayout {
+        alignment: start;
+        VerticalBox {
+            Rectangle {
+                height: topPadding;
             }
-        }
-        ProjectDetailRow {
-            width: 300px; //klappt....
-            title: "project.Tel.:";
-            TextField {}
-            Button {
-                width: 30px;
-                text: "X";
-                clicked => {}
-            }
-        }
-    }
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project.Project-start";
-        TextField {}
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
-        }
-    }
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project-deadline";
-        TextField {}
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
-        }
-    }
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project.calculated costs";
-        TextField {}
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
-        }
-    }
-    ProjectDetailRow {
-        width: 300px; //klappt....
-        title: "project.currentcosts";
-        TextField {
 
+            alignment: start;
+            ProjectDetailRow {
+                title: Constants.project_name;
+                textFieldName: projectController;
+            }
+
+            ProjectDetailRow {
+                title: Constants.client + suffix;
+                textFieldName: clientController;
+            }
+
+            ProjectDetailRowTwoBoxes {
+                title: Constants.phone + suffix;
+                textFieldName: phoneController;
+                title2: Constants.email + suffix;
+                textFieldName2: eMailController;
+            }
+
+            ProjectDetailRow {
+                title: Constants.project_start + suffix;
+                textFieldName: projectStartController;
+            }
+
+            ProjectDetailRow {
+                title: Constants.project_deadline + suffix;
+                textFieldName: deadlineController;
+            }
+
+            ProjectDetailRow {
+                title: Constants.calculated_costs + suffix;
+                textFieldName: calcCostsController;
+            }
+
+            ProjectDetailRow {
+                title: Constants.currentCosts + suffix;
+                textFieldName: currentCostsController;
+            }
+    
         }
-        Button {
-            width: 30px;
-            text: "X";
-            clicked => {}
+        Rectangle {width: 500px;}
+        VerticalLayout {
+            Rectangle {height: topPadding;}
+            Rectangle {
+                border-radius: 5px;
+                border-color: Palette.accent-color;
+                border-width: 1px;
+
+                drop-shadow-blur: 20px;
+                drop-shadow-color: Palette.control-color;
+                drop-shadow-offset-y: 1px;
+                VerticalBox {
+        
+                    // TODO(jmeusel): Mit Schleife durchlaufen lassen
+                    // hier wird es noch Problematisch werden, um alles eine Box gezogen werden soll,
+                    // in der man zusätzlich Materialien hinzufügen kann
+                    MaterialDetailCard {
+                        materialName: "Material 1";
+                    }
+        
+                    MaterialDetailCard {
+                        materialName: "Material 1";
+                        count: 12;
+                    }
+        
+                    MaterialDetailCard {
+                        materialName: "Material 1";
+                    }
+        
+                    MaterialDetailCard {
+                        materialName: "Material 1";
+                    }
+        
+                    MaterialDetailCard {
+                        materialName: "Material 1";
+                    }
+                }
+            }
+            Rectangle {height: 25px;}
+            HorizontalLayout {
+                Button {
+                    text: "add material";
+                    height: 30px;
+                    width: 130px;
+                    callback addMaterial(
+                        // TODO(jmeusel): implement
+                    );
+                }
+                Rectangle {width: 45px;}
+                Button {
+                    text: "Safe";
+                    height: 30px;
+                    width: 130px;
+                    callback safe(
+                        // TODO(jmeusel): implement
+                    );
+                }
+            }
         }
     }
 }

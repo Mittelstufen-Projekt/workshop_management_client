@@ -2,15 +2,39 @@
 import { HorizontalBox, VerticalBox, Button } from "std-widgets.slint";
 import { TextField } from "TextField.slint";
 import { Palette } from "../Palette.slint";
-export component ProjectDetailRow inherits HorizontalBox {
+export component ProjectDetailRow inherits HorizontalLayout {
 
     in-out property <string> title;
-    in-out property <string> controller;
+    in-out property <string> textFieldName <=> textFieldName.text;
+    // TODO(jmeusel): Hier muss noch etwas getan werden, da der Controller keine Werte nimmt
+    in-out property <string> textFieldName2;
     property <length> customHeight;
     //customHeight: 50px;
+    alignment: space-between;
     Text {
         vertical-alignment: center;
         text: title;
         color: Palette.accent-color;
+        font-size: Palette.font-size * 1px;
     }
+
+    textFieldName := TextField { }
+}
+
+export component ProjectDetailRowTwoBoxes inherits ProjectDetailRow {
+    in-out property <string> title2;
+    Rectangle {
+        width: 10px;
+    }
+    
+    textFieldName:=Text {
+        vertical-alignment: center;
+        text: title2;
+        color: Palette.accent-color;
+        font-size: Palette.font-size * 1px;
+    }
+
+    textFieldName2 := TextField {
+        
+     }
 }

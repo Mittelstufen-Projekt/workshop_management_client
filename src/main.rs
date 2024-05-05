@@ -19,7 +19,7 @@ slint::include_modules!();
 
 fn main() -> Result<(), slint::PlatformError> {
     // Make the window fullscreen
-    std::env::set_var("SLINT_FULLSCREEN", "1");
+    //std::env::set_var("SLINT_FULLSCREEN", "1");
 
     let ui = WorkshopClient::new()?;
 
@@ -27,8 +27,8 @@ fn main() -> Result<(), slint::PlatformError> {
     let arc_workshop_service: Arc<Mutex<WorkshopService>> = Arc::new(Mutex::new(WorkshopService::new()));
     let arc_keycloak: Arc<Mutex<Keycloak>> = Arc::new(Mutex::new(Keycloak::new()));
 
-    ui.set_loginView(true);
-    ui.set_projectView(false);
+    ui.set_loginView(false);
+    ui.set_projectView(true);
     ui.set_projectManagementView(false);
     ui.set_projectDetailView(false);
 
