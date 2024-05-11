@@ -12,8 +12,8 @@ use std::sync::{Arc, Mutex};
 
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::workshop_service::WorkshopService;
-use crate::models::project_model::Project;
-use crate::models::material_model::Material;
+use crate::models::project_model::Project as RustProject;
+use crate::models::material_model::Material as RustMaterial;
 
 slint::include_modules!();
 
@@ -33,7 +33,7 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.set_projectDetailView(false);
 
     // Login action
-    ui.on_request_login({
+    ui.global::<Backend>().on_request_login({
         let ui_handle = ui.as_weak();
         let keycloak_handle = arc_keycloak.clone();
         move || {
@@ -64,7 +64,7 @@ fn main() -> Result<(), slint::PlatformError> {
     });
 
     // Logout action
-    ui.on_request_logout({
+    ui.global::<Backend>().on_request_logout({
         let ui_handle = ui.as_weak();
         let keycloak_handle = arc_keycloak.clone();
         move || {

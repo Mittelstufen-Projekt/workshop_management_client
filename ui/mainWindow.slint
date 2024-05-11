@@ -1,26 +1,35 @@
 /*
 
-    Author: Justin Rauch, Jasha Pierre
+    Author: Justin, Jasha
     Date: 2024-03-01
     Description: Main Window for the WorkshopClient
 
 */
 
+// Importing constants and other stuff
 import { Palette } from "Palette.slint";
+import { Backend } from "Backend.slint";
+import { Constants } from "Constants.slint";
 
+// Importing the Standard Widgets
 import { VerticalBox, ComboBox, LineEdit, Button } from "std-widgets.slint";
 
+// Importing self made Widgets
 import { ToggleSwitch } from "Widgets/ToggleSwitch.slint";
 import { CheckBox } from "Widgets/CheckBox.slint";
 
+// Importing the Views
 import { LoginView } from "Views/LoginView.slint";
 import { ProjectView } from "Views/ProjectView.slint";
 import { ProjectManagement } from "Views/ProjectManagement.slint";
 import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 
+// Exporting the Backend
+export { Backend }
+
 export component WorkshopClient inherits Window {
-width: 1920px;
-height: 1080px;
+    width: 1920px;
+    height: 1080px;
 
     // Properties
     in-out property<string> username;
@@ -32,10 +41,6 @@ height: 1080px;
     in-out property <bool> projectView: false;
     in-out property <bool> projectManagementView: false;
     in-out property <bool> projectDetailView: false;
-
-    // Signals
-    callback request-login();
-    callback request-logout();
 
     // Variables for the window itself
     background: Palette.background-color;
@@ -54,14 +59,12 @@ height: 1080px;
 
     // Actual content
     LoginView {
-        request-login => {root.request-login();}
         username <=> root.username;
         password <=> root.password;
         login_error <=> root.login_error;
         visible: false;
     }
     ProjectView {
-        request-logout => {root.request-logout();}
         //visible <=> root.projectView;
         visible: false;
     }
