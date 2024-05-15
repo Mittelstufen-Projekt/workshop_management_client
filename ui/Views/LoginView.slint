@@ -28,7 +28,6 @@ export component LoginView inherits Rectangle {
         alignment: center;
         VerticalBox {
             alignment: center;
-
             Text {
                 text: "Username";
                 color: Palette.text-color;
@@ -38,7 +37,6 @@ export component LoginView inherits Rectangle {
                 height: root.width * 0.027;
                 width: root.width * 0.2;
             }
-    
             Text {
                 text: "Password";
                 color: Palette.text-color;
@@ -48,7 +46,6 @@ export component LoginView inherits Rectangle {
                 height: root.width * 0.027;
                 width: root.width * 0.2;
             }
-            
             Rectangle {
                 height: root.width * 0.02;
                 login_error := Text {
@@ -58,7 +55,6 @@ export component LoginView inherits Rectangle {
                     overflow: elide; 
                 }    
             }
-
             Button {
                 text: "Login";
                 clicked => {

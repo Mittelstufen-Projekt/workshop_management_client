@@ -63,6 +63,24 @@ export component LagerOverview inherits VerticalBox {
                 }
         }
     }
+    HorizontalBox {
+        alignment: space-between;
+        Button {text: "safe";
+        clicked => {
+            // TODO(jmeusel): implement safe
+        }
+        width: root.width * 0.04;
+        height: root.height * 0.04;
+    }
+    //Rectangle {width: 200px;}
+    Button {text: "cancel";
+        clicked => {
+            // TODO(jmeusel): implement cancel
+        }
+        width: root.width * 0.04;
+        height: root.height * 0.04;
+    }
+    }
 }
 
 
