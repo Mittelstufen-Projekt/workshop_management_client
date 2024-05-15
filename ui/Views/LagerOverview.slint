@@ -1,14 +1,22 @@
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
-import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox, GridBox, Slider } from "std-widgets.slint";
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
 import { Button } from "../Widgets/Button.slint";
 import { Palette } from "../Palette.slint";
 import { LagerText } from "../Widgets/LagerText.slint";
-import { LagerRow } from "../Widgets/LagerRow.slint";
+import { LagerRow } from "../Widgets/Lager/LagerRow.slint";
 export component LagerOverview inherits VerticalBox {
+
     property <length> topPadding: 20px;
+
+    in property <string> name;
+    in property <float> price;
+    in property <string> type;
+    in property <string> amount;
+    in property <string> rememberWhen;
+    in property <string> description;
 
     alignment: start;
     WMSAppbar {
@@ -21,12 +29,45 @@ export component LagerOverview inherits VerticalBox {
             // TODO(jmeusel): implement add Material
         }
     }
-
     Rectangle {
-        height: 25px;
+        height: 80px;
     }
+    
+    HorizontalLayout {
+        GridBox {
+            Row {
+                LagerText {label: "name";}
+                Rectangle {width: 120px;}
+                LagerText {label: "price";}
+                Rectangle {width: 120px;}
+                LagerText {label: "type";}
+                Rectangle {width: 120px;}
+                LagerText {label: "amount";}
+                Rectangle {width: 120px;}
+                LagerText {label: "remember when";}
+                Rectangle {width: 120px;}
+                LagerText {label: "description";}
+            }
+            Row {
+                TextField {text: name;}
+                Rectangle {width: 120px;}
+                TextField {text: price;}
+                Rectangle {width: 120px;}
+                TextField {text: amount;}
+                Rectangle {width: 120px;}
+                TextField {text: type;}
+                Rectangle {width: 120px;}
+                TextField {text: rememberWhen;}
+                Rectangle {width: 120px;}
+                TextField {text: description;}
+                }
+        }
+    }
+}
 
-    HorizontalBox {
+
+/*
+HorizontalBox {
         alignment: space-between;
         HorizontalBox {
             LagerText {
@@ -57,4 +98,5 @@ export component LagerOverview inherits VerticalBox {
     }
 
     LagerRow { }
-}
+*/
+
