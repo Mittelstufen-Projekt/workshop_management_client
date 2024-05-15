@@ -1,0 +1,73 @@
+import { TextField } from "TextField.slint";
+
+
+import { Palette } from "../Palette.slint";
+
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+
+import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { CheckBox } from "../Widgets/CheckBox.slint";
+import { Button } from "../Widgets/Button.slint";
+
+export component WMSAppbar {
+
+    in-out property <string> title;
+    in-out property <string> buttonTitle;
+    callback onBackButtonPress();
+    callback onButtonPress();
+
+    HorizontalBox {
+        height: 0;
+        VerticalLayout {
+            alignment: start;
+            Text {
+                text: title;
+                color: Palette.accent-color;
+                font-size: Palette.font-size * 2.1px;
+            }
+
+            Rectangle {
+                height: 12px;
+            }
+
+            HorizontalLayout {
+                alignment: center;
+                width: 0;
+                Text {
+                    text: "Search:";
+                    vertical-alignment: center;
+                    font-size: Palette.font-size * 1.9px;
+                    color: Palette.accent-color;
+                }
+
+                Rectangle {
+                    width: 12px;
+                }
+
+                TextField { height: Palette.font-size * 2px;}
+
+                Rectangle {
+                    width: 120px;
+                }
+
+                Button {
+                    height: Palette.font-size * 2px;
+                    text: buttonTitle;
+                    width: 120px;
+                    clicked => {
+                        onButtonPress();
+                    }
+                }
+                Rectangle {width: 700px;}
+                Button {
+                    height: Palette.font-size * 2px;
+                    text: "⬅";
+                    clicked => {
+                        onBackButtonPress();
+                    }
+                }
+            }
+        }
+    }
+}

@@ -17,6 +17,7 @@ import { LoginView } from "Views/LoginView.slint";
 import { ProjectView } from "Views/ProjectView.slint";
 import { ProjectManagement } from "Views/ProjectManagement.slint";
 import { ProjectDetailView } from "Views/ProjectDetailView.slint";
+import { LagerOverview } from "Views/LagerOverview.slint";
 
 export component WorkshopClient inherits Window {
 width: 1920px;
@@ -71,9 +72,12 @@ height: 1080px;
     }
     ProjectDetailView {
         //visible <=> root.projectDetailView;
-        visible: true;
+        visible: false;
     }
 
+    LagerOverview {
+        visible: true;
+    }
 
     // Bar in the accent color for design purposes
     VerticalLayout {

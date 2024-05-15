@@ -1,0 +1,23 @@
+import { Palette } from "../../Palette.slint";
+import { HorizontalBox } from "std-widgets.slint";
+import { TextField } from "../TextField.slint";
+
+export component LagerRow {
+    in property <string> name;
+    in property <float> price;
+    in property <string> type;
+    in property <string> amount;
+    in property <string> rememberWhen;
+    in property <string> description;
+
+
+    HorizontalBox {
+        alignment: start;
+        TextField {text: name;}
+        TextField {text: price;}
+        TextField {text: amount;}
+        TextField {text: type;}
+        TextField {text: rememberWhen;}
+        TextField {text: description;}
+    }
+}

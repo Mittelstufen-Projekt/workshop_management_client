@@ -1,0 +1,60 @@
+import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
+import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { CheckBox } from "../Widgets/CheckBox.slint";
+import { Button } from "../Widgets/Button.slint";
+import { Palette } from "../Palette.slint";
+import { LagerText } from "../Widgets/LagerText.slint";
+import { LagerRow } from "../Widgets/LagerRow.slint";
+export component LagerOverview inherits VerticalBox {
+    property <length> topPadding: 20px;
+
+    alignment: start;
+    WMSAppbar {
+        title: "Lager overview";
+        buttonTitle: "Add Material";
+        onBackButtonPress => {
+            // TODO(jmeusel): implement routing
+        }
+        onButtonPress => {
+            // TODO(jmeusel): implement add Material
+        }
+    }
+
+    Rectangle {
+        height: 25px;
+    }
+
+    HorizontalBox {
+        alignment: space-between;
+        HorizontalBox {
+            LagerText {
+                label: "name";
+            }
+        }
+
+        LagerText {
+            label: "price";
+        }
+
+        LagerText {
+            label: "type";
+        }
+
+        LagerText {
+            label: "amount";
+        }
+
+        // TODO(jmeusel): DateTime? 
+        LagerText {
+            label: "rememberWhen";
+        }
+
+        LagerText {
+            label: "description";
+        }
+    }
+
+    LagerRow { }
+}
