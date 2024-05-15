@@ -6,8 +6,15 @@
 
 */
 
+// Importing Palette, Backend and Constants
 import { Palette } from "../Palette.slint";
+import { Backend } from "../Backend.slint";
+import { Constants } from "../Constants.slint";
+
+// Importing Standard Widgets
 import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+
+// Importing selfmade Widgets
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
@@ -22,8 +29,6 @@ export component ProjectView inherits Rectangle {
     property <length> txt;
     txt: Palette.font-size * 1px;
 
-    callback request-logout;
-
     // TODO(jmeusel): bedarf klären aufgrund der Datentypen (müsste eigentlich eine Map sein)
     in-out property <[string]> recentProjects;
     recentProjects: ["Project", "Client", "current costs", "deadline"];
@@ -34,7 +39,7 @@ export component ProjectView inherits Rectangle {
             Button {
                 text: "Logout";
                 clicked => {
-                    root.request-logout();
+                    Backend.request-logout();
                 }
             }
         }
