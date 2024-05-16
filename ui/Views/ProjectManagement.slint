@@ -1,57 +1,42 @@
 import { HorizontalBox, VerticalBox } from "std-widgets.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
 import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
-
+import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
+import { Constants } from "../Constants.slint";
+import { RowTest } from "../Widgets/Rowtest.slint";
+import { ProjectRowShort } from "../Widgets/ProjectRowShort.slint";
+import { Palette } from "../Palette.slint";
+import { Button } from "../Widgets/Button.slint";
 
 
 //Refactor
 // TODO(jmeusel): Liste von Projekten
-export component ProjectManagement inherits Rectangle {
+export component ProjectManagement inherits VerticalBox {
 
     VerticalBox {
-        Appbar {buttonText: "Create new Project";}
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
+        alignment: start;
+        HorizontalLayout {
+            Text {
+                text: Constants.project_overview;
+                font-size: Palette.page-title-font-size * 1px;
+                color: Palette.text-color;
+            }
+            Button {
+                height: Palette.font-size * 2px;
+                width: 40px;
+                text: "⬅";
+                clicked => {
+                    //onBackButtonPress();
+                }
+            }
         }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
+        WMSAppbar {
+            buttonTitle: Constants.search;
         }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
-        }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
-        }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
-        }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
-        }
-        ProjectOverViewRowShort{
-            project: "ProjectName";
-            client: "Client";
-            costs: "curent costs";
-            deadline: "deadline";
-        }
+        Rectangle {height: 50px;}
+        ProjectRowShort {project: "Project"; client: "Client"; costs: "Costs"; deadline: "Deadline";}
+        ProjectRowShort {project: "Project"; client: "Client"; costs: "Costs"; deadline: "Deadline";}
+        ProjectRowShort {project: "Project"; client: "Client"; costs: "Costs"; deadline: "Deadline";}
     }
     // TODO(jmeusel): schleife
 

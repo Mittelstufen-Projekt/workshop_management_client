@@ -10,25 +10,25 @@ import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
 import { Button } from "../Widgets/Button.slint";
 
-export component WMSAppbar {
+export component WMSAppbar inherits Rectangle{
 
     in-out property <string> title;
     in-out property <string> buttonTitle;
     callback onBackButtonPress();
     callback onButtonPress();
 
+    border-color: white;
+    border-width: 2px;
+    border-radius: 8px;
+    
+
     HorizontalBox {
-        height: 0;
         VerticalLayout {
             alignment: start;
             Text {
                 text: title;
                 color: Palette.accent-color;
-                font-size: Palette.font-size * 2.1px;
-            }
-
-            Rectangle {
-                height: 12px;
+                font-size: Palette.page-title-font-size * 1px;
             }
 
             HorizontalLayout {
@@ -38,7 +38,7 @@ export component WMSAppbar {
                     text: "Search:";
                     vertical-alignment: center;
                     font-size: Palette.font-size * 1.9px;
-                    color: Palette.accent-color;
+                    color: Palette.text-color;
                 }
 
                 Rectangle {
@@ -57,14 +57,6 @@ export component WMSAppbar {
                     width: 120px;
                     clicked => {
                         onButtonPress();
-                    }
-                }
-                Rectangle {width: 700px;}
-                Button {
-                    height: Palette.font-size * 2px;
-                    text: "⬅";
-                    clicked => {
-                        onBackButtonPress();
                     }
                 }
             }

@@ -1,0 +1,43 @@
+import { VerticalBox } from "std-widgets.slint";
+import { Palette } from "../Palette.slint";
+
+
+ component WMSText inherits Text {
+    in-out property <string> title;
+    font-size: Palette.font-size * 1px;
+    color: Palette.text-color;
+    text: title;
+    width: 200px;
+    overflow: TextOverflow.elide;
+}
+
+export component ProjectRowShort inherits Rectangle{
+    //props
+    property <length> txt;
+    txt: Palette.font-size * 1px;
+    in-out property <string> project;
+    in-out property <string> client;
+    in-out property <string> costs;
+    in-out property <string> deadline;
+    //callback clicked <=> touch.clicked;
+
+
+    background: Palette.accent-color;
+    height: 65px;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 8px;
+
+    HorizontalLayout {
+        padding: 16px;
+        WMSText{
+            title: project;
+        }
+        WMSText{title: client;}
+        WMSText{title: costs;}
+        WMSText{title: deadline;}
+    }
+
+}
+
+
