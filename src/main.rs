@@ -5,16 +5,16 @@
 
 */
 
-mod utils;
 mod models;
+mod utils;
 
 use std::sync::{Arc, Mutex};
 
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::workshop_service::WorkshopService;
 // Need to import out models as alias to avoid conflicts with the slint models
-use crate::models::project_model::Project as RustProject;
 use crate::models::material_model::Material as RustMaterial;
+use crate::models::project_model::Project as RustProject;
 
 // Import the slint modules
 slint::include_modules!();
@@ -27,7 +27,8 @@ fn main() -> Result<(), slint::PlatformError> {
     let ui = WorkshopClient::new()?;
 
     // Need to use the services as mutex arcs so that we can move and still edit the memory
-    let arc_workshop_service: Arc<Mutex<WorkshopService>> = Arc::new(Mutex::new(WorkshopService::new()));
+    let arc_workshop_service: Arc<Mutex<WorkshopService>> =
+        Arc::new(Mutex::new(WorkshopService::new()));
     let arc_keycloak: Arc<Mutex<Keycloak>> = Arc::new(Mutex::new(Keycloak::new()));
 
     // Set the inital state of the window
@@ -63,8 +64,14 @@ fn main() -> Result<(), slint::PlatformError> {
                 }
                 Ok(token) => {
                     keycloak_handle.lock().unwrap().set_token(token);
-                    keycloak_handle.lock().unwrap().set_username(user.to_string());
-                    keycloak_handle.lock().unwrap().set_password(password.to_string());
+                    keycloak_handle
+                        .lock()
+                        .unwrap()
+                        .set_username(user.to_string());
+                    keycloak_handle
+                        .lock()
+                        .unwrap()
+                        .set_password(password.to_string());
                     ui.set_loginView(false);
                     ui.set_projectView(true);
                     ui.set_login_error("".into());

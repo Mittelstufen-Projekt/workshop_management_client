@@ -5,8 +5,8 @@
 
 */
 
-use crate::models::project_model::Project;
 use crate::models::material_model::Material;
+use crate::models::project_model::Project;
 
 //TODO: Change this to the actual API URL
 const API_URL: &str = "http://justinrauch.myftp.org:8580/";
@@ -56,7 +56,8 @@ impl WorkshopService {
             .await
             .expect("Failed to add project");
 
-        self.projects.push(response.json().await.expect("Failed to parse project"));
+        self.projects
+            .push(response.json().await.expect("Failed to parse project"));
     }
 
     #[tokio::main]
@@ -68,6 +69,7 @@ impl WorkshopService {
             .await
             .expect("Failed to add material");
 
-        self.materials.push(response.json().await.expect("Failed to parse material"));
+        self.materials
+            .push(response.json().await.expect("Failed to parse material"));
     }
 }

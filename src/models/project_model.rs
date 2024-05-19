@@ -5,7 +5,7 @@
 
 */
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use super::material_model::Material;
 

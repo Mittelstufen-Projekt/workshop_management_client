@@ -31,10 +31,17 @@ impl Keycloak {
     }
 
     #[tokio::main]
-    pub async fn login_user(&mut self, username: &str, password: &str) -> Result<String, reqwest::Error> {
+    pub async fn login_user(
+        &mut self,
+        username: &str,
+        password: &str,
+    ) -> Result<String, reqwest::Error> {
         // Send a POST request to the keycloak server to get a token
         let response = reqwest::Client::new()
-            .post(&format!("{}/realms/{}/protocol/openid-connect/token", API_URL, REALM))
+            .post(&format!(
+                "{}/realms/{}/protocol/openid-connect/token",
+                API_URL, REALM
+            ))
             .form(&[
                 ("client_id", CLIENT_ID),
                 ("client_secret", CLIENT_SECRET),
@@ -51,7 +58,10 @@ impl Keycloak {
             Some(err) => Err(err),
             None => {
                 let token: serde_json::Value = response.json().await?;
-                self.login_timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
+                self.login_timestamp = SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs();
                 Ok(token["access_token"].as_str().unwrap().to_string())
             }
         }
@@ -78,7 +88,11 @@ impl Keycloak {
 
     pub fn refresh_token(&mut self) {
         // Check if the token is empty or if the time since the last login is less than 5 minutes
-        let time_since_login = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs() - self.login_timestamp;
+        let time_since_login = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs()
+            - self.login_timestamp;
         if self.token.is_empty() || time_since_login < 300 {
             return;
         }
@@ -91,7 +105,10 @@ impl Keycloak {
             }
             Ok(token) => {
                 // Set the new token and update the login timestamp
-                self.login_timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
+                self.login_timestamp = SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs();
                 self.set_token(token);
             }
         }
