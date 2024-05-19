@@ -63,6 +63,14 @@ export component LoginView inherits Rectangle {
                 width: root.width * 0.2;
                 height: root.width * 0.04;
             }
+            Button {
+                text: "Exit";
+                clicked => {
+                    Backend.request-exit();
+                }
+                width: root.width * 0.2;
+                height: root.width * 0.04;
+            }
         }
     }
 }

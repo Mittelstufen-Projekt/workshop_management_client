@@ -9,7 +9,7 @@ use crate::models::project_model::Project;
 use crate::models::material_model::Material;
 
 //TODO: Change this to the actual API URL
-const API_URL: &str = "http://localhost:8000/api";
+const API_URL: &str = "http://justinrauch.myftp.org:8580/";
 
 #[derive(Clone)]
 pub struct WorkshopService {

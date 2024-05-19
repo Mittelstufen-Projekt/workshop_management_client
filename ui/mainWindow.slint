@@ -29,8 +29,8 @@ import { LagerOverview } from "Views/LagerOverview.slint";
 export { Backend }
 
 export component WorkshopClient inherits Window {
-    width: 1920px;
-    height: 1080px;
+    //width: 1920px;
+    //height: 1080px;
 
     // Properties
     in-out property<string> username;
@@ -42,6 +42,7 @@ export component WorkshopClient inherits Window {
     in-out property <bool> projectView: false;
     in-out property <bool> projectManagementView: false;
     in-out property <bool> projectDetailView: false;
+    in-out property <bool> lagerOverviewView: false;
 
     // Variables for the window itself
     background: Palette.background-color;
@@ -63,23 +64,25 @@ export component WorkshopClient inherits Window {
         username <=> root.username;
         password <=> root.password;
         login_error <=> root.login_error;
-        visible: false;
+        visible <=> root.loginView;
+        //visible: false;
     }
     ProjectView {
-        //visible <=> root.projectView;
-        visible: false;
+        visible <=> root.projectView;
+        //visible: false;
     }
     ProjectManagement {
-        //visible <=> root.projectManagementView;
-        visible: true;
+        visible <=> root.projectManagementView;
+        //visible: true;
     }
     ProjectDetailView {
-        //visible <=> root.projectDetailView;
-        visible: false;
+        visible <=> root.projectDetailView;
+        //visible: false;
     }
 
     LagerOverview {
-        visible: false;
+        visible <=> root.lagerOverviewView;
+        //visible: false;
     }
 
     // Bar in the accent color for design purposes
@@ -91,5 +94,5 @@ export component WorkshopClient inherits Window {
             height: 2px;
             background: Palette.accent-color;
         }
-}
+    }
 }
