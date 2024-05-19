@@ -11,6 +11,7 @@ use super::material_model::Material;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Project {
+    pub id: i32,
     pub name: String,
     pub client: String,
     pub email: String,
