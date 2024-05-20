@@ -12,19 +12,10 @@ import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
 
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
-    // TODO(jmeusel): richtiges model
-    // project: {
-    //     name: "project",
-    //     client: "Client",
-    //     email: "whyDoesntThisWork",
-    //     tel: "08006666999",
-    //     project_start: "2024-04-18",
-    //     project-deadline: "2024-06-12",
-    //     calculated_costs:"299.99",
-    //     current_costs: "127.48",
-    //     //mats: ["Ahorn-platte", "Schraube 6x25"],
-    // };
+    in-out property <[string]> materialTypes;
 
+    // TODO(jmeusel): kann wahrscheinlich weg, nicht sicher!
+    // TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
     // in-out property <string> projectController:project.name;
     // in-out property <string> clientController:project.client;
     // in-out property <string> phoneController: project.tel;
@@ -97,36 +88,19 @@ export component ProjectDetailView inherits VerticalLayout {
                 Rectangle {height: topPadding;}
                 Rectangle {
                     border-radius: 5px;
-                    border-color: Palette.accent-color;
                     border-width: 1px;
-    
+                    border-color: Palette.accent-color;
                     drop-shadow-blur: 20px;
                     drop-shadow-color: Palette.control-color;
                     drop-shadow-offset-y: 1px;
                     VerticalBox {
-            
-                        // TODO(jmeusel): Mit Schleife durchlaufen lassen
-                        // hier wird es noch Problematisch werden, um alles eine Box gezogen werden soll,
-                        // in der man zusätzlich Materialien hinzufügen kann
-                        MaterialDetailCard {
-                            materialName: "Material 1";
-                        }
-            
-                        MaterialDetailCard {
-                            materialName: "Material 1";
-                            count: 12;
-                        }
-            
-                        MaterialDetailCard {
-                            materialName: "Material 1";
-                        }
-            
-                        MaterialDetailCard {
-                            materialName: "Material 1";
-                        }
-            
-                        MaterialDetailCard {
-                            materialName: "Material 1";
+                        for material[i] in project.mats: MaterialDetailCard {
+                            materialName: project.mats[i].name;
+                            count: project.mats[i].quantity;
+                            materialTypes: materialTypes;
+                            fontSizeMultiplier: 2px;
+
+                            for name[index] in project.mats : Rectangle {height: 85px;}
                         }
                     }
                 }
@@ -142,10 +116,10 @@ export component ProjectDetailView inherits VerticalLayout {
                     }
                     Rectangle {width: 45px;}
                     Button {
-                        text: "Safe";
+                        text: "Save";
                         height: 30px;
                         width: 130px;
-                        callback safe(
+                        callback save(
                             // TODO(jmeusel): implement
                         );
                     }
