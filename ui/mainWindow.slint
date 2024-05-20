@@ -71,17 +71,19 @@ export component WorkshopClient inherits Window {
     }
     ProjectView {
         //visible <=> root.projectView;
-        visible: true;
+        visible: false;
         recentProjects: MockModel.recentProjects;
         materialAlerts: MockModel.materials;
     }
     ProjectManagement {
         //visible <=> root.projectManagementView;
-        visible: false;
+        visible: true;
+        allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView {
         //visible <=> root.projectDetailView;
         visible: false;
+        project: MockModel.projectWithMats;
     }
 
     LagerOverview {

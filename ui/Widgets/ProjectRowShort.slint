@@ -11,15 +11,16 @@ import { Palette } from "../Palette.slint";
     overflow: TextOverflow.elide;
 }
 
-export component ProjectRowShort inherits Rectangle{
+export component ProjectRowShort inherits Rectangle {
     //props
     property <length> txt;
-    txt: Palette.font-size * 1px;
+    txt: Palette.font-size * 1.5px;
     in-out property <string> project;
     in-out property <string> client;
     in-out property <string> costs;
     in-out property <string> deadline;
     //callback clicked <=> touch.clicked;
+    callback clicked <=> touch.clicked; // The callback for when the button is clicked
 
 
     background: Palette.accent-color;
@@ -28,16 +29,35 @@ export component ProjectRowShort inherits Rectangle{
     border-width: 2px;
     border-radius: 8px;
 
-    HorizontalLayout {
-        padding: 16px;
-        WMSText{
-            title: project;
+    Rectangle {
+        // TODO(jmeusel): response für click anpassen 
+        HorizontalLayout {
+            x: (parent.width - self.width)/2 + (touch.pressed ? 2px : 0);
+            y: (parent.height - self.height)/2 + (touch.pressed ? 1px : 0);
+            alignment: stretch;
+            padding: 16px;
+            WMSText {
+                title: project;
+                font-size: txt;
+            }
+            Rectangle {}
+            WMSText {
+                title: client;
+                font-size: txt;
+            }
+            Rectangle {}
+            WMSText {
+                title: costs;
+                font-size: txt;
+            }
+            Rectangle {}
+            WMSText {
+                title: deadline;
+                font-size: txt;
+            }
         }
-        WMSText{title: client;}
-        WMSText{title: costs;}
-        WMSText{title: deadline;}
     }
 
+    touch := TouchArea {}
+
 }
-
-

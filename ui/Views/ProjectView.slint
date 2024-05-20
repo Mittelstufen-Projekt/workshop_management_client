@@ -25,13 +25,11 @@ import { MaterialAlertShort } from "../Widgets/MaterialAlertShort.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
 import { Material } from "../models/MaterialModel.slint";
 
-// TODO(jmeusel): Ein Button zur Zurücknavigation fehlt noch
 export component ProjectView inherits Rectangle {
 
     property <length> txt;
     txt: Palette.font-size * 1px;
 
-    // TODO(jmeusel): bedarf klären aufgrund der Datentypen (müsste eigentlich eine Map sein)
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
     VerticalBox {
@@ -46,7 +44,6 @@ export component ProjectView inherits Rectangle {
         }
 
         HorizontalBox {
-            //alignment: LayoutAlignment.start;
             VerticalBox {
                 Button {
                     max-width: 300px;
@@ -66,7 +63,7 @@ export component ProjectView inherits Rectangle {
 
             Text {
                 text: "Carpenter management\n             System";
-                font-size: Palette.font-size * 1px;
+                font-size: Palette.font-size * 1.5px;
             }
 
             Rectangle { }
@@ -78,7 +75,7 @@ export component ProjectView inherits Rectangle {
             padding-left: root.padding-left + 20px;
             HorizontalBox {
                 Text {
-                    text: "Latest Projects:";
+                    text: Constants.latest_projects;
                     font-size: Palette.font-size * 1.5px;
                     vertical-alignment: center;
                     color: Palette.accent-color;
@@ -122,7 +119,7 @@ export component ProjectView inherits Rectangle {
 
                 Button {
                     fontSizeMultiplier: 1.5px;
-                    text: "Show more";
+                    text: Constants.show_more;
                     clicked => {
                         // TODO(jmeusel): implement route to MaterialAlert
                 }

@@ -7,137 +7,148 @@ import { Constants } from "../Constants.slint";
 import { MaterialDetailCard } from "../Widgets/MaterialDetailCard.slint";
 import { Palette } from "../Palette.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
+import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
 
 
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     // TODO(jmeusel): richtiges model
-    project: {
-        name: "project",
-        client: "Client",
-        email: "whyDoesntThisWork",
-        tel: "08006666999",
-        project_start: "2024-04-18",
-        project-deadline: "2024-06-12",
-        calculated_costs:"299.99",
-        current_costs: "127.48",
-        //mats: ["Ahorn-platte", "Schraube 6x25"],
-    };
+    // project: {
+    //     name: "project",
+    //     client: "Client",
+    //     email: "whyDoesntThisWork",
+    //     tel: "08006666999",
+    //     project_start: "2024-04-18",
+    //     project-deadline: "2024-06-12",
+    //     calculated_costs:"299.99",
+    //     current_costs: "127.48",
+    //     //mats: ["Ahorn-platte", "Schraube 6x25"],
+    // };
 
-    in-out property <string> projectController:project.name;
-    in-out property <string> clientController:project.client;
-    in-out property <string> phoneController: project.tel;
-    in-out property <string> eMailController:project.email;
-    in-out property <string> projectStartController:project.project-start;
-    in-out property <string> deadlineController:project.project-deadline;
-    in-out property <string> calcCostsController:project.calculated-costs;
-    in-out property <string> currentCostsController:project.current-costs;
+    // in-out property <string> projectController:project.name;
+    // in-out property <string> clientController:project.client;
+    // in-out property <string> phoneController: project.tel;
+    // in-out property <string> eMailController:project.email;
+    // in-out property <string> projectStartController:project.project-start;
+    // in-out property <string> deadlineController:project.project-deadline;
+    // in-out property <string> calcCostsController:project.calculated-costs;
+    // in-out property <string> currentCostsController:project.current-costs;
 
     property <string> suffix: ": ";
     property <length> topPadding: 20px;
 
-    HorizontalLayout {
-        alignment: start;
-        VerticalBox {
-            Rectangle {
-                height: topPadding;
-            }
-
-            alignment: start;
-            ProjectDetailRow {
-                title: Constants.project_name;
-                textFieldName: projectController;
-            }
-
-            ProjectDetailRow {
-                title: Constants.client + suffix;
-                textFieldName: clientController;
-            }
-
-            ProjectDetailRowTwoBoxes {
-                title: Constants.phone + suffix;
-                textFieldName: phoneController;
-                title2: Constants.email + suffix;
-                textFieldName2: eMailController;
-            }
-
-            ProjectDetailRow {
-                title: Constants.project_start + suffix;
-                textFieldName: projectStartController;
-            }
-
-            ProjectDetailRow {
-                title: Constants.project_deadline + suffix;
-                textFieldName: deadlineController;
-            }
-
-            ProjectDetailRow {
-                title: Constants.calculated_costs + suffix;
-                textFieldName: calcCostsController;
-            }
-
-            ProjectDetailRow {
-                title: Constants.currentCosts + suffix;
-                textFieldName: currentCostsController;
-            }
-    
+    VerticalLayout {
+        Rectangle {
+            height: topPadding;
         }
-        Rectangle {width: 500px;}
-        VerticalLayout {
-            Rectangle {height: topPadding;}
-            Rectangle {
-                border-radius: 5px;
-                border-color: Palette.accent-color;
-                border-width: 1px;
-
-                drop-shadow-blur: 20px;
-                drop-shadow-color: Palette.control-color;
-                drop-shadow-offset-y: 1px;
-                VerticalBox {
-        
-                    // TODO(jmeusel): Mit Schleife durchlaufen lassen
-                    // hier wird es noch Problematisch werden, um alles eine Box gezogen werden soll,
-                    // in der man zusätzlich Materialien hinzufügen kann
-                    MaterialDetailCard {
-                        materialName: "Material 1";
-                    }
-        
-                    MaterialDetailCard {
-                        materialName: "Material 1";
-                        count: 12;
-                    }
-        
-                    MaterialDetailCard {
-                        materialName: "Material 1";
-                    }
-        
-                    MaterialDetailCard {
-                        materialName: "Material 1";
-                    }
-        
-                    MaterialDetailCard {
-                        materialName: "Material 1";
-                    }
+        alignment: start;
+        WMSAppbar {
+            title: project.name;
+        }
+        HorizontalLayout {
+            alignment: start;
+            VerticalBox {
+                Rectangle {
+                    height: topPadding;
                 }
+                Rectangle {height: 20px;}
+                alignment: start;
+                ProjectDetailRow {
+                    title: Constants.project_name;
+                    textFieldName: project.name;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRow {
+                    title: Constants.client + suffix;
+                    textFieldName: project.client;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRowTwoBoxes {
+                    title: Constants.phone + suffix;
+                    textFieldName: project.tel;
+                    title2: Constants.email + suffix;
+                    textFieldName2: project.email;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRow {
+                    title: Constants.project_start + suffix;
+                    textFieldName: project.project-start;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRow {
+                    title: Constants.project_deadline + suffix;
+                    textFieldName: project.project-deadline;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRow {
+                    title: Constants.calculated_costs + suffix;
+                    textFieldName: project.calculated-costs;
+                }
+                Rectangle {height: 20px;}
+                ProjectDetailRow {
+                    title: Constants.currentCosts + suffix;
+                    textFieldName: project.current-costs;
+                }
+        
             }
-            Rectangle {height: 25px;}
-            HorizontalLayout {
-                Button {
-                    text: "add material";
-                    height: 30px;
-                    width: 130px;
-                    callback addMaterial(
-                        // TODO(jmeusel): implement
-                    );
+            Rectangle {width: 500px;}
+            //Material Section
+            VerticalLayout {
+                Rectangle {height: topPadding;}
+                Rectangle {
+                    border-radius: 5px;
+                    border-color: Palette.accent-color;
+                    border-width: 1px;
+    
+                    drop-shadow-blur: 20px;
+                    drop-shadow-color: Palette.control-color;
+                    drop-shadow-offset-y: 1px;
+                    VerticalBox {
+            
+                        // TODO(jmeusel): Mit Schleife durchlaufen lassen
+                        // hier wird es noch Problematisch werden, um alles eine Box gezogen werden soll,
+                        // in der man zusätzlich Materialien hinzufügen kann
+                        MaterialDetailCard {
+                            materialName: "Material 1";
+                        }
+            
+                        MaterialDetailCard {
+                            materialName: "Material 1";
+                            count: 12;
+                        }
+            
+                        MaterialDetailCard {
+                            materialName: "Material 1";
+                        }
+            
+                        MaterialDetailCard {
+                            materialName: "Material 1";
+                        }
+            
+                        MaterialDetailCard {
+                            materialName: "Material 1";
+                        }
+                    }
                 }
-                Rectangle {width: 45px;}
-                Button {
-                    text: "Safe";
-                    height: 30px;
-                    width: 130px;
-                    callback safe(
-                        // TODO(jmeusel): implement
-                    );
+                Rectangle {height: 25px;}
+                HorizontalLayout {
+                    Button {
+                        text: "add material";
+                        height: 30px;
+                        width: 130px;
+                        callback addMaterial(
+                            // TODO(jmeusel): implement
+                        );
+                    }
+                    Rectangle {width: 45px;}
+                    Button {
+                        text: "Safe";
+                        height: 30px;
+                        width: 130px;
+                        callback safe(
+                            // TODO(jmeusel): implement
+                        );
+                    }
                 }
             }
         }

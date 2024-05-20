@@ -15,10 +15,13 @@ export component ProjectDetailRow inherits HorizontalLayout {
         vertical-alignment: center;
         text: title;
         color: Palette.accent-color;
-        font-size: Palette.font-size * 1px;
+        font-size: Palette.font-size * 2px;
     }
 
-    textFieldName := TextField { }
+    textFieldName := TextField { 
+        height: Palette.font-size * 2px;
+        width: 300px;
+    }
 }
 
 export component ProjectDetailRowTwoBoxes inherits ProjectDetailRow {
@@ -35,6 +38,7 @@ export component ProjectDetailRowTwoBoxes inherits ProjectDetailRow {
     }
 
     textFieldName2 := TextField {
-        
+        height: Palette.font-size * 2px;
+        width: 300px;
      }
 }
