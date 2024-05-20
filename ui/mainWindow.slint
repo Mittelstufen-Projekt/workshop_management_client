@@ -25,6 +25,8 @@ import { ProjectManagement } from "Views/ProjectManagement.slint";
 import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 import { LagerOverview } from "Views/LagerOverview.slint";
 
+import { MockModel } from "../ui/models/MockModels.slint";
+
 // Exporting the Backend
 export { Backend }
 
@@ -64,25 +66,27 @@ export component WorkshopClient inherits Window {
         username <=> root.username;
         password <=> root.password;
         login_error <=> root.login_error;
-        visible <=> root.loginView;
-        //visible: false;
+        //visible <=> root.loginView;
+        visible: false;
     }
     ProjectView {
-        visible <=> root.projectView;
-        //visible: false;
+        //visible <=> root.projectView;
+        visible: true;
+        recentProjects: MockModel.recentProjects;
+        materialAlerts: MockModel.materials;
     }
     ProjectManagement {
-        visible <=> root.projectManagementView;
-        //visible: true;
+        //visible <=> root.projectManagementView;
+        visible: false;
     }
     ProjectDetailView {
-        visible <=> root.projectDetailView;
-        //visible: false;
+        //visible <=> root.projectDetailView;
+        visible: false;
     }
 
     LagerOverview {
-        visible <=> root.lagerOverviewView;
-        //visible: false;
+        //visible <=> root.lagerOverviewView;
+        visible: false;
     }
 
     // Bar in the accent color for design purposes

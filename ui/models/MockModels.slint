@@ -1,0 +1,49 @@
+import { ProjectModel } from "ProjectModel.slint";
+import { Material } from "MaterialModel.slint";
+
+export global MockModel {
+
+    //List of Projects
+    in-out property <ProjectModel> projectModel;
+    in-out property <[ProjectModel]> recentProjects;
+    in-out property <ProjectModel> modelMock;
+    in-out property <ProjectModel> modelMock1;
+    in-out property <ProjectModel> modelMock2;
+    in-out property <ProjectModel> modelMock3;
+    modelMock: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    modelMock1: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    modelMock2: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    modelMock3: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    recentProjects: [modelMock, modelMock1, modelMock2, modelMock];
+
+    //List of Materials 
+    in-out property <Material> mat1;
+    in-out property <Material> mat2;
+    in-out property <Material> mat3;
+    in-out property <Material> mat4;
+    in-out property <Material> mat5;
+    in-out property <Material> mat6;
+    in-out property <[Material]> materials;
+
+    mat1: {name: "Material1", description: "Description1", price: 11.11, quantity: 11};
+    mat2: {name: "Material2", description: "Description2", price: 22.22, quantity: 22};
+    mat3: {name: "Material3", description: "Description3", price: 33.33, quantity: 33};
+    mat4: {name: "Material4", description: "Description4", price: 44.44, quantity: 44};
+    mat5: {name: "Material5", description: "Description5", price: 55.55, quantity: 55};
+    mat6: {name: "Material6", description: "Description6", price: 66.66, quantity: 66};
+
+    materials: [mat1,mat2,mat3,mat4,mat5,mat6];
+
+
+    //ProjectView ehmalig: 
+    // //recentProjects: ["Project", "Client", "current costs", "deadline"];
+    // in-out property <ProjectModel> modelMock;
+    // in-out property <ProjectModel> modelMock1;
+    // in-out property <ProjectModel> modelMock2;
+    // in-out property <ProjectModel> modelMock3;
+    // modelMock: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    // modelMock1: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    // modelMock2: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    // modelMock3: {name: "ProjName", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"299.99", current_costs: "194.72", mats: []};
+    // recentProjects: [modelMock, modelMock1, modelMock2, modelMock];
+}

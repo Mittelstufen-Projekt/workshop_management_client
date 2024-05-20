@@ -22,6 +22,8 @@ import { RowTest, RowBox } from "../Widgets/Rowtest.slint";
 import { Button } from "../Widgets/Button.slint";
 import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
 import { MaterialAlertShort } from "../Widgets/MaterialAlertShort.slint";
+import { ProjectModel } from "../models/ProjectModel.slint";
+import { Material } from "../models/MaterialModel.slint";
 
 // TODO(jmeusel): Ein Button zur Zurücknavigation fehlt noch
 export component ProjectView inherits Rectangle {
@@ -30,9 +32,8 @@ export component ProjectView inherits Rectangle {
     txt: Palette.font-size * 1px;
 
     // TODO(jmeusel): bedarf klären aufgrund der Datentypen (müsste eigentlich eine Map sein)
-    in-out property <[string]> recentProjects;
-    recentProjects: ["Project", "Client", "current costs", "deadline"];
-
+    in-out property <[ProjectModel]> recentProjects;
+    in-out property <[Material]> materialAlerts;
     VerticalBox {
         HorizontalBox {
             alignment: LayoutAlignment.end;
@@ -49,20 +50,22 @@ export component ProjectView inherits Rectangle {
             VerticalBox {
                 Button {
                     max-width: 300px;
-                    text: "Project - management";
+                    text: Constants.project_management;
+                    fontSizeMultiplier: 1.5px;
                 }
 
                 Button {
                     max-width: 300px;
-                    text: "Warehouse - management";
+                    text: Constants.warehouse_management;
+                    fontSizeMultiplier: 1.5px;
                 }
             }
 
+            //Leeres Rectangle um das Alignment zu beeinflussen
             Rectangle { }
 
-            //Leeres Rectangle um das Alignment zu beeinflussen
             Text {
-                text: "Stupid Carpenter\nmanagement";
+                text: "Carpenter management\n             System";
                 font-size: Palette.font-size * 1px;
             }
 
@@ -89,72 +92,36 @@ export component ProjectView inherits Rectangle {
 
             HorizontalBox {
                 Text {
-                    text: "Material-alert:";
+                    text: Constants.mat_alert;
                     font-size: Palette.font-size * 1.5px;
                     color: Palette.accent-color;
                 }
             }
         }
 
-        // TODO(jmeusel): durch schleifen umsetzen
+        // Als Referenz für die Schleifen nehmen
           HorizontalBox {
             VerticalBox {
-                ProjectOverViewRowShort {
-                    project: "ProjectName";
-                    client: "Client";
-                    costs: "curent costs";
-                    deadline: "deadline";
+                for item[i] in recentProjects: ProjectOverViewRowShort {
+                    project: recentProjects[i].name;
+                    client: recentProjects[i].client;
+                    costs: recentProjects[i].current_costs;
+                    deadline: recentProjects[i].project_deadline;
                 }
-
-                ProjectOverViewRowShort {
-                    project: "ProjectName";
-                    client: "Client";
-                    costs: "curent costs";
-                    deadline: "deadline";
-                }
-
-                ProjectOverViewRowShort {
-                    project: "ProjectName";
-                    client: "Client";
-                    costs: "curent costs";
-                    deadline: "deadline";
-                }
-
                 Rectangle { }
             }
 
+            //Material Section
             VerticalBox {
+                // TODO(jmeusel): IF-Statement um quantity mit alert zu vergleichen
+                for material[i] in materialAlerts: 
                 MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
-                }
-
-                MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
-                }
-
-                MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
-                }
-
-                MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
-                }
-
-                MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
-                }
-
-                MaterialAlertShort {
-                    materialName: "Material";
-                    count: 5;
+                    materialName: materialAlerts[i].name;
+                    count: materialAlerts[i].quantity;
                 }
 
                 Button {
+                    fontSizeMultiplier: 1.5px;
                     text: "Show more";
                     clicked => {
                         // TODO(jmeusel): implement route to MaterialAlert

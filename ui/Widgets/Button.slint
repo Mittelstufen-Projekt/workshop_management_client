@@ -12,6 +12,8 @@ export component Button inherits Rectangle {
     in-out property text <=> txt.text; // The text of the button
     in-out property <color> accent; // The color of the button
     callback clicked <=> touch.clicked; // The callback for when the button is clicked
+    in property <length> fontSizeMultiplier;
+    fontSizeMultiplier: 1px;
     border-radius: root.height / 4;
     border-width: 1px;
     border-color: root.background.darker(25%);
@@ -19,7 +21,7 @@ export component Button inherits Rectangle {
     height: txt.preferred-height * 1.33;
     min-width: txt.preferred-width + 20px;
     txt := Text {
-        font-size: Palette.font-size * 1px;
+        font-size: Palette.font-size * fontSizeMultiplier;
         x: (parent.width - self.width)/2 + (touch.pressed ? 2px : 0);
         y: (parent.height - self.height)/2 + (touch.pressed ? 1px : 0);
         color: touch.pressed ? Palette.text-color.darker(10%) : Palette.text-color;
