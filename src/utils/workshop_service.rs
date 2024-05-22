@@ -5,8 +5,12 @@
 
 */
 
-use crate::models::material_model::Material;
-use crate::models::project_model::Project;
+use crate::models::material::Material;
+use crate::models::project::Project;
+use crate::models::project_material::ProjectMaterial;
+use crate::models::material_type::MaterialType;
+use crate::models::client::Client;
+use crate::models::error::Error;
 
 //TODO: Change this to the actual API URL
 const API_URL: &str = "http://justinrauch.myftp.org:8580/";

@@ -13,8 +13,12 @@ use std::sync::{Arc, Mutex};
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::workshop_service::WorkshopService;
 // Need to import out models as alias to avoid conflicts with the slint models
-use crate::models::material_model::Material as RustMaterial;
-use crate::models::project_model::Project as RustProject;
+use crate::models::material::Material as r_Material;
+use crate::models::project::Project as r_Project;
+use crate::models::project_material::ProjectMaterial as r_ProjectMaterial;
+use crate::models::material_type::MaterialType as r_MaterialType;
+use crate::models::client::Client as r_Client;
+use crate::models::error::Error;
 
 // Import the slint modules
 slint::include_modules!();
