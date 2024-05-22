@@ -1,0 +1,38 @@
+import { Material } from "../models/MaterialModel.slint";
+
+export component MatDetailRow inherits Rectangle {
+
+    in-out property <Material> material;
+
+    background: lightblue;
+    // TODO(jmeusel): init
+    property <length> maxWidth;
+
+    VerticalLayout {
+        alignment: center;
+        HorizontalLayout {
+            alignment: space-between;
+            padding: 8px;
+            Rectangle {
+                max-width: maxWidth;
+                Text {
+                    text: material.name;
+                }
+            }
+
+            Rectangle {
+                max-width: maxWidth;
+                Text {
+                    text: material.type;
+                }
+            }
+
+            Rectangle {
+                max-width: maxWidth;
+                Text {
+                    text: material.quantity;
+                }
+            }
+        }
+    }
+}

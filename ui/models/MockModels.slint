@@ -44,12 +44,12 @@ export global MockModel {
     in-out property <Material> mat6;
     in-out property <[Material]> materials;
 
-    mat1: {name: "Material1", description: "Description1", price: 11.11, quantity: 11};
-    mat2: {name: "Material2", description: "Description2", price: 22.22, quantity: 22};
-    mat3: {name: "Material3", description: "Description3", price: 33.33, quantity: 33};
-    mat4: {name: "Material4", description: "Description4", price: 44.44, quantity: 44};
-    mat5: {name: "Material5", description: "Description5", price: 55.55, quantity: 55};
-    mat6: {name: "Material6", description: "Description6", price: 66.66, quantity: 66};
+    mat1: {name: "Material1", type: "schraube",description: "Description1", price: 11.11, quantity: 11};
+    mat2: {name: "Material2", type: "dübel",description: "Description2", price: 22.22, quantity: 22};
+    mat3: {name: "Material3", type: "CCCC",description: "Description3", price: 33.33, quantity: 33};
+    mat4: {name: "Material4", type: "BSGE",description: "Description4", price: 44.44, quantity: 44};
+    mat5: {name: "Material5", type: "AAAA",description: "Description5", price: 55.55, quantity: 55};
+    mat6: {name: "Material6", type: "BBB",description: "Description6", price: 66.66, quantity: 66};
 
     materials: [mat1,mat2,mat3,mat4,mat5,mat6];
 
@@ -67,7 +67,7 @@ export global MockModel {
 
     material1: {name: "Holz", description: "Ich und mein Holz", price: 49.85, quantity: 12};
     material2: {name: "Schraube 6x15", description: "Ich und die Schraube", price: 2.99, quantity: 36};
-    material3: {name: "Dübel 2x5", description: "Ich und mein Dübel", price: 0.36, quantity: 122};
+    material3: {name: "Dübel 2x5", description: "Ich und mein Dübel", price: 0.36, quantity: 12};
     material4: {name: "Nagel 0.5x4", description: "Nagelpiste", price: 2.12, quantity: 34};
     material5: {name: "Baum", description: "Ich und mein Baum", price: 299.66, quantity: 2};
     material6: {name: "Kohle", description: "Kooooooooohle ohne Ole", price: 44.12, quantity: 22};

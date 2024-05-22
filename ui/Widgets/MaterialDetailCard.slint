@@ -1,42 +1,56 @@
 import { ListView, ComboBox, TextEdit } from "std-widgets.slint";
 import { Palette } from "../Palette.slint";
 import { TextField } from "TextField.slint";
+import { Palette } from "../Palette.slint";
 
 
+// TODO(jmeusel): Component kann wahrscheinlich später gelöscht werden
+export component MaterialDetailCard inherits VerticalLayout {
 
-export component MaterialDetailCard inherits HorizontalLayout {
-
-      //in property <[MaterialTypeModel]> materialTypes;
+    //in property <[MaterialTypeModel]> materialTypes;
     in property <string> materialName;
     in property <int> count;
     in-out property <length> fontSizeMultiplier: 1px;
     in-out property <[string]> materialTypes;
+    in-out property <string> type;
+    // Props
+    alignment: start;
+    height: 50px;
+
+    HorizontalLayout {
+        Text {
+            text: materialName;
+            color: Palette.accent-color;
+            font-size: Palette.font-size * fontSizeMultiplier;
+            vertical-alignment: center;
+        }
+
+        // Rectangle {
+    //     width: 10px;
+    //     height: 0;
+    // }
 
     Text {
-        text: materialName;
-        color: Palette.accent-color;
-        font-size: Palette.font-size * fontSizeMultiplier;
-        vertical-alignment: center;
-    }
-    Rectangle {width: 10px;}
-    //Dropdown menu
-        ComboBox {
-            width: 180px;
-            height: self.preferred-height + 30px;
-            model: materialTypes;
-            current-value: "TYPE: ";
+            text: "(" + type + ")";
+            font-size: Palette.font-size * fontSizeMultiplier;
+            color: Palette.text-color;
         }
-    Rectangle {width: 10px;}
+
+        // Rectangle {
+    //     width: 10px;
+    // }
+
     Rectangle {
-        width: 70px;
-        height: 50px;
-        border-radius: 5px;
-        border-color: Palette.accent-color;        
-        border-width: 1px;
-        Text {
-            text: count;
-            font-size: Palette.font-size *1.5px;
-            color: Palette.accent-color;
+            width: self.preferred-width + 10px;
+            height: 40px;
+            border-radius: 5px;
+            border-color: Palette.accent-color;
+            border-width: 1px;
+            Text {
+                text: count;
+                font-size: Palette.font-size * 1.5px;
+                color: Palette.accent-color;
+            }
+        }
     }
-}   
 }

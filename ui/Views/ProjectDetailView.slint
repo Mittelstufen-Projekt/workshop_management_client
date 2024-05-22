@@ -8,6 +8,10 @@ import { MaterialDetailCard } from "../Widgets/MaterialDetailCard.slint";
 import { Palette } from "../Palette.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
+import { TitleSection } from "../Widgets/TitleSeciton.slint";
+import { MatDetailRow } from "../Widgets/MatDetailRow.slint";
+import { MockModel } from "../models/MockModels.slint";
+
 
 
 export component ProjectDetailView inherits VerticalLayout {
@@ -33,12 +37,16 @@ export component ProjectDetailView inherits VerticalLayout {
             height: topPadding;
         }
         alignment: start;
-        WMSAppbar {
+        TitleSection {
             title: project.name;
-            showSecondButton: true;
-            showFirstButton: true;
-            buttonTitleSecond: Constants.add_client;
+
         }
+        // WMSAppbar {
+        //     title: project.name;
+        //     showSecondButton: true;
+        //     showFirstButton: true;
+        //     buttonTitleSecond: Constants.add_client;
+        // }
         HorizontalLayout {
             alignment: start;
             VerticalBox {
@@ -85,32 +93,36 @@ export component ProjectDetailView inherits VerticalLayout {
                 }
         
             }
-            Rectangle {width: 500px;}
+            Rectangle {width: 400px;}
             //Material Section
             VerticalLayout {
                 Rectangle {height: topPadding;}
-                Rectangle {
-                    border-radius: 5px;
-                    border-width: 1px;
-                    border-color: Palette.accent-color;
-                    drop-shadow-blur: 20px;
-                    drop-shadow-color: Palette.control-color;
-                    drop-shadow-offset-y: 1px;
+                // Rectangle {
+                //     border-radius: 5px;
+                //     border-width: 1px;
+                //     border-color: Palette.accent-color;
+                //     drop-shadow-blur: 20px;
+                //     drop-shadow-color: Palette.control-color;
+                //     drop-shadow-offset-y: 1px;
                     VerticalBox {
-                        for material[i] in project.mats: MaterialDetailCard {
-                            materialName: project.mats[i].name;
-                            count: project.mats[i].quantity;
-                            materialTypes: materialTypes;
-                            fontSizeMultiplier: 2px;
-
-                            for name[index] in project.mats : Rectangle {height: 85px;}
+                        MatDetailRow {
+                            material: MockModel.mat1;
                         }
+                        // for material[i] in project.mats: MaterialDetailCard {
+                        //     materialName: project.mats[i].name;
+                        //     count: project.mats[i].quantity;
+                        //     materialTypes: materialTypes;
+                        //     fontSizeMultiplier: 2px;
+                        //     type: materialTypes[i];
+                        //     for name[index] in project.mats : Rectangle {height: 85px;}
+                        // }
                     }
-                }
+              //  }
                 Rectangle {height: 25px;}
                 HorizontalLayout {
+                    alignment: space-between;
                     Button {
-                        text: "add material";
+                        text: Constants.add_material;
                         height: 30px;
                         width: 130px;
                         callback addMaterial(

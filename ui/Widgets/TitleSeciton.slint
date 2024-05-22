@@ -7,7 +7,7 @@ export component TitleSection {
     in-out property <string> title;
     HorizontalLayout {
         Text {
-            text: Constants.project_overview;
+            text: title;
             font-size: Palette.page-title-font-size * 1px;
             color: Palette.text-color;
         }
