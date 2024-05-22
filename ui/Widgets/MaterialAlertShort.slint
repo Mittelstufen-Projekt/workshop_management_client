@@ -3,7 +3,7 @@ import { Palette } from "ui/Palette.slint";
 
 
 
-export  component MaterialAlertShort inherits HorizontalBox {
+export  component MaterialAlertShort inherits HorizontalLayout {
 
     in-out property <string> materialName;
     in-out property <int> count;
@@ -11,7 +11,7 @@ export  component MaterialAlertShort inherits HorizontalBox {
     txt: Palette.font-size * 1px;
 
     Rectangle {
-        height: txt + 30px;
+        height: txt + 46px;
         border-color: grey;
         border-width: 3px;
         HorizontalBox {

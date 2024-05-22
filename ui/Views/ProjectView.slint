@@ -24,6 +24,7 @@ import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slin
 import { MaterialAlertShort } from "../Widgets/MaterialAlertShort.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
 import { Material } from "../models/MaterialModel.slint";
+import { ProjectRowShort } from "../Widgets/ProjectRowShort.slint";
 
 export component ProjectView inherits Rectangle {
 
@@ -36,7 +37,7 @@ export component ProjectView inherits Rectangle {
         HorizontalBox {
             alignment: LayoutAlignment.end;
             Button {
-                text: "Logout";
+                text: Constants.logout;
                 clicked => {
                     Backend.request-logout();
                 }
@@ -62,7 +63,9 @@ export component ProjectView inherits Rectangle {
             Rectangle { }
 
             Text {
-                text: "Carpenter management\n             System";
+                text: "Carpenter management\nSystem";
+                horizontal-alignment: center;
+                color: Palette.text-color;
                 font-size: Palette.font-size * 1.5px;
             }
 
@@ -95,12 +98,10 @@ export component ProjectView inherits Rectangle {
                 }
             }
         }
-        
-        // Als Referenz für die Schleifen nehmen
-          HorizontalBox {
 
+        HorizontalBox {
             VerticalBox {
-                for item[i] in recentProjects: ProjectOverViewRowShort {
+                for item[i] in recentProjects: ProjectRowShort {
                     project: recentProjects[i].name;
                     client: recentProjects[i].client;
                     costs: recentProjects[i].current_costs;
@@ -112,12 +113,10 @@ export component ProjectView inherits Rectangle {
             //Material Section
             VerticalBox {
                 // TODO(jmeusel): IF-Statement um quantity mit alert zu vergleichen
-                for material[i] in materialAlerts: 
-                MaterialAlertShort {
+                for material[i] in materialAlerts: MaterialAlertShort {
                     materialName: materialAlerts[i].name;
                     count: materialAlerts[i].quantity;
                 }
-
                 Button {
                     fontSizeMultiplier: 1.5px;
                     text: Constants.show_more;
@@ -129,65 +128,3 @@ export component ProjectView inherits Rectangle {
         }
     }
 }
-
-/*
-  HorizontalBox {
-        VerticalBox {
-            HorizontalBox {
-                VerticalBox {
-                    width: root.width * 0.03;
-                    height: root.width * 0.2;
-                    Button {
-                        text: "Project Overview";
-                        height: 50px;
-                        width: 300px;
-                    }
-                    Button {
-                        text: "Warehouse Management";
-                        height: 50px;
-                        width: 300px;
-                    }
-                    Text {
-                        text: "Latest Projects:";
-                        font-size: Palette.font-size * 1px;
-                        color: Palette.text-color;
-                    }
-                    VerticalBox {
-                        RowTest {
-                            project: "Project";
-                            client: "client";
-                            costs: "current costs";
-                            deadline: "deadline";
-                        }
-                        RowTest {
-                            project: "Project";
-                            client: "client";
-                            costs: "current costs";
-                            deadline: "deadline";
-                        }
-                        RowTest {
-                            project: "Project";
-                            client: "client";
-                            costs: "current costs";
-                            deadline: "deadline";
-                        }
-                        RowBox {}
-                    }
-                }
-                Text {
-                    text: "Workshop Management \n              System";
-                    color: Palette.text-color;
-                    font-size: Palette.font-size * 1.2px;
-                }
-            }
-        }
-        VerticalBox {
-            Button {
-                text: "Logout";
-            }
-        }
-    }
-*/
-
-
-

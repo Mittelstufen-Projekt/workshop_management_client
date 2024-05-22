@@ -81,12 +81,12 @@ export component WorkshopClient inherits Window {
     }
     ProjectManagement {
         //visible <=> root.projectManagementView;
-        visible: true;
+        visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView {
         //visible <=> root.projectDetailView;
-        visible: false;
+        visible: true;
         project: MockModel.projectWithMats;
         materialTypes: MockModel.materialTypesMock;
     }
@@ -109,7 +109,7 @@ export component WorkshopClient inherits Window {
 
     // Popup for the Client
     ClientPopUp {
-        visible: true;
+        visible: false;
         showPopUp: Backend.showPopUp();
     }
 
