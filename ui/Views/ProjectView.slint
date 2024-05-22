@@ -95,9 +95,10 @@ export component ProjectView inherits Rectangle {
                 }
             }
         }
-
+        
         // Als Referenz für die Schleifen nehmen
           HorizontalBox {
+
             VerticalBox {
                 for item[i] in recentProjects: ProjectOverViewRowShort {
                     project: recentProjects[i].name;

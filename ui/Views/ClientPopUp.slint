@@ -1,0 +1,73 @@
+import { VerticalBox, HorizontalBox, StandardButton } from "std-widgets.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { Constants } from "../Constants.slint";
+import { Button } from "../Widgets/Button.slint";
+
+
+export component ClientPopUp inherits Rectangle {
+
+    in-out property <bool> showPopUp;
+    in-out property <string> nameController;
+    in-out property <string> emailController;
+    in-out property <string> phoneController;
+
+    HorizontalLayout {
+        alignment: center;
+        VerticalLayout {
+            alignment: start;
+            padding-top: 200px;
+            Rectangle {
+                background: lightgray;
+                width: 400px;
+                height: 260px;
+                VerticalBox {
+                    HorizontalBox {
+                        Text {
+                            text: Constants.name + ":";
+                        }
+        
+                        TextField {
+                            text: nameController;
+                        }
+                    }
+        
+                    HorizontalBox {
+                        Text {
+                            text: Constants.email + ":";
+                        }
+        
+                        TextField {
+                            text: emailController;
+                        }
+                    }
+        
+                    HorizontalBox {
+                        Text {
+                            text: Constants.phone + ":";
+                        }
+        
+                        TextField {
+                            text: phoneController;
+                        }
+                    }
+        
+                    HorizontalBox {
+                        Button {
+                            text: "Cancel";
+                            clicked => {
+                                // TODO(jmeusel): cancel
+                        }
+                        }
+        
+                        Button {
+                            text: "Save";
+                            clicked => {
+                                // TODO(jmeusel): Save
+                        }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

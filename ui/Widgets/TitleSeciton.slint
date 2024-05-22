@@ -1,0 +1,23 @@
+import { Button } from "Button.slint";
+import { Constants } from "../Constants.slint";
+import { Palette } from "../Palette.slint";
+import { Backend } from "../Backend.slint";
+export component TitleSection {
+
+    in-out property <string> title;
+    HorizontalLayout {
+        Text {
+            text: Constants.project_overview;
+            font-size: Palette.page-title-font-size * 1px;
+            color: Palette.text-color;
+        }
+        Button {
+            height: Palette.font-size * 2px;
+            width: 40px;
+            text: "⬅";
+            clicked => {
+                Backend.goBack();
+            }
+        }
+    }
+}

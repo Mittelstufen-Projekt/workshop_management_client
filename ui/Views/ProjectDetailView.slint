@@ -35,6 +35,9 @@ export component ProjectDetailView inherits VerticalLayout {
         alignment: start;
         WMSAppbar {
             title: project.name;
+            showSecondButton: true;
+            showFirstButton: true;
+            buttonTitleSecond: Constants.add_client;
         }
         HorizontalLayout {
             alignment: start;

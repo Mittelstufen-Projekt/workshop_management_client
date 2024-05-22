@@ -17,4 +17,17 @@ export global Backend {
 
     
     // Project Management View
+    callback create_new_project();
+    callback add-new-client();
+    public pure function showPopUp () -> bool {
+        // TODO(jmeusel): boolean switchen
+        // TODO(jmeusel): funktion muss gleichzeitig die Project-Overvierw unsichtbar machen
+        return true;
+    }
+
+
+
+    // AppBar
+    callback goBack();
+
 }

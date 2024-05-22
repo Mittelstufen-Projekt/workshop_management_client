@@ -21,11 +21,8 @@ export component LagerOverview inherits VerticalBox {
     alignment: start;
     WMSAppbar {
         title: "Lager overview";
-        buttonTitle: "Add Material";
-        onBackButtonPress => {
-            // TODO(jmeusel): implement routing
-        }
-        onButtonPress => {
+        buttonTitleFirst: "Add Material";
+        onFirstButtonPressed => {
             // TODO(jmeusel): implement add Material
         }
     }

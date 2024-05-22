@@ -24,8 +24,10 @@ import { ProjectView } from "Views/ProjectView.slint";
 import { ProjectManagement } from "Views/ProjectManagement.slint";
 import { ProjectDetailView } from "Views/ProjectDetailView.slint";
 import { LagerOverview } from "Views/LagerOverview.slint";
+import { ClientPopUp } from "../ui/Views/ClientPopUp.slint";
 
 import { MockModel } from "../ui/models/MockModels.slint";
+import { BlurBackground } from "Views/BlurBackground.slint";
 
 // Exporting the Backend
 export { Backend }
@@ -45,6 +47,8 @@ export component WorkshopClient inherits Window {
     in-out property <bool> projectManagementView: false;
     in-out property <bool> projectDetailView: false;
     in-out property <bool> lagerOverviewView: false;
+    // isn´t a view but works like
+    in-out property <bool> clientPopUp: false;
 
     // Variables for the window itself
     background: Palette.background-color;
@@ -77,12 +81,12 @@ export component WorkshopClient inherits Window {
     }
     ProjectManagement {
         //visible <=> root.projectManagementView;
-        visible: false;
+        visible: true;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView {
         //visible <=> root.projectDetailView;
-        visible: true;
+        visible: false;
         project: MockModel.projectWithMats;
         materialTypes: MockModel.materialTypesMock;
     }
@@ -102,4 +106,11 @@ export component WorkshopClient inherits Window {
             background: Palette.accent-color;
         }
     }
+
+    // Popup for the Client
+    ClientPopUp {
+        visible: true;
+        showPopUp: Backend.showPopUp();
+    }
+
 }

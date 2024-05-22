@@ -9,20 +9,31 @@ import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
 import { Button } from "../Widgets/Button.slint";
+import { Constants } from "../Constants.slint";
 
 // TODO(jmeusel): Bools um Search auszublenden, sowie buttons 
 
 export component WMSAppbar inherits Rectangle{
 
     in-out property <string> title;
-    in-out property <string> buttonTitle;
-    callback onBackButtonPress();
-    callback onButtonPress();
+    in-out property <string> buttonTitleFirst;
+    in-out property <string> buttonTitleSecond;
+    in-out property <string> buttonTitleThird;
+    callback onFirstButtonPressed();
+    callback onSecondButtonPress();
+    callback onThirdButtonPressed();
+    // TODO(jmeusel): rename
+    in-out property <bool> showFirstButton: true;
+    in-out property <bool> showSecondButton: false;
+    in-out property <bool> showThirdButton: false;
+    in-out property <bool> showSearchField: true;
+    in property <length> firstButtonWidth: 120px;
+    in property <length> secondButtonWidth: 120px;
+    in property <length> thirdButtonWidth: 120px;
 
     border-color: white;
     border-width: 2px;
     border-radius: 8px;
-    
 
     HorizontalBox {
         VerticalLayout {
@@ -32,12 +43,11 @@ export component WMSAppbar inherits Rectangle{
                 color: Palette.accent-color;
                 font-size: Palette.page-title-font-size * 1px;
             }
-
             HorizontalLayout {
                 alignment: center;
                 width: 0;
                 Text {
-                    text: "Search:";
+                    text: Constants.search;
                     vertical-alignment: center;
                     font-size: Palette.font-size * 1.9px;
                     color: Palette.text-color;
@@ -55,11 +65,32 @@ export component WMSAppbar inherits Rectangle{
 
                 Button {
                     height: Palette.font-size * 2px;
-                    text: buttonTitle;
-                    width: 120px;
+                    text: buttonTitleFirst;
+                    width: firstButtonWidth;
                     clicked => {
-                        onButtonPress();
+                        onFirstButtonPressed();
                     }
+                    visible: showFirstButton;
+                }
+                Rectangle {width: 120px;}
+                Button {
+                    height: Palette.font-size * 2px;
+                    text: buttonTitleSecond;
+                    width: secondButtonWidth;
+                    clicked => {
+                        onSecondButtonPress();
+                    }
+                    visible: showSecondButton;
+                }
+                Rectangle {width: 120px;}
+                Button {
+                    height: Palette.font-size * 2px;
+                    text: buttonTitleThird;
+                    width: thirdButtonWidth;
+                    clicked => {
+                        onThirdButtonPressed();
+                    }
+                    visible: showThirdButton;
                 }
             }
         }

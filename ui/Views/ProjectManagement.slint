@@ -8,32 +8,32 @@ import { ProjectRowShort } from "../Widgets/ProjectRowShort.slint";
 import { Palette } from "../Palette.slint";
 import { Button } from "../Widgets/Button.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
+import { TitleSection } from "../Widgets/TitleSeciton.slint";
+import { Backend } from "../Backend.slint";
+import { ClientPopUp } from "../Views/ClientPopup.slint";
 
 
 //Refactor
 export component ProjectManagement inherits VerticalBox {
 
     in-out property <[ProjectModel]> allProjects;
+    //in-out property <bool> showPopup;
 
     VerticalBox {
         alignment: start;
-        HorizontalLayout {
-            Text {
-                text: Constants.project_overview;
-                font-size: Palette.page-title-font-size * 1px;
-                color: Palette.text-color;
-            }
-            Button {
-                height: Palette.font-size * 2px;
-                width: 40px;
-                text: "⬅";
-                clicked => {
-                    //onBackButtonPress();
-                }
-            }
+        TitleSection {
+            title: Constants.project_overview;
         }
         WMSAppbar {
-            buttonTitle: Constants.search;
+            showSecondButton: true;
+            buttonTitleFirst: Constants.create_new_project;
+            buttonTitleSecond: Constants.add_client;
+            firstButtonWidth: 200px;
+            onFirstButtonPressed => {Backend.create_new_project()}
+            onSecondButtonPress => {
+                
+            }
+
         }
         Rectangle {height: 50px;}
         // TODO(jmeusel): Button fehlt 
@@ -43,6 +43,13 @@ export component ProjectManagement inherits VerticalBox {
         //     text: "X";
         //     fontSizeMultiplier: 1.5px;
         // }
+        // TODO(jmeusel): Abheben von der Liste Darunter
+        ProjectRowShort {
+            project: "Project Name";
+            client: "Client";
+            costs: "Costs";
+            deadline: "Deadline";
+        }
         for project[i] in allProjects: ProjectRowShort {
             client: allProjects[i].client;
             project: allProjects[i].name;
