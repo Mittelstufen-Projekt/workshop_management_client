@@ -11,13 +11,15 @@ import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
 import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { MatDetailRow } from "../Widgets/MatDetailRow.slint";
 import { MockModel } from "../models/MockModels.slint";
-
+import { Material } from "../models/MaterialModel.slint";
 
 
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> materialTypes;
 
+    property <Material> mock;
+    mock: {name: "Name", type: "Type",description: "", price: 0, quantity: 0};
     // TODO(jmeusel): kann wahrscheinlich weg, nicht sicher!
     // TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
     // in-out property <string> projectController:project.name;
@@ -106,16 +108,14 @@ export component ProjectDetailView inherits VerticalLayout {
                 //     drop-shadow-offset-y: 1px;
                     VerticalBox {
                         MatDetailRow {
-                            material: MockModel.mat1;
+                            disableBorder: true;
+                            material: mock;
                         }
-                        // for material[i] in project.mats: MaterialDetailCard {
-                        //     materialName: project.mats[i].name;
-                        //     count: project.mats[i].quantity;
-                        //     materialTypes: materialTypes;
-                        //     fontSizeMultiplier: 2px;
-                        //     type: materialTypes[i];
-                        //     for name[index] in project.mats : Rectangle {height: 85px;}
-                        // }
+                        for material[i] in project.mats: MatDetailRow {
+                    
+                            material: project.mats[i];
+                            for name[index] in project.mats : Rectangle {height: 85px;}
+                        }
                     }
               //  }
                 Rectangle {height: 25px;}
@@ -129,7 +129,7 @@ export component ProjectDetailView inherits VerticalLayout {
                             // TODO(jmeusel): implement
                         );
                     }
-                    Rectangle {width: 45px;}
+                    Rectangle {width: 100px;}
                     Button {
                         text: "Save";
                         height: 30px;
