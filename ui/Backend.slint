@@ -17,10 +17,17 @@ export global Backend {
     // TODO(jmeusel): id mitgeben
     callback deleteMaterial();
 
+    //ProjektName, Client, ProjectStart, ProjectDeadline, calculated and current -costs
+    //List of Materials 
+    //all of this needs to be saved
+    callback save-project-and-used-materials();
+    
     
     // Project Management View
     callback create_new_project();
+
     callback add-new-client();
+
     public pure function showPopUp () -> bool {
         // TODO(jmeusel): boolean switchen
         // TODO(jmeusel): funktion muss gleichzeitig die Project-Overvierw unsichtbar machen
@@ -30,6 +37,32 @@ export global Backend {
 
 
     // AppBar
+    //sollte immer zur vorherigen page navigieren, da der callback ausschließlich in der Section selbst aufgerufen wird
     callback goBack();
+
+
+    // LagerOverview
+    //name price type amount rememberWhen description
+    callback save-materials();
+
+    // müsste diese zusätzlich zu der MaterialList hinzufügen
+    callback add-material();
+
+
+
+    // NAVIGATION:
+    callback route-to-project-management();
+
+    callback route-to-warehouse-management();
+
+    // TODO(jmeusel): nochmal überlegen, kommt hier nh ID rein oder wird ein Projekt angegeben?
+    // Das Projekt welches angeclicked wurde muss mitgegeben werden
+    callback route-to-project-i(int);
+
+    callback route-to-LagerOverview();
+
+
+
+    // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
 
 }

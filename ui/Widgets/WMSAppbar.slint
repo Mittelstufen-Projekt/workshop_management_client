@@ -45,6 +45,7 @@ export component WMSAppbar inherits Rectangle{
             }
             HorizontalLayout {
                 alignment: center;
+                // 0 width, da ansonsten das alignment nicht mehr funktioniert
                 width: 0;
                 Text {
                     text: Constants.search;

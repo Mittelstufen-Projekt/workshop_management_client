@@ -1,4 +1,4 @@
-import { HorizontalBox, VerticalBox } from "std-widgets.slint";
+import { HorizontalBox, VerticalBox, ScrollView } from "std-widgets.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
 import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
@@ -14,7 +14,11 @@ import { ClientPopUp } from "../Views/ClientPopup.slint";
 
 
 //Refactor
-export component ProjectManagement inherits VerticalBox {
+
+// TODO(jmeusel): lässt sch nur bis zu gewissen bereichen Scrollen und lässt sich ebenfalls nicht horizontal scrollen
+
+// TODO(jmeusel): Abstand des titles nach oben..
+export component ProjectManagement inherits ScrollView {
 
     in-out property <[ProjectModel]> allProjects;
     //in-out property <bool> showPopup;
@@ -24,18 +28,24 @@ export component ProjectManagement inherits VerticalBox {
         TitleSection {
             title: Constants.project_overview;
         }
+
         WMSAppbar {
             showSecondButton: true;
             buttonTitleFirst: Constants.create_new_project;
             buttonTitleSecond: Constants.add_client;
             firstButtonWidth: 200px;
-            onFirstButtonPressed => {Backend.create_new_project()}
-            onSecondButtonPress => {
-                
+            onFirstButtonPressed => {
+                Backend.create_new_project();
             }
-
+            onSecondButtonPress => {
+                Backend.add-new-client();
+            }
         }
-        Rectangle {height: 50px;}
+
+        Rectangle {
+            height: 50px;
+        }
+
         // TODO(jmeusel): Button fehlt 
         // Button {
         //     width: 35px;
@@ -50,16 +60,18 @@ export component ProjectManagement inherits VerticalBox {
             costs: "Costs";
             deadline: "Deadline";
         }
+
         for project[i] in allProjects: ProjectRowShort {
             client: allProjects[i].client;
             project: allProjects[i].name;
             costs: allProjects[i].current_costs;
             deadline: allProjects[i].project_deadline;
             clicked => {
-                // TODO(jmeusel): Navigate to the ProjectOverview for project[i]
+                Backend.route-to-project-i(i);
             }
         }
-        Rectangle {max-width: 20px;}
+        Rectangle {
+            max-width: 20px;
+        }
     }
 }
-

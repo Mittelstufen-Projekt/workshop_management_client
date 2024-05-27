@@ -13,7 +13,8 @@ import { MatDetailRow } from "../Widgets/MatDetailRow.slint";
 import { MockModel } from "../models/MockModels.slint";
 import { Material } from "../models/MaterialModel.slint";
 
-
+// TODO(jmeusel): Save button anders anordnen, Email feld checken, X Button für Materialien, Listen müssen dabei geupdated werden
+// TODO(jmeusel): client muss durch dropdown geändert werden
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> materialTypes;
@@ -35,6 +36,7 @@ export component ProjectDetailView inherits VerticalLayout {
     property <length> topPadding: 20px;
 
     VerticalLayout {
+        padding: topPadding;
         Rectangle {
             height: topPadding;
         }
@@ -99,20 +101,12 @@ export component ProjectDetailView inherits VerticalLayout {
             //Material Section
             VerticalLayout {
                 Rectangle {height: topPadding;}
-                // Rectangle {
-                //     border-radius: 5px;
-                //     border-width: 1px;
-                //     border-color: Palette.accent-color;
-                //     drop-shadow-blur: 20px;
-                //     drop-shadow-color: Palette.control-color;
-                //     drop-shadow-offset-y: 1px;
                     VerticalBox {
                         MatDetailRow {
                             disableBorder: true;
                             material: mock;
                         }
                         for material[i] in project.mats: MatDetailRow {
-                    
                             material: project.mats[i];
                             for name[index] in project.mats : Rectangle {height: 85px;}
                         }
@@ -131,7 +125,7 @@ export component ProjectDetailView inherits VerticalLayout {
                     }
                     Rectangle {width: 100px;}
                     Button {
-                        text: "Save";
+                        text: Constants.save;
                         height: 30px;
                         width: 130px;
                         callback save(

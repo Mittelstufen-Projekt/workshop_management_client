@@ -32,8 +32,8 @@ import { MockModel } from "../ui/models/MockModels.slint";
 export { Backend }
 
 export component WorkshopClient inherits Window {
-    //width: 1920px;
-    //height: 1080px;
+    width: 1920px;
+    height: 1080px;
 
     // Properties
     in-out property<string> username;
@@ -85,7 +85,7 @@ export component WorkshopClient inherits Window {
     }
     ProjectDetailView {
         //visible <=> root.projectDetailView;
-        visible: true;
+        visible: false;
         project: MockModel.projectWithMats;
         materialTypes: MockModel.materialTypesMock;
     }
@@ -93,6 +93,7 @@ export component WorkshopClient inherits Window {
     LagerOverview {
         //visible <=> root.lagerOverviewView;
         visible: false;
+        materials: MockModel.materialList;
     }
 
     // Bar in the accent color for design purposes
@@ -107,9 +108,23 @@ export component WorkshopClient inherits Window {
     }
 
     // Popup for the Client
+    // TODO(jmeusel): muss noch angepasst werden
     ClientPopUp {
         visible: false;
         showPopUp: Backend.showPopUp();
     }
 
 }
+
+/*
+NOTIZEN: 
+Die Preise sollten gerundet werden
+wäre schön wenn man das Textfield so umbauen könnte das ein Overflow mit reinpasst,
+da ansonsten ein overflow im Namen der Materials passieren könnte.
+
+
+functions in backendFile
+
+Client hat nur Telefonnummer und Name
+*/
+

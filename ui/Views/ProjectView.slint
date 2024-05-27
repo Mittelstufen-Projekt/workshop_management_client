@@ -50,12 +50,18 @@ export component ProjectView inherits Rectangle {
                     max-width: 300px;
                     text: Constants.project_management;
                     fontSizeMultiplier: 1.5px;
+                    clicked => {
+                        Backend.route-to-project-management();
+                    }
                 }
 
                 Button {
                     max-width: 300px;
                     text: Constants.warehouse_management;
                     fontSizeMultiplier: 1.5px;
+                    clicked => {
+                        Backend.route-to-warehouse-management();
+                    }
                 }
             }
 
@@ -106,6 +112,9 @@ export component ProjectView inherits Rectangle {
                     client: recentProjects[i].client;
                     costs: recentProjects[i].current_costs;
                     deadline: recentProjects[i].project_deadline;
+                    clicked => {
+                        Backend.route-to-project-i(i);
+                    }
                 }
                 Rectangle { }
             }
@@ -121,8 +130,8 @@ export component ProjectView inherits Rectangle {
                     fontSizeMultiplier: 1.5px;
                     text: Constants.show_more;
                     clicked => {
-                        // TODO(jmeusel): implement route to MaterialAlert
-                }
+                        Backend.route-to-LagerOverview();
+                    }
                 }
             }
         }

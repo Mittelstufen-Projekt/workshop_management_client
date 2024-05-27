@@ -1,8 +1,12 @@
 import { Palette } from "../../Palette.slint";
-import { HorizontalBox } from "std-widgets.slint";
+import { HorizontalBox, TextEdit, LineEdit } from "std-widgets.slint";
 import { TextField } from "../TextField.slint";
+import { Button } from "../Button.slint";
 
-export component LagerRow {
+export component LagerRow inherits HorizontalLayout{
+
+    callback clicked();
+
     in property <string> name;
     in property <float> price;
     in property <string> type;
@@ -11,10 +15,24 @@ export component LagerRow {
     in property <string> description;
 
 
-        TextField {text: name;}
+        TextField {text: name; width: 250px;}
+        Rectangle {width: 120px;}
         TextField {text: price;}
+        Rectangle {width: 120px;}
         TextField {text: amount;}
+        Rectangle {width: 120px;}
         TextField {text: type;}
+        Rectangle {width: 120px;}
         TextField {text: rememberWhen;}
+        Rectangle {width: 120px;}
         TextField {text: description;}
+        Rectangle {width: 20px;}
+        Button {
+            width: 30px;
+            height: 30px;
+            text: "X";
+            clicked => {
+                // TODO(jmeusel): someHow auslagern
+            }
+        }
 }
