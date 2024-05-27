@@ -12,13 +12,6 @@ use std::sync::{Arc, Mutex};
 
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::workshop_service::WorkshopService;
-// Need to import out models as alias to avoid conflicts with the slint models
-use crate::models::material::Material as r_Material;
-use crate::models::project::Project as r_Project;
-use crate::models::project_material::ProjectMaterial as r_ProjectMaterial;
-use crate::models::material_type::MaterialType as r_MaterialType;
-use crate::models::client::Client as r_Client;
-use crate::models::error::Error;
 
 // Import the slint modules
 slint::include_modules!();
@@ -99,6 +92,82 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.set_username("".into());
             ui.set_password("".into());
             keycloak_handle.lock().unwrap().clear();
+        }
+    });
+
+    /*
+        Raw routing functions
+    */
+    // Route to project view
+    ui.global::<Backend>().on_route_to_project_management({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.set_projectView(false);
+            ui.set_projectManagementView(true);
+            ui.set_projectDetailView(false);
+            ui.set_lagerOverviewView(false);
+        }
+    });
+
+    // Route to lager overview
+    ui.global::<Backend>().on_route_to_warehouse_management({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.set_projectView(false);
+            ui.set_projectManagementView(false);
+            ui.set_projectDetailView(false);
+            ui.set_lagerOverviewView(true);
+        }
+    });
+
+    // Route to project detail view
+    ui.global::<Backend>().on_route_to_project_i({
+        let ui_handle = ui.as_weak();
+        let workshop_handle = arc_workshop_service.clone();
+        let keycloak_handle = arc_keycloak.clone();
+        move |project_id: i32| {
+            let ui = ui_handle.unwrap();
+            ui.set_projectView(false);
+            ui.set_projectManagementView(false);
+            ui.set_projectDetailView(true);
+            ui.set_lagerOverviewView(false);
+            // Refresh the token
+            let token = keycloak_handle
+                .lock()
+                .unwrap()
+                .refresh_token();
+            // Check if the token was successfully retrieved otherwise handle the error
+            let token = match token {
+                Err(e) => {
+                    todo!("Set UI error message");
+                    return;
+                }
+                Ok(token) => token,
+            };
+            let project = workshop_handle
+                .lock()
+                .unwrap()
+                .get_project_by_id(project_id, &token);
+            // Check if the project was successfully retrieved otherwise handle the error
+            let project = match project {
+                Err(e) => {
+                    todo!("Set UI error message");
+                    return;
+                }
+                Ok(project) => project,
+            };
+            todo!("Set project details");
+        }
+    });
+
+    // Go back (Always route to the page before that)
+    ui.global::<Backend>().on_goBack({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            todo!("Check what page to route to")
         }
     });
 

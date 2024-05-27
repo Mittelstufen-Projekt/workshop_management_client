@@ -15,19 +15,24 @@ export global Backend {
 
     // Project Detail View
     // TODO(jmeusel): id mitgeben
+    //// Justin: Bitte ein parameter von dem Material, welches gelöscht werden soll
     callback deleteMaterial();
 
     //ProjektName, Client, ProjectStart, ProjectDeadline, calculated and current -costs
     //List of Materials 
     //all of this needs to be saved
+    //// Justin: Bitte noch die Variblen angeben, welche zum speichern von project genutzt werden sollen
     callback save-project-and-used-materials();
     
     
     // Project Management View
+    //// Justin: Bitte noch die Variblen angeben, welche zum erstellen von project genutzt werden sollen
     callback create_new_project();
 
+    //// Justin: Bitte noch die Variblen angeben, welche zum erstellen von client genutzt werden sollen
     callback add-new-client();
 
+    //// Justin: Bitte feedback an mich, wofür diese Funktion genutzt wird
     public pure function showPopUp () -> bool {
         // TODO(jmeusel): boolean switchen
         // TODO(jmeusel): funktion muss gleichzeitig die Project-Overvierw unsichtbar machen
@@ -43,9 +48,11 @@ export global Backend {
 
     // LagerOverview
     //name price type amount rememberWhen description
+    //// Justin: Bitte noch die Variblen angeben, in welche das Material gespeichert ist
     callback save-materials();
 
     // müsste diese zusätzlich zu der MaterialList hinzufügen
+    //// Justin: Bitte noch die Variblen angeben, in welche das Material hinzugefügt werden soll
     callback add-material();
 
 
@@ -57,6 +64,7 @@ export global Backend {
 
     // TODO(jmeusel): nochmal überlegen, kommt hier nh ID rein oder wird ein Projekt angegeben?
     // Das Projekt welches angeclicked wurde muss mitgegeben werden
+    //// Justin: Bitte noch die Variblen angeben, in welche ich das projekt uebergeben muss
     callback route-to-project-i(int);
 
     callback route-to-LagerOverview();
@@ -64,5 +72,7 @@ export global Backend {
 
 
     // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
+    //// Justin: Mach eine function die mir einfach den inhalt des searchfeldes via parameter übergibt
+    ////         jeweils für project und material
 
 }
