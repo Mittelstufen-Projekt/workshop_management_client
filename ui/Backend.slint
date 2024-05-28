@@ -15,11 +15,11 @@ export global Backend {
 
     */
     // Login View
-    callback request-login();
-    callback request-exit();
+    callback request-login(); // Implemented
+    callback request-exit(); // Implemented
 
     // Project View
-    callback request-logout();
+    callback request-logout(); // Implemented
 
     // Project Detail View
     // parameter: ID of the material to delete
@@ -38,20 +38,20 @@ export global Backend {
     callback add-new-client();
 
     // AppBar
-    callback goBack();
+    callback goBack(); // Implemented
 
     // LagerOverview
     callback save-materials();
     callback add-material();
 
     // Navigation:
-    callback route-to-project-management();
-    callback route-to-warehouse-management();
+    callback route-to-project-management(); // Implemented
+    callback route-to-warehouse-management(); // Implemented
     // parameter: ID of the project to show
-    callback route-to-project-i(int);
-    callback route-to-LagerOverview();
-    callback showAddNewClientPopUp ();
-    callback showAddNewMaterialPopUp ();
+    callback route-to-project-i(int); // Implemented
+    callback route-to-LagerOverview(); // Implemented
+    callback showAddNewClientPopUp (); // Implemented
+    callback showAddNewMaterialPopUp (); // Implemented
 
 
     // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
@@ -66,10 +66,10 @@ export global Backend {
 
     */
     // LoginView
-    in-out property <string> username;
-    in-out property <string> password;
-    in-out property <string> login_error;
-
+    in-out property <string> username; // Implemented
+    in-out property <string> password; // Implemented
+    in-out property <string> login_error; // Implemented
+ 
     // ProjectView 
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;

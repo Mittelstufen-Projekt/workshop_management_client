@@ -203,7 +203,12 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            todo!("Check what page to route to")
+            ui.global::<Backend>().set_projectView(true);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
         }
     });
 
