@@ -53,21 +53,40 @@ export component ProjectManagement inherits ScrollView {
         //     fontSizeMultiplier: 1.5px;
         // }
         // TODO(jmeusel): Abheben von der Liste Darunter
-        ProjectRowShort {
-            project: "Project Name";
-            client: "Client";
-            costs: "Costs";
-            deadline: "Deadline";
+        HorizontalLayout {
+            ProjectRowShort {
+                project: Constants.project_name;
+                client: "Client";
+                costs: "Costs";
+                deadline: "Deadline";
+            }
+            // invisible Rectangle to align with the listView lower in the Code
+            Rectangle {
+            width: 35px;
+            height: 40px;
+        }
         }
 
-        for project[i] in allProjects: ProjectRowShort {
-            client: allProjects[i].client.lastName;
-            project: allProjects[i].name;
-            costs: allProjects[i].current_costs;
-            deadline: allProjects[i].project_deadline;
-            clicked  => {
-                Backend.route-to-project-i(i);
+        for project[i] in allProjects: HorizontalLayout {
+            ProjectRowShort {
+                client: allProjects[i].client.lastName;
+                project: allProjects[i].name;
+                costs: allProjects[i].current_costs;
+                deadline: allProjects[i].project_deadline;
+                clicked => {
+                    Backend.route-to-project-i(allProjects[i].id);
+                }
             }
+            Rectangle {width: 10px;}
+            Button {
+            width: 35px;
+            height: 50px;
+            text: "X";
+            fontSizeMultiplier: 1.5px;
+            clicked => {
+                Backend.delete-project-i(allProjects[i].id);
+            }
+        }
         }
         Rectangle {
             max-width: 20px;

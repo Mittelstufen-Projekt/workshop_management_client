@@ -52,34 +52,34 @@ export component WorkshopClient inherits Window {
 
 
     // Actual content
-    LoginView {
+    LoginView { //FUNCTIONS CHECK
         username <=> Backend.username;
         password <=> Backend.password;
         login_error <=> Backend.login_error;
         //visible <=> Backend.loginView;
         visible: false;
     }
-    ProjectView {
+    ProjectView { //FUNCTIONS CHECK
         //visible <=> Backend.projectView;
         visible: false;
         recentProjects: MockModel.recentProjects;
         materialAlerts: MockModel.materials;
     }
-    ProjectManagement {
+    ProjectManagement { //FUNCTIONS CHECK
         //visible <=> Backend.projectManagementView;
         visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
-    ProjectDetailView {
+    ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
         //visible <=> Backend.projectDetailView;
-        visible: true;
+        visible: false;
         project: MockModel.projectWithMats;
         //clients: ;
     }
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: false;
+        visible: true;
         materials: MockModel.materialList;
     }
 

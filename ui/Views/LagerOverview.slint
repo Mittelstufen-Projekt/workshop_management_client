@@ -9,20 +9,16 @@ import { LagerText } from "../Widgets/LagerText.slint";
 import { LagerRow } from "../Widgets/Lager/LagerRow.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { Constants } from "../Constants.slint";
+import { Backend } from "../Backend.slint";
 
 
 // TODO(jmeusel): Material Count sollte Rot angezeigt werden falls der Wert unterschritten wird
 export component LagerOverview inherits VerticalBox {
 
+    in-out property <[Material]> materials;
+
     property <length> topPadding: 20px;
 
-    in property <string> name;
-    in property <float> price;
-    in property <string> type;
-    in property <string> amount;
-    in property <string> rememberWhen;
-    in property <string> description;
-    in-out property <[Material]> materials;
 
     
     alignment: start;
@@ -30,7 +26,7 @@ export component LagerOverview inherits VerticalBox {
         title: Constants.warehouse_overview;
         buttonTitleFirst: "Add Material";
         onFirstButtonPressed => {
-            // TODO(jmeusel): implement add Material
+            Backend.add-material();
         }
 
     }
@@ -56,7 +52,8 @@ export component LagerOverview inherits VerticalBox {
         for material[i] in materials: LagerRow {
             name: materials[i].name;
             price: materials[i].price;
-            // TODO(jmeusel): type is falsch
+            // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
+            // werden dann in nh liste geworden? not sure
             type: materials[i].type;
             amount: materials[i].quantity;
             // TODO(jmeusel): was einfallen lassen.... muss wahrscheinlich im FE gehalten werden
@@ -71,7 +68,9 @@ export component LagerOverview inherits VerticalBox {
         //alignment: space-between;
         Button {text: Constants.save;
         clicked => {
-            // TODO(jmeusel): BE - Function Daten Speichern
+            Backend.save-materials(
+                
+            );
         }
         width: root.width * 0.04;
         height: root.height * 0.04;

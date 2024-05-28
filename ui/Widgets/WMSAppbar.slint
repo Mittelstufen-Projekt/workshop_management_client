@@ -13,7 +13,7 @@ import { Constants } from "../Constants.slint";
 
 // TODO(jmeusel): Bools um Search auszublenden, sowie buttons 
 
-export component WMSAppbar inherits Rectangle{
+export component WMSAppbar inherits Rectangle {
 
     in-out property <string> title;
     in-out property <string> buttonTitleFirst;
@@ -43,6 +43,7 @@ export component WMSAppbar inherits Rectangle{
                 color: Palette.accent-color;
                 font-size: Palette.page-title-font-size * 1px;
             }
+
             HorizontalLayout {
                 alignment: center;
                 // 0 width, da ansonsten das alignment nicht mehr funktioniert
@@ -58,7 +59,9 @@ export component WMSAppbar inherits Rectangle{
                     width: 12px;
                 }
 
-                TextField { height: Palette.font-size * 2px;}
+                TextField {
+                    height: Palette.font-size * 2px;
+                }
 
                 Rectangle {
                     width: 120px;
@@ -73,7 +76,11 @@ export component WMSAppbar inherits Rectangle{
                     }
                     visible: showFirstButton;
                 }
-                Rectangle {width: 120px;}
+
+                Rectangle {
+                    width: 120px;
+                }
+
                 Button {
                     height: Palette.font-size * 2px;
                     text: buttonTitleSecond;
@@ -83,7 +90,11 @@ export component WMSAppbar inherits Rectangle{
                     }
                     visible: showSecondButton;
                 }
-                Rectangle {width: 120px;}
+
+                Rectangle {
+                    width: 120px;
+                }
+
                 Button {
                     height: Palette.font-size * 2px;
                     text: buttonTitleThird;
