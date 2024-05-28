@@ -6,7 +6,6 @@ import { Button } from "../Widgets/Button.slint";
 
 export component MaterialPopUp inherits Rectangle {
     // TODO(jmeusel): Type ändern
-    in-out property <bool> showPopUp;
     in-out property <string> nameController;
     in-out property <string> priceController;
     in-out property <string> typeController;
@@ -14,7 +13,6 @@ export component MaterialPopUp inherits Rectangle {
     in-out property <string> rememberWhenController;
     in-out property <string> descriptionController;
     in-out property <string> thresholdValueController;
-    visible: showPopUp;
 
 
     /*

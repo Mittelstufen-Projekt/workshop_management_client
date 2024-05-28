@@ -29,12 +29,14 @@ fn main() -> Result<(), slint::PlatformError> {
     let arc_keycloak: Arc<Mutex<Keycloak>> = Arc::new(Mutex::new(Keycloak::new()));
 
     // Set the inital state of the window
-    ui.set_loginView(true);
-    ui.set_projectView(false);
-    ui.set_projectManagementView(false);
-    ui.set_projectDetailView(false);
-    ui.set_lagerOverviewView(false);
-
+    ui.global::<Backend>().set_loginView(true);
+    ui.global::<Backend>().set_projectView(false);
+    ui.global::<Backend>().set_projectManagementView(false);
+    ui.global::<Backend>().set_projectDetailView(false);
+    ui.global::<Backend>().set_lagerOverviewView(false);
+    ui.global::<Backend>().set_showClientPopUp(false);
+    ui.global::<Backend>().set_showMaterialPopUp(false);
+    
     // Login action
     ui.global::<Backend>().on_request_login({
         // Get the handlers that we need to manipulate the UI and Keycloak
@@ -69,8 +71,8 @@ fn main() -> Result<(), slint::PlatformError> {
                         .lock()
                         .unwrap()
                         .set_password(password.to_string());
-                    ui.set_loginView(false);
-                    ui.set_projectView(true);
+                    ui.global::<Backend>().set_loginView(false);
+                    ui.global::<Backend>().set_projectView(true);
                     ui.set_login_error("".into());
                 }
             }
@@ -85,10 +87,12 @@ fn main() -> Result<(), slint::PlatformError> {
         move || {
             // Basically just route to the login view and clear the token
             let ui = ui_handle.unwrap();
-            ui.set_loginView(true);
-            ui.set_projectView(false);
-            ui.set_projectManagementView(false);
-            ui.set_projectDetailView(false);
+            ui.global::<Backend>().set_loginView(true);
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.set_username("".into());
             ui.set_password("".into());
             keycloak_handle.lock().unwrap().clear();
@@ -103,10 +107,12 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            ui.set_projectView(false);
-            ui.set_projectManagementView(true);
-            ui.set_projectDetailView(false);
-            ui.set_lagerOverviewView(false);
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(true);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
         }
     });
 
@@ -115,10 +121,12 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            ui.set_projectView(false);
-            ui.set_projectManagementView(false);
-            ui.set_projectDetailView(false);
-            ui.set_lagerOverviewView(true);
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(true);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
         }
     });
 
@@ -129,10 +137,12 @@ fn main() -> Result<(), slint::PlatformError> {
         let keycloak_handle = arc_keycloak.clone();
         move |project_id: i32| {
             let ui = ui_handle.unwrap();
-            ui.set_projectView(false);
-            ui.set_projectManagementView(false);
-            ui.set_projectDetailView(true);
-            ui.set_lagerOverviewView(false);
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(true);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
             // Refresh the token
             let token = keycloak_handle
                 .lock()
@@ -159,6 +169,32 @@ fn main() -> Result<(), slint::PlatformError> {
                 Ok(project) => project,
             };
             todo!("Set project details");
+        }
+    });
+    
+    ui.global::<Backend>().on_showAddNewClientPopUp({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(true);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
+        }
+    });
+
+    ui.global::<Backend>().on_showAddNewMaterialPopUp({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(true);
         }
     });
 

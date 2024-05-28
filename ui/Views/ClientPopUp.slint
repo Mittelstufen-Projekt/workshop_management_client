@@ -6,13 +6,9 @@ import { Button } from "../Widgets/Button.slint";
 
 export component ClientPopUp inherits Rectangle {
     // TODO(jmeusel): Client hat nur email und name
-
-    in-out property <bool> showPopUp;
     in-out property <string> nameController;
     in-out property <string> emailController;
     in-out property <string> phoneController;
-    visible: showPopUp;
-
 
     /*
     DB model:

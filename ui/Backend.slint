@@ -9,6 +9,11 @@ import { ProjectModel } from "../ui/models/ProjectModel.slint";
 
 
 export global Backend {
+    /*
+
+        Callbacks
+
+    */
     // Login View
     callback request-login();
     callback request-exit();
@@ -17,71 +22,30 @@ export global Backend {
     callback request-logout();
 
     // Project Detail View
-    // TODO(jmeusel): id mitgeben
-    //// Justin: Bitte ein parameter von dem Material, welches gelöscht werden soll
-    // TODO(jmeusel): hier nochmal drüber nachdenken ....
-    callback deleteMaterial(Material);
-
-    //ProjektName, Client, ProjectStart, ProjectDeadline, calculated and current -costs
-    //List of Materials 
-    //all of this needs to be saved
-    //// Justin: Bitte noch die Variblen angeben, welche zum speichern von project genutzt werden sollen
+    // parameter: ID of the material to delete
+    callback deleteMaterial(int);
     callback save-project-and-used-materials();
     
-    
     // Project Management View
-    //// Justin: Bitte noch die Variblen angeben, welche zum erstellen von project genutzt werden sollen
     callback create_new_project();
-
-    //// Justin: Bitte noch die Variblen angeben, welche zum erstellen von client genutzt werden sollen
     callback add-new-client();
 
-    //// Justin: Bitte feedback an mich, wofür diese Funktion genutzt wird
-            /// Jasha: Um das ClientPopUp anzuzeigen, außerdem gibt es innerhalb des Popups einen Save und einen Cancel button
-            /// Zudem weiß ich nicht ob das eine public pure function sein muss. Ich weiß nicht wie du das routing implementierst aber wir haben
-            /// quasi einen visible boolean innerhalb des popups, deswegen dachte ich man müsse das so wie heir schreiben
-    public pure function showAddNewClientPopUp () -> bool {
-        // TODO(jmeusel): boolean switchen
-        // TODO(jmeusel): funktion muss gleichzeitig die Project-Overvierw unsichtbar machen
-        return true;
-    }
-
-    /// Jasha: Um das AddMaterialPopUp anzuzeigen, außerdem gibt es innerhalb des Popups einen Save und einen Cancel button
-    public pure function showAddNewMaterialPopUp () -> bool {
-        // TODO(jmeusel): boolean switchen
-        // TODO(jmeusel): funktion muss gleichzeitig die Warehouse-overview unsichtbar machen
-        return true;
-    }
-
-
     // AppBar
-    //sollte immer zur vorherigen page navigieren, da der callback ausschließlich in der Section selbst aufgerufen wird
     callback goBack();
 
-
     // LagerOverview
-    //name price type amount rememberWhen description
-    //// Justin: Bitte noch die Variblen angeben, in welche das Material gespeichert ist
     callback save-materials();
-
-    // müsste diese zusätzlich zu der MaterialList hinzufügen
-    //// Justin: Bitte noch die Variblen angeben, in welche das Material hinzugefügt werden soll
     callback add-material();
 
-
-
-    // NAVIGATION:
+    // Navigation:
     callback route-to-project-management();
-
     callback route-to-warehouse-management();
-
-    // TODO(jmeusel): nochmal überlegen, kommt hier nh ID rein oder wird ein Projekt angegeben?
-    // Das Projekt welches angeclicked wurde muss mitgegeben werden
-    //// Justin: Bitte noch die Variblen angeben, in welche ich das projekt uebergeben muss
+    // parameter: ID of the project to show
     callback route-to-project-i(int);
-
     callback route-to-LagerOverview();
-    
+    callback showAddNewClientPopUp ();
+    callback showAddNewMaterialPopUp ();
+
 
     // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
     //// Justin: Mach eine function die mir einfach den inhalt des searchfeldes via parameter übergibt
@@ -89,26 +53,30 @@ export global Backend {
 
 
 
-    // Variables:
-//ProjectView 
+    /*
+
+        Variables
+
+    */
+    // ProjectView 
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
 
-//ProjectManagement
+    // ProjectManagement
     in-out property <[ProjectModel]> allProjects;
 
-
-//ProjectDetailView
+    // ProjectDetailView
     in-out property <ProjectModel> project;
 
-//LagerOverview
+    // LagerOverview
     in-out property <[Material]> materials;
 
-
-//ClientPopUp
+    // Variables for routing and navigation
     in-out property <bool> showClientPopUp;
-
-//MaterialPopUp
     in-out property <bool> showMaterialPopUp;
-
+    in-out property <bool> loginView: true;
+    in-out property <bool> projectView: false;
+    in-out property <bool> projectManagementView: false;
+    in-out property <bool> projectDetailView: false;
+    in-out property <bool> lagerOverviewView: false;
 }

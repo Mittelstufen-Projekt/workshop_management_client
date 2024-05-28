@@ -41,15 +41,6 @@ export component WorkshopClient inherits Window {
     in-out property<string> password;
     in-out property<string> login_error;
 
-    // Bools for views
-    in-out property <bool> loginView: true;
-    in-out property <bool> projectView: false;
-    in-out property <bool> projectManagementView: false;
-    in-out property <bool> projectDetailView: false;
-    in-out property <bool> lagerOverviewView: false;
-    // isn´t a view but works like
-    in-out property <bool> clientPopUp: false;
-
     // Variables for the window itself
     background: Palette.background-color;
     title: "Workshop Management Client";
@@ -70,29 +61,29 @@ export component WorkshopClient inherits Window {
         username <=> root.username;
         password <=> root.password;
         login_error <=> root.login_error;
-        //visible <=> root.loginView;
-        visible: false;
+        visible <=> Backend.loginView;
+        //visible: false;
     }
     ProjectView {
-        //visible <=> root.projectView;
-        visible: false;
+        visible <=> Backend.projectView;
+        //visible: false;
         recentProjects: MockModel.recentProjects;
         materialAlerts: MockModel.materials;
     }
     ProjectManagement {
-        //visible <=> root.projectManagementView;
-        visible: false;
+        visible <=> Backend.projectManagementView;
+        //visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView {
-        //visible <=> root.projectDetailView;
-        visible: true;
+        visible <=> Backend.projectDetailView;
+        //visible: true;
         project: MockModel.projectWithMats;
     }
 
     LagerOverview {
-        //visible <=> root.lagerOverviewView;
-        visible: false;
+        visible <=> Backend.lagerOverviewView;
+        //visible: false;
         materials: MockModel.materialList;
     }
 
@@ -110,13 +101,11 @@ export component WorkshopClient inherits Window {
     // Popup for the Client
     // TODO(jmeusel): muss noch angepasst werden
     ClientPopUp {
-        visible: false;
-        showPopUp: Backend.showAddNewClientPopUp();
+        visible <=> Backend.showClientPopUp;
     }
 
     MaterialPopUp {
-        visible: false;
-        showPopUp: Backend.showAddNewMaterialPopUp();
+        visible <=> Backend.showMaterialPopUp;
     }
 
 }
