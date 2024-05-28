@@ -4,6 +4,9 @@
     Description: Backend interface with all callbacks
 
 */
+import { Material } from "../ui/models/MaterialModel.slint";
+import { ProjectModel } from "../ui/models/ProjectModel.slint";
+
 
 export global Backend {
     // Login View
@@ -16,7 +19,8 @@ export global Backend {
     // Project Detail View
     // TODO(jmeusel): id mitgeben
     //// Justin: Bitte ein parameter von dem Material, welches gelöscht werden soll
-    callback deleteMaterial();
+    // TODO(jmeusel): hier nochmal drüber nachdenken ....
+    callback deleteMaterial(Material);
 
     //ProjektName, Client, ProjectStart, ProjectDeadline, calculated and current -costs
     //List of Materials 
@@ -77,11 +81,34 @@ export global Backend {
     callback route-to-project-i(int);
 
     callback route-to-LagerOverview();
-
-
+    
 
     // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
     //// Justin: Mach eine function die mir einfach den inhalt des searchfeldes via parameter übergibt
     ////         jeweils für project und material
+
+
+
+    // Variables:
+//ProjectView 
+    in-out property <[ProjectModel]> recentProjects;
+    in-out property <[Material]> materialAlerts;
+
+//ProjectManagement
+    in-out property <[ProjectModel]> allProjects;
+
+
+//ProjectDetailView
+    in-out property <ProjectModel> project;
+
+//LagerOverview
+    in-out property <[Material]> materials;
+
+
+//ClientPopUp
+    in-out property <bool> showClientPopUp;
+
+//MaterialPopUp
+    in-out property <bool> showMaterialPopUp;
 
 }

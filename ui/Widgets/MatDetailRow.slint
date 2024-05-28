@@ -1,57 +1,69 @@
 import { Material } from "../models/MaterialModel.slint";
 import { Palette } from "../Palette.slint";
-import { LineEdit } from "std-widgets.slint";
+import { LineEdit, Button } from "std-widgets.slint";
 
 export component MatDetailRow inherits Rectangle {
 
     in-out property <Material> material;
     in-out property <bool> disableBorder;
-
+    in-out property <bool> disableCancelButton;
+    callback onClick();
     //background: lightblue;
     // TODO(jmeusel): init
     property <length> maxWidth: 175px;
-    
-    VerticalLayout {
-        alignment: center;
-        Rectangle {
-            padding: 8px;
-            border-color: Palette.accent-color;
-            border-width: disableBorder ? 0px : 2px;
-            HorizontalLayout {
-                alignment: space-between;
+    HorizontalLayout {
+        VerticalLayout {
+            alignment: center;
+            Rectangle {
                 padding: 8px;
-                Rectangle {
-                    width: maxWidth;
-                    Text {
+                border-color: Palette.accent-color;
+                border-width: disableBorder ? 0px : 2px;
+                HorizontalLayout {
+                    alignment: space-between;
+                    padding: 8px;
+                    Rectangle {
                         width: maxWidth;
-                        text: material.name;
-                        font-size: Palette.font-size * 1px;
-                        color: Palette.text-color;
-                        overflow: TextOverflow.elide;
+                        Text {
+                            width: maxWidth;
+                            text: material.name;
+                            font-size: Palette.font-size * 1px;
+                            color: Palette.text-color;
+                            overflow: TextOverflow.elide;
+                        }
                     }
-                }
-        
-                Rectangle {
-                    max-width: maxWidth;
-                    Text {
+    
+                    Rectangle {
                         max-width: maxWidth;
-                        text: material.type == "" ? "–" : material.type;
-                        font-size: Palette.font-size * 1px;
-                        color: Palette.text-color;
-                        overflow: TextOverflow.elide;
+                        Text {
+                            max-width: maxWidth;
+                            text: material.type == "" ? "–" : material.type;
+                            font-size: Palette.font-size * 1px;
+                            color: Palette.text-color;
+                            overflow: TextOverflow.elide;
+                        }
                     }
-                }
-        
-                Rectangle {
-                    max-width: maxWidth;
-                    Text {
+    
+                    Rectangle {
                         max-width: maxWidth;
-                        text: material.quantity;
-                        font-size: Palette.font-size * 1px;
-                        color: Palette.text-color;
-                        overflow: TextOverflow.elide;
+                        Text {
+                            max-width: maxWidth;
+                            text: material.quantity;
+                            font-size: Palette.font-size * 1px;
+                            color: Palette.text-color;
+                            overflow: TextOverflow.elide;
+                        }
                     }
+    
+                   
                 }
+            }
+        }
+        Rectangle {width: 20px;}
+        if(!disableCancelButton): Button {
+            width: 40px;
+            text: "X";
+            clicked => {
+                onClick()
             }
         }
     }

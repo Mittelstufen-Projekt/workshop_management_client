@@ -12,25 +12,16 @@ import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { MatDetailRow } from "../Widgets/MatDetailRow.slint";
 import { MockModel } from "../models/MockModels.slint";
 import { Material } from "../models/MaterialModel.slint";
+import { Backend } from "../Backend.slint";
 
 // TODO(jmeusel): Save button anders anordnen, Email feld checken, X Button für Materialien, Listen müssen dabei geupdated werden
+// TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
 // TODO(jmeusel): client muss durch dropdown geändert werden
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
-    in-out property <[string]> materialTypes;
 
     property <Material> mock;
-    mock: {name: "Name", type: "Type",description: "", price: 0, quantity: 0};
-    // TODO(jmeusel): kann wahrscheinlich weg, nicht sicher!
-    // TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
-    // in-out property <string> projectController:project.name;
-    // in-out property <string> clientController:project.client;
-    // in-out property <string> phoneController: project.tel;
-    // in-out property <string> eMailController:project.email;
-    // in-out property <string> projectStartController:project.project-start;
-    // in-out property <string> deadlineController:project.project-deadline;
-    // in-out property <string> calcCostsController:project.calculated-costs;
-    // in-out property <string> currentCostsController:project.current-costs;
+    mock: { name: "Name", type: "Type", description: "", price: 0, quantity: 0 };
 
     property <string> suffix: ": ";
     property <length> topPadding: 20px;
@@ -40,96 +31,150 @@ export component ProjectDetailView inherits VerticalLayout {
         Rectangle {
             height: topPadding;
         }
+
         alignment: start;
         TitleSection {
             title: project.name;
-
         }
-        // WMSAppbar {
-        //     title: project.name;
-        //     showSecondButton: true;
-        //     showFirstButton: true;
-        //     buttonTitleSecond: Constants.add_client;
-        // }
+
         HorizontalLayout {
             alignment: start;
             VerticalBox {
                 Rectangle {
                     height: topPadding;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 alignment: start;
                 ProjectDetailRow {
                     title: Constants.project_name;
                     textFieldName: project.name;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRow {
                     title: Constants.client + suffix;
                     textFieldName: project.client;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRowTwoBoxes {
                     title: Constants.phone + suffix;
                     textFieldName: project.tel;
                     title2: Constants.email + suffix;
                     textFieldName2: project.email;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRow {
                     title: Constants.project_start + suffix;
                     textFieldName: project.project-start;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRow {
                     title: Constants.project_deadline + suffix;
                     textFieldName: project.project-deadline;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRow {
                     title: Constants.calculated_costs + suffix;
                     textFieldName: project.calculated-costs;
                 }
-                Rectangle {height: 20px;}
+
+                Rectangle {
+                    height: 20px;
+                }
+
                 ProjectDetailRow {
                     title: Constants.currentCosts + suffix;
                     textFieldName: project.current-costs;
                 }
-        
             }
-            Rectangle {width: 400px;}
+
+            Rectangle {
+                width: 400px;
+            }
+
             //Material Section
             VerticalLayout {
-                Rectangle {height: topPadding;}
-                    VerticalBox {
-                        MatDetailRow {
-                            disableBorder: true;
-                            material: mock;
+                Rectangle {
+                    height: topPadding;
+                }
+
+                VerticalBox {
+                    HorizontalBox {
+                        Text {
+                            text: Constants.name;
+                            font-size: Palette.font-size * 1px;
                         }
-                        for material[i] in project.mats: MatDetailRow {
-                            material: project.mats[i];
-                            for name[index] in project.mats : Rectangle {height: 85px;}
+
+                        Text {
+                            text: Constants.type;
+                            font-size: Palette.font-size * 1px;
+                        }
+
+                        Text {
+                            text: Constants.amount;
+                            font-size: Palette.font-size * 1px;
                         }
                     }
-              //  }
-                Rectangle {height: 25px;}
+
+                    for material[i] in project.mats: MatDetailRow {
+                        material: project.mats[i];
+                        onClick => {
+                            Backend.deleteMaterial(project.mats[i])
+                        }
+                        // TODO(jmeusel): unnötig?
+                            for name[index] in project.mats: Rectangle {
+                            height: 85px;
+                        }
+                    }
+                }
+
+                //  }
+                Rectangle {
+                    height: 25px;
+                }
+
                 HorizontalLayout {
                     alignment: space-between;
                     Button {
                         text: Constants.add_material;
                         height: 30px;
                         width: 130px;
-                        callback addMaterial(
-                            // TODO(jmeusel): implement
+                        callback addMaterial(// TODO(jmeusel): implement
                         );
                     }
-                    Rectangle {width: 100px;}
+
+                    Rectangle {
+                        width: 100px;
+                    }
+
                     Button {
                         text: Constants.save;
                         height: 30px;
                         width: 130px;
-                        callback save(
-                            // TODO(jmeusel): implement
+                        callback save(// TODO(jmeusel): implement
                         );
                     }
                 }
