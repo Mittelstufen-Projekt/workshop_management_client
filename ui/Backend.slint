@@ -33,12 +33,21 @@ export global Backend {
     callback add-new-client();
 
     //// Justin: Bitte feedback an mich, wofür diese Funktion genutzt wird
-    public pure function showPopUp () -> bool {
+            /// Jasha: Um das ClientPopUp anzuzeigen, außerdem gibt es innerhalb des Popups einen Save und einen Cancel button
+            /// Zudem weiß ich nicht ob das eine public pure function sein muss. Ich weiß nicht wie du das routing implementierst aber wir haben
+            /// quasi einen visible boolean innerhalb des popups, deswegen dachte ich man müsse das so wie heir schreiben
+    public pure function showAddNewClientPopUp () -> bool {
         // TODO(jmeusel): boolean switchen
         // TODO(jmeusel): funktion muss gleichzeitig die Project-Overvierw unsichtbar machen
         return true;
     }
 
+    /// Jasha: Um das AddMaterialPopUp anzuzeigen, außerdem gibt es innerhalb des Popups einen Save und einen Cancel button
+    public pure function showAddNewMaterialPopUp () -> bool {
+        // TODO(jmeusel): boolean switchen
+        // TODO(jmeusel): funktion muss gleichzeitig die Warehouse-overview unsichtbar machen
+        return true;
+    }
 
 
     // AppBar

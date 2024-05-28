@@ -27,6 +27,7 @@ import { LagerOverview } from "Views/LagerOverview.slint";
 import { ClientPopUp } from "../ui/Views/ClientPopUp.slint";
 
 import { MockModel } from "../ui/models/MockModels.slint";
+import { MaterialPopUp } from "Widgets/MaterialPopUp.slint";
 
 // Exporting the Backend
 export { Backend }
@@ -74,7 +75,7 @@ export component WorkshopClient inherits Window {
     }
     ProjectView {
         //visible <=> root.projectView;
-        visible: false;
+        visible: true;
         recentProjects: MockModel.recentProjects;
         materialAlerts: MockModel.materials;
     }
@@ -111,7 +112,12 @@ export component WorkshopClient inherits Window {
     // TODO(jmeusel): muss noch angepasst werden
     ClientPopUp {
         visible: false;
-        showPopUp: Backend.showPopUp();
+        showPopUp: Backend.showAddNewClientPopUp();
+    }
+
+    MaterialPopUp {
+        visible: false;
+        showPopUp: Backend.showAddNewMaterialPopUp();
     }
 
 }
