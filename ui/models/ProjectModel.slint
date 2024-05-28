@@ -6,16 +6,18 @@
 */
 
 import { Material } from "MaterialModel.slint";
+import { ClientModel } from "ClientModel.slint";
 
 export struct ProjectModel {
     id: int,
     name: string,
-    client: string,
-    email: string,
-    tel: string,
+    // Client
+    client: ClientModel,
+    //email: string,
+    //tel: string,
     project_start: string,
     project_deadline: string,
-    calculated_costs: string,
-    current_costs: string,
+    calculated_costs: float,
+    current_costs: float,
     mats: [Material],
 }

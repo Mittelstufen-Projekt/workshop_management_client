@@ -61,11 +61,11 @@ export component ProjectManagement inherits ScrollView {
         }
 
         for project[i] in allProjects: ProjectRowShort {
-            client: allProjects[i].client;
+            client: allProjects[i].client.lastName;
             project: allProjects[i].name;
             costs: allProjects[i].current_costs;
             deadline: allProjects[i].project_deadline;
-            clicked => {
+            clicked  => {
                 Backend.route-to-project-i(i);
             }
         }

@@ -1,5 +1,6 @@
 import { ProjectModel } from "ProjectModel.slint";
 import { Material } from "MaterialModel.slint";
+import { ClientModel } from "ClientModel.slint";
 
 export global MockModel {
 
@@ -19,21 +20,40 @@ export global MockModel {
     in-out property <ProjectModel> modelMock9;
     in-out property <ProjectModel> modelMock10;
     in-out property <ProjectModel> modelMock11;
-    modelMock: {name: "ProjName0", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2299.99", current_costs: "194.72", mats: []};
-    modelMock1: {name: "ProjName1", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2199.99", current_costs: "194.72", mats: []};
-    modelMock2: {name: "ProjName2", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2929.99", current_costs: "194.72", mats: []};
-    modelMock3: {name: "ProjName3", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2929.99", current_costs: "194.72", mats: []};
+    modelMock: {name: "ProjName0", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2299.99, current_costs: 194.72, mats: []};
+    modelMock1: {name: "ProjName1", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2199.99, current_costs: 194.72, mats: []};
+    modelMock2: {name: "ProjName2", client: clientMock1, project_start: "heute", project_deadline: "deadline", calculated_costs:2929.99, current_costs: 194.72, mats: []};
+    modelMock3: {name: "ProjName3", client: clientMock2, project_start: "heute", project_deadline: "deadline", calculated_costs:2929.99, current_costs: 194.72, mats: []};
 
-    modelMock4: {name: "ProjName4", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2979.99", current_costs: "194.72", mats: []};
-    modelMock5: {name: "ProjName5", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2959.99", current_costs: "19344.72", mats: []};
-    modelMock6: {name: "ProjName6", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2949.99", current_costs: "19224.7212", mats: []};
-    modelMock7: {name: "ProjName7", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2939.99", current_costs: "19554.72", mats: []};
-    modelMock8: {name: "ProjName8", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"99.99", current_costs: "19674.72", mats: []};
-    modelMock9: {name: "ProjName9", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2939.99", current_costs: "19424.72", mats: []};
-    modelMock10: {name: "ProjName11", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2939.99", current_costs: "1494.72", mats: []};
-    modelMock11: {name: "ProjName12", client: "ClientName", email: "EMAIL", tel: "phone", project_start: "heute", project_deadline: "deadline", calculated_costs:"2939.949", current_costs: "19324.72", mats: []};
+    modelMock4: {name: "ProjName4", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2979.99, current_costs: 194.72, mats: []};
+    modelMock5: {name: "ProjName5", client: clientMock4, project_start: "heute", project_deadline: "deadline", calculated_costs:2959.99, current_costs: 19344.72, mats: []};
+    modelMock6: {name: "ProjName6", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2949.99, current_costs: 19224.7212, mats: []};
+    modelMock7: {name: "ProjName7", client: clientMock1, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 19554.72, mats: []};
+    modelMock8: {name: "ProjName8", client: clientMock2, project_start: "heute", project_deadline: "deadline", calculated_costs:99.99, current_costs: 19674.72, mats: []};
+    modelMock9: {name: "ProjName9", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 19424.72, mats: []};
+    modelMock10: {name: "ProjName11", client: clientMock4, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 1494.72, mats: []};
+    modelMock11: {name: "ProjName12", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.949, current_costs: 19324.72, mats: []};
 
     recentProjects: [modelMock, modelMock1, modelMock2, modelMock];
+
+
+    //List of Clients
+    in-out property <[ClientModel]> clientList;
+    in-out property <ClientModel> clientMock;
+    in-out property <ClientModel> clientMock1;
+    in-out property <ClientModel> clientMock2;
+    in-out property <ClientModel> clientMock3;
+    in-out property <ClientModel> clientMock4;
+
+    clientMock: {firstName: "Max", lastName: "Mustermann", phone: 015730023345};
+    clientMock1: {firstName: "Mus", lastName: "Meeeee", phone: 015730023345};
+    clientMock2: {firstName: "Maas", lastName: "AAAAArNe", phone: 015730023345};
+    clientMock3: {firstName: "kemo", lastName: "Bröld", phone: 015730023345};
+    clientMock4: {firstName: "Tarek", lastName: "Asterix", phone: 015730023345};
+
+
+    clientList: [clientMock, clientMock1, clientMock2, clientMock3, clientMock4];
+
 
     //List of Materials 
     in-out property <Material> mat1;
@@ -74,7 +94,7 @@ export global MockModel {
     in-out property <[Material]> materialList;
     materialList: [material1,material2,material3,material4,material5, material6, mat1, mat2,mat3,mat4,mat5,mat6,];
     in property <ProjectModel> projectWithMats;
-    projectWithMats: {name: "Project with mats", client: "ClientName with mats", email: "EMAIL +  MATS", tel: "12312423123", project_start: "2024-04-18", project_deadline: "2024-06-02", calculated_costs:"666", current_costs: "667-1", mats: materialList};
+    projectWithMats: {name: "Project with mats", client: clientMock, project_start: "2024-04-18", project_deadline: "2024-06-02", calculated_costs:666, current_costs: 667-1, mats: materialList};
 
 
     //MAterial Types

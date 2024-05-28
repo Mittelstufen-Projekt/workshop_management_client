@@ -24,7 +24,9 @@ export global Backend {
     // Project Detail View
     // parameter: ID of the material to delete
     callback deleteMaterial(int);
-    callback save-project-and-used-materials();
+    // Jasha: aktuell noch keine Materialien sondern nur die ProjektValues in folgender Reihenfole: 
+    // projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
+    callback save-project-and-used-materials(string, string, string, string, string, string);
     
     // Project Management View
     callback create_new_project();

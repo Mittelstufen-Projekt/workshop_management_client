@@ -56,29 +56,30 @@ export component WorkshopClient inherits Window {
         username <=> Backend.username;
         password <=> Backend.password;
         login_error <=> Backend.login_error;
-        visible <=> Backend.loginView;
-        //visible: false;
+        //visible <=> Backend.loginView;
+        visible: false;
     }
     ProjectView {
-        visible <=> Backend.projectView;
-        //visible: false;
+        //visible <=> Backend.projectView;
+        visible: false;
         recentProjects: MockModel.recentProjects;
         materialAlerts: MockModel.materials;
     }
     ProjectManagement {
-        visible <=> Backend.projectManagementView;
-        //visible: false;
+        //visible <=> Backend.projectManagementView;
+        visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView {
-        visible <=> Backend.projectDetailView;
-        //visible: true;
+        //visible <=> Backend.projectDetailView;
+        visible: true;
         project: MockModel.projectWithMats;
+        //clients: ;
     }
 
     LagerOverview {
-        visible <=> Backend.lagerOverviewView;
-        //visible: false;
+        //visible <=> Backend.lagerOverviewView;
+        visible: false;
         materials: MockModel.materialList;
     }
 

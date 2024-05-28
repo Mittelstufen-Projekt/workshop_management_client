@@ -109,11 +109,11 @@ export component ProjectView inherits Rectangle {
             VerticalBox {
                 for item[i] in recentProjects: ProjectRowShort {
                     project: recentProjects[i].name;
-                    client: recentProjects[i].client;
+                    client: recentProjects[i].client.firstName + " " + recentProjects[i].client.lastName;
                     costs: recentProjects[i].current_costs;
                     deadline: recentProjects[i].project_deadline;
                     clicked => {
-                        Backend.route-to-project-i(i);
+                        Backend.route-to-project-i(recentProjects[i].id);
                     }
                 }
                 Rectangle { }
