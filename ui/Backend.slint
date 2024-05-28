@@ -58,6 +58,11 @@ export global Backend {
         Variables
 
     */
+    // LoginView
+    in-out property <string> username;
+    in-out property <string> password;
+    in-out property <string> login_error;
+
     // ProjectView 
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;

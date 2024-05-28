@@ -36,11 +36,6 @@ export component WorkshopClient inherits Window {
     width: 1920px;
     height: 1080px;
 
-    // Properties
-    in-out property<string> username;
-    in-out property<string> password;
-    in-out property<string> login_error;
-
     // Variables for the window itself
     background: Palette.background-color;
     title: "Workshop Management Client";
@@ -58,9 +53,9 @@ export component WorkshopClient inherits Window {
 
     // Actual content
     LoginView {
-        username <=> root.username;
-        password <=> root.password;
-        login_error <=> root.login_error;
+        username <=> Backend.username;
+        password <=> Backend.password;
+        login_error <=> Backend.login_error;
         visible <=> Backend.loginView;
         //visible: false;
     }

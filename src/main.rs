@@ -44,12 +44,12 @@ fn main() -> Result<(), slint::PlatformError> {
         let keycloak_handle = arc_keycloak.clone();
         move || {
             let ui = ui_handle.unwrap();
-            let user = ui.get_username();
-            let password = ui.get_password();
+            let user = ui.global::<Backend>().get_username();
+            let password = ui.global::<Backend>().get_password();
 
             // Check if the user has entered a username and password
             if user.is_empty() || password.is_empty() {
-                ui.set_login_error("Please enter a username and password.".into());
+                ui.global::<Backend>().set_login_error("Please enter a username and password.".into());
                 return;
             }
 
@@ -59,7 +59,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             match token {
                 Err(e) => {
-                    ui.set_login_error(e.to_string().into());
+                    ui.global::<Backend>().set_login_error(e.to_string().into());
                 }
                 Ok(token) => {
                     keycloak_handle.lock().unwrap().set_token(token);
@@ -73,7 +73,7 @@ fn main() -> Result<(), slint::PlatformError> {
                         .set_password(password.to_string());
                     ui.global::<Backend>().set_loginView(false);
                     ui.global::<Backend>().set_projectView(true);
-                    ui.set_login_error("".into());
+                    ui.global::<Backend>().set_login_error("".into());
                 }
             }
         }
@@ -93,8 +93,8 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_projectDetailView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
-            ui.set_username("".into());
-            ui.set_password("".into());
+            ui.global::<Backend>().set_username("".into());
+            ui.global::<Backend>().set_password("".into());
             keycloak_handle.lock().unwrap().clear();
         }
     });
