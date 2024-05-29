@@ -10,6 +10,7 @@ import { TextField } from "../Widgets/TextField.slint";
 import { CheckBox } from "../Widgets/CheckBox.slint";
 import { Button } from "../Widgets/Button.slint";
 import { Constants } from "../Constants.slint";
+import { Backend } from "../Backend.slint";
 
 // TODO(jmeusel): Bools um Search auszublenden, sowie buttons 
 
@@ -30,8 +31,10 @@ export component WMSAppbar inherits Rectangle {
     in property <length> firstButtonWidth: 120px;
     in property <length> secondButtonWidth: 120px;
     in property <length> thirdButtonWidth: 120px;
+    callback edited();
+    in-out property <string> searchText <=> searchField.text;
 
-    border-color: white;
+    border-color: Palette.accent-color;
     border-width: 2px;
     border-radius: 8px;
 
@@ -43,7 +46,6 @@ export component WMSAppbar inherits Rectangle {
                 color: Palette.accent-color;
                 font-size: Palette.page-title-font-size * 1px;
             }
-
             HorizontalLayout {
                 alignment: center;
                 // 0 width, da ansonsten das alignment nicht mehr funktioniert
@@ -59,8 +61,11 @@ export component WMSAppbar inherits Rectangle {
                     width: 12px;
                 }
 
-                TextField {
+                searchField:= TextField {
                     height: Palette.font-size * 2px;
+                    edited => {
+                        root.edited();
+                    }
                 }
 
                 Rectangle {

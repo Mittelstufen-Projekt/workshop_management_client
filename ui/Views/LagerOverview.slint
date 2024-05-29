@@ -10,107 +10,85 @@ import { LagerRow } from "../Widgets/Lager/LagerRow.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { Constants } from "../Constants.slint";
 import { Backend } from "../Backend.slint";
+import { TitleSection } from "../Widgets/TitleSeciton.slint";
 
 
 // TODO(jmeusel): Material Count sollte Rot angezeigt werden falls der Wert unterschritten wird
 export component LagerOverview inherits VerticalBox {
 
     in-out property <[Material]> materials;
-
+    in-out property <string> searchText;
     property <length> topPadding: 20px;
 
-
-    
     alignment: start;
+    Rectangle {
+        height: topPadding;
+    }
+
+    TitleSection {
+        title: Constants.warehouse_management;
+    }
+
     WMSAppbar {
-        title: Constants.warehouse_overview;
         buttonTitleFirst: "Add Material";
+        showSecondButton: true;
         onFirstButtonPressed => {
             Backend.showAddNewMaterialPopUp();
         }
-
+        edited => {
+            Backend.search-material(self.searchText);
+        }
+        buttonTitleSecond: "Add Material Type";
+        secondButtonWidth: 167px;
+        onSecondButtonPress => {
+            Backend.showAddNewMateriaTypelPopUp();
+        }
     }
+
     Rectangle {
         height: 80px;
     }
-    
-    HorizontalBox {
-    
-            alignment: LayoutAlignment.start;
-            LagerText {label: "name";}
-            Rectangle {width: 265px;}
-            LagerText {label: "price";}
-            Rectangle {width: 185px;}
-            LagerText {label: "type";}
-            Rectangle {width: 190px;}
-            LagerText {label: "amount";}
-            Rectangle {width: 150px;}
-            LagerText {label: "remember when";}
-            Rectangle {width: 35px;}
-            LagerText {label: "description";}
-        }        
-        for material[i] in materials: LagerRow {
-            name: materials[i].name;
-            price: materials[i].price;
-            // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
-            // werden dann in nh liste geworden? not sure
-            type: materials[i].type;
-            amount: materials[i].quantity;
-            // TODO(jmeusel): was einfallen lassen.... muss wahrscheinlich im FE gehalten werden
-            rememberWhen: "never";
-            description: materials[i].description;
-            clicked => {
-                // TODO(jmeusel): BE - Function Delete Material[i]
-            }
-        }
 
     HorizontalBox {
-        //alignment: space-between;
-        Button {text: Constants.save;
-        clicked => {
-            Backend.save-materials(
-                
-            );
+        alignment: LayoutAlignment.start;
+        LagerText {
+            label: "name";
         }
-        width: root.width * 0.04;
-        height: root.height * 0.04;
-    }
-    //Rectangle {width: 200px;}
-    Button {text: Constants.cancel;
-        clicked => {
-            // TODO(jmeusel): BE - Function Keine Daten Speichern und änderungen verwerfen
-        }
-        width: root.width * 0.04;
-        height: root.height * 0.04;
-    }
-    }
-}
 
-
-/*
-HorizontalBox {
-        alignment: space-between;
-        HorizontalBox {
-            LagerText {
-                label: "name";
-            }
+        Rectangle {
+            width: 265px;
         }
 
         LagerText {
             label: "price";
         }
 
+        Rectangle {
+            width: 185px;
+        }
+
         LagerText {
             label: "type";
+        }
+
+        Rectangle {
+            width: 190px;
         }
 
         LagerText {
             label: "amount";
         }
 
-        // TODO(jmeusel): DateTime? 
+        Rectangle {
+            width: 150px;
+        }
+
         LagerText {
-            label: "rememberWhen";
+            label: "remember when";
+        }
+
+        Rectangle {
+            width: 35px;
         }
 
         LagerText {
@@ -118,6 +96,17 @@ HorizontalBox {
         }
     }
 
-    LagerRow { }
-*/
-
+    for material[i] in materials: LagerRow {
+        name: materials[i].name;
+        price: materials[i].price;
+        // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
+            // werden dann in nh liste geworden? not sure
+            type: materials[i].type;
+        amount: materials[i].quantity;
+        rememberWhen: "never";
+        description: materials[i].description;
+        clicked => {
+            // TODO(jmeusel): BE - Function Delete Material[i]
+            }
+    }
+}

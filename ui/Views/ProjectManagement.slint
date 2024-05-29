@@ -39,6 +39,9 @@ export component ProjectManagement inherits ScrollView {
             onSecondButtonPress => {
                 Backend.showAddNewClientPopUp();
             }
+            edited => {
+                Backend.search-project(self.searchText);
+            }
         }
 
         Rectangle {

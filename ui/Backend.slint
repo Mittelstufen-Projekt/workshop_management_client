@@ -33,12 +33,14 @@ export global Backend {
     callback create_new_project(); // Implemented
     // parameter: ID of the project to delete
     callback delete-project-i(int);
+    callback search-project(string);
 
     // AppBar
     callback goBack(); // Implemented
 
     // LagerOverview
     callback save-materials();
+    callback search-material(string);
 
     // Navigation:
     callback route-to-project-management(); // Implemented
@@ -47,6 +49,7 @@ export global Backend {
     callback route-to-project-i(int); // Implemented
     callback showAddNewClientPopUp (); // Implemented
     callback showAddNewMaterialPopUp (); // Implemented
+    callback showAddNewMateriaTypelPopUp (); 
 
 
     // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
@@ -86,4 +89,8 @@ export global Backend {
     in-out property <bool> projectManagementView: false;
     in-out property <bool> projectDetailView: false;
     in-out property <bool> lagerOverviewView: false;
+
+
+
+    in-out property <string> searchValue;
 }
