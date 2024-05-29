@@ -18,11 +18,12 @@ export component LagerRow inherits Rectangle {
     border-width: 1px;
 
     HorizontalLayout {
-
+        alignment: start;
         Text {
             text: name;
             width: 250px;
             font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
         }
 
         Rectangle {
@@ -31,14 +32,17 @@ export component LagerRow inherits Rectangle {
 
         Text {
             text: price;
+            font-size: Palette.font-size * 1px;
         }
 
         Rectangle {
             width: 120px;
+            
         }
 
         Text {
             text: amount;
+            font-size: Palette.font-size * 1px;
         }
 
         Rectangle {
@@ -47,6 +51,7 @@ export component LagerRow inherits Rectangle {
 
         Text {
             text: type;
+            font-size: Palette.font-size * 1px;
         }
 
         Rectangle {
@@ -55,6 +60,7 @@ export component LagerRow inherits Rectangle {
 
         Text {
             text: rememberWhen;
+            font-size: Palette.font-size * 1px;
         }
 
         Rectangle {
@@ -63,10 +69,7 @@ export component LagerRow inherits Rectangle {
 
         Text {
             text: description;
-        }
-
-        Rectangle {
-            width: 20px;
+            font-size: Palette.font-size * 1px;
         }
 
         // Button {

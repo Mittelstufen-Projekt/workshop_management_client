@@ -41,7 +41,7 @@ export component LagerOverview inherits VerticalBox {
         buttonTitleSecond: "Add Material Type";
         secondButtonWidth: 167px;
         onSecondButtonPress => {
-            Backend.showAddNewMateriaTypelPopUp();
+            Backend.showAddNewMateriaTypePopUp();
         }
     }
 
@@ -51,7 +51,27 @@ export component LagerOverview inherits VerticalBox {
 
     HorizontalBox {
         alignment: LayoutAlignment.start;
-        LagerText {
+        
+    }
+
+    for material[i] in materials: LagerRow {
+        name: materials[i].name;
+        price: materials[i].price;
+        // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
+            // werden dann in nh liste geworden? not sure
+            type: materials[i].type;
+        amount: materials[i].quantity;
+        rememberWhen: "never";
+        description: materials[i].description;
+        clicked => {
+            // TODO(jmeusel): BE - Function Delete Material[i]
+            }
+    }
+}
+
+
+/*
+LagerText {
             label: "name";
         }
 
@@ -94,19 +114,4 @@ export component LagerOverview inherits VerticalBox {
         LagerText {
             label: "description";
         }
-    }
-
-    for material[i] in materials: LagerRow {
-        name: materials[i].name;
-        price: materials[i].price;
-        // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
-            // werden dann in nh liste geworden? not sure
-            type: materials[i].type;
-        amount: materials[i].quantity;
-        rememberWhen: "never";
-        description: materials[i].description;
-        clicked => {
-            // TODO(jmeusel): BE - Function Delete Material[i]
-            }
-    }
-}
+*/
