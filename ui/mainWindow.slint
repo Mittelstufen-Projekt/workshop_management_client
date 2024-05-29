@@ -67,7 +67,7 @@ export component WorkshopClient inherits Window {
     }
     ProjectManagement { //FUNCTIONS CHECK
         //visible <=> Backend.projectManagementView;
-        visible: true;
+        visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
@@ -79,7 +79,7 @@ export component WorkshopClient inherits Window {
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: false;
+        visible: true;
         materials: MockModel.materialList;
     }
 
@@ -111,9 +111,6 @@ NOTIZEN:
 Die Preise sollten gerundet werden
 wäre schön wenn man das Textfield so umbauen könnte das ein Overflow mit reinpasst,
 da ansonsten ein overflow im Namen der Materials passieren könnte.
-
-
-functions in backendFile
 
 Client hat nur Telefonnummer und Name
 */

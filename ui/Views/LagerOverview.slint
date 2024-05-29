@@ -26,7 +26,7 @@ export component LagerOverview inherits VerticalBox {
         title: Constants.warehouse_overview;
         buttonTitleFirst: "Add Material";
         onFirstButtonPressed => {
-            Backend.add-material();
+            Backend.showAddNewMaterialPopUp();
         }
 
     }
