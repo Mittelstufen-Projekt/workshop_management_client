@@ -45,14 +45,6 @@ export component ProjectManagement inherits ScrollView {
             height: 50px;
         }
 
-        // TODO(jmeusel): Button fehlt 
-        // Button {
-        //     width: 35px;
-        //     height: 40px;
-        //     text: "X";
-        //     fontSizeMultiplier: 1.5px;
-        // }
-        // TODO(jmeusel): Abheben von der Liste Darunter
         HorizontalLayout {
             ProjectRowShort {
                 project: Constants.project_name;
@@ -66,7 +58,7 @@ export component ProjectManagement inherits ScrollView {
             height: 40px;
         }
         }
-
+        // TODO(jmeusel): abheben von liste darunter
         for project[i] in allProjects: HorizontalLayout {
             ProjectRowShort {
                 client: allProjects[i].client.lastName;
