@@ -12,7 +12,7 @@ use crate::models::material_type::MaterialType;
 use crate::models::client::Client;
 use crate::models::error::Error;
 
-const API_URL: &str = "http://justinrauch.myftp.org:8580/";
+const API_URL: &str = "http://justinrauch.myftp.org:8580";
 
 /*
     All the endpoints for the API are as follows:
@@ -27,6 +27,11 @@ const API_URL: &str = "http://justinrauch.myftp.org:8580/";
     - `POST /Materials` - create material
     - `PUT /Materials/{id}` - update material
     - `DELETE /Materials/{id}` - delete material
+    - `GET /MaterialTypes` - get all material types
+    - `GET /MaterialTypes/{id}` - get material type by id
+    - `POST /MaterialTypes` - create material type
+    - `PUT /MaterialTypes/{id}` - update material type
+    - `DELETE /MaterialTypes/{id}` - delete material type
     - `GET /ProjectMaterials` - get all project materials
     - `GET /ProjectMaterials/{id}` - get project material by id
     - `POST /ProjectMaterials` - create project material
@@ -61,7 +66,7 @@ impl WorkshopService {
 
     // Get all items endpoints
     #[tokio::main]
-    pub async fn get_projects(&mut self, token: &str) {
+    pub async fn get_projects(&mut self, token: &str) -> Result<Vec<Project>, Error> {
         let response = reqwest::Client::new()
             .get(&format!("{}/Projects", API_URL))
             .bearer_auth(token)
@@ -69,11 +74,16 @@ impl WorkshopService {
             .await
             .expect("Failed to get projects");
 
-        self.projects = response.json().await.expect("Failed to parse projects");
+        if response.status().is_success() {
+            self.projects = response.json().await.expect("Failed to parse projects");
+            Ok(self.projects.clone())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
+        }
     }
 
     #[tokio::main]
-    pub async fn get_materials(&mut self, token: &str) {
+    pub async fn get_materials(&mut self, token: &str) -> Result<Vec<Material>, Error> {
         let response = reqwest::Client::new()
             .get(&format!("{}/Materials", API_URL))
             .bearer_auth(token)
@@ -81,11 +91,16 @@ impl WorkshopService {
             .await
             .expect("Failed to get materials");
 
-        self.materials = response.json().await.expect("Failed to parse materials");
+        if response.status().is_success() {
+            self.materials = response.json().await.expect("Failed to parse materials");
+            Ok(self.materials.clone())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
+        }
     }
 
     #[tokio::main]
-    pub async fn get_project_materials(&mut self, token: &str) {
+    pub async fn get_project_materials(&mut self, token: &str) -> Result<Vec<ProjectMaterial>, Error> {
         let response = reqwest::Client::new()
             .get(&format!("{}/ProjectMaterials", API_URL))
             .bearer_auth(token)
@@ -93,11 +108,16 @@ impl WorkshopService {
             .await
             .expect("Failed to get project materials");
 
-        self.project_materials = response.json().await.expect("Failed to parse project materials");
+        if response.status().is_success() {
+            self.project_materials = response.json().await.expect("Failed to parse project materials");
+            Ok(self.project_materials.clone())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
+        }
     }
 
     #[tokio::main]
-    pub async fn get_material_types(&mut self, token: &str) {
+    pub async fn get_material_types(&mut self, token: &str) -> Result<Vec<MaterialType>, Error> {
         let response = reqwest::Client::new()
             .get(&format!("{}/MaterialTypes", API_URL))
             .bearer_auth(token)
@@ -105,11 +125,16 @@ impl WorkshopService {
             .await
             .expect("Failed to get material types");
 
-        self.material_types = response.json().await.expect("Failed to parse material types");
+        if response.status().is_success() {
+            self.material_types = response.json().await.expect("Failed to parse material types");
+            Ok(self.material_types.clone())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
+        }
     }
 
     #[tokio::main]
-    pub async fn get_clients(&mut self, token: &str) {
+    pub async fn get_clients(&mut self, token: &str) -> Result<Vec<Client>, Error> {
         let response = reqwest::Client::new()
             .get(&format!("{}/Clients", API_URL))
             .bearer_auth(token)
@@ -119,6 +144,9 @@ impl WorkshopService {
 
         if response.status().is_success() {
             self.clients = response.json().await.expect("Failed to parse clients");
+            Ok(self.clients.clone())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
         }
     }
 
@@ -205,7 +233,7 @@ impl WorkshopService {
 
     // Create item endpoints
     #[tokio::main]
-    pub async fn create_project(&mut self, project: Project, token: &str) -> Result<Project, Error> {
+    pub async fn create_project(&mut self, project: Project, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .post(&format!("{}/Projects", API_URL))
             .bearer_auth(token)
@@ -215,14 +243,14 @@ impl WorkshopService {
             .expect("Failed to create project");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse project"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn create_material(&mut self, material: Material, token: &str) -> Result<Material, Error> {
+    pub async fn create_material(&mut self, material: Material, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .post(&format!("{}/Materials", API_URL))
             .bearer_auth(token)
@@ -232,14 +260,14 @@ impl WorkshopService {
             .expect("Failed to create material");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse material"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn create_project_material(&mut self, project_material: ProjectMaterial, token: &str) -> Result<ProjectMaterial, Error> {
+    pub async fn create_project_material(&mut self, project_material: ProjectMaterial, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .post(&format!("{}/ProjectMaterials", API_URL))
             .bearer_auth(token)
@@ -249,14 +277,14 @@ impl WorkshopService {
             .expect("Failed to create project material");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse project material"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn create_client(&mut self, client: Client, token: &str) -> Result<Client, Error> {
+    pub async fn create_client(&mut self, client: Client, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .post(&format!("{}/Clients", API_URL))
             .bearer_auth(token)
@@ -266,7 +294,24 @@ impl WorkshopService {
             .expect("Failed to create client");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse client"))
+            Ok(())
+        } else {
+            Err(Error::new(response.status().to_string(), 500))
+        }
+    }
+
+    #[tokio::main]
+    pub async fn create_material_type(&mut self, material_type: MaterialType, token: &str) -> Result<(), Error> {
+        let response = reqwest::Client::new()
+            .post(&format!("{}/MaterialTypes", API_URL))
+            .bearer_auth(token)
+            .json(&material_type)
+            .send()
+            .await
+            .expect("Failed to create material type");
+
+        if response.status().is_success() {
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
@@ -274,7 +319,7 @@ impl WorkshopService {
 
     // Update item endpoints
     #[tokio::main]
-    pub async fn update_project(&mut self, project: Project, token: &str) -> Result<Project, Error> {
+    pub async fn update_project(&mut self, project: Project, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .put(&format!("{}/Projects/{}", API_URL, project.id))
             .bearer_auth(token)
@@ -284,14 +329,14 @@ impl WorkshopService {
             .expect("Failed to update project");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse project"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn update_material(&mut self, material: Material, token: &str) -> Result<Material, Error> {
+    pub async fn update_material(&mut self, material: Material, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .put(&format!("{}/Materials/{}", API_URL, material.id))
             .bearer_auth(token)
@@ -301,14 +346,14 @@ impl WorkshopService {
             .expect("Failed to update material");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse material"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn update_project_material(&mut self, project_material: ProjectMaterial, token: &str) -> Result<ProjectMaterial, Error> {
+    pub async fn update_project_material(&mut self, project_material: ProjectMaterial, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .put(&format!("{}/ProjectMaterials/{}", API_URL, project_material.id))
             .bearer_auth(token)
@@ -318,14 +363,14 @@ impl WorkshopService {
             .expect("Failed to update project material");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse project material"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }
     }
 
     #[tokio::main]
-    pub async fn update_client(&mut self, client: Client, token: &str) -> Result<Client, Error> {
+    pub async fn update_client(&mut self, client: Client, token: &str) -> Result<(), Error> {
         let response = reqwest::Client::new()
             .put(&format!("{}/Clients/{}", API_URL, client.id))
             .bearer_auth(token)
@@ -335,7 +380,7 @@ impl WorkshopService {
             .expect("Failed to update client");
 
         if response.status().is_success() {
-            Ok(response.json().await.expect("Failed to parse client"))
+            Ok(())
         } else {
             Err(Error::new(response.status().to_string(), 500))
         }

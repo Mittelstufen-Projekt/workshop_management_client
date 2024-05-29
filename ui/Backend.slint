@@ -4,6 +4,7 @@
     Description: Backend interface with all callbacks
 
 */
+
 import { Material } from "../ui/models/MaterialModel.slint";
 import { ProjectModel } from "../ui/models/ProjectModel.slint";
 
@@ -17,19 +18,17 @@ export global Backend {
 
     // Project View -------------------------------------------------------------------------------------
     callback request-logout(); // Implemented
-    in-out property <[ProjectModel]> recentProjects;
-    in-out property <[Material]> materialAlerts;
+    in-out property <[ProjectModel]> recentProjects; // Implemented
+    in-out property <[Material]> materialAlerts; // Implemented
 
     // Project Detail View -------------------------------------------------------------------------------------
     // parameter: ID of the material to delete
-    callback deleteMaterial(int);
+    callback deleteMaterial(int); // Implemented
     // Reihenfolge: projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
     callback save-project(string, string, string, string, string, string);
-    in-out property <ProjectModel> project;
-    // Property: id of the material which should be edited 
-    //Route to PopUp (Material)
-    callback editMaterial(int);
-    
+    // parameter: ID of the material to edit
+    callback editMaterial(int); // Implemented
+    in-out property <ProjectModel> project; // Implemented    
 
     // Project Management View -------------------------------------------------------------------------------------
     //Navigiert zu einem neuen Leeren Projekt und übergibt lediglich eine neue Liste
@@ -37,17 +36,17 @@ export global Backend {
     // parameter: ID of the project to delete
     callback delete-project-i(int);
     // parameter: Name of the project to show
-    callback search-project(string);
-    in-out property <[ProjectModel]> allProjects;
+    callback search-project(string); // Implemented
+    in-out property <[ProjectModel]> allProjects; // Implemented
     // Reihenfolge: firstName, lastName, phone
-    callback saveClient(string, string, string);
+    callback saveClient(string, string, string); // Implemented
 
     // LagerOverview -------------------------------------------------------------------------------------
     // Reihenfolge: name, price, type, amount, thresholdValue, description
     callback save-materials(string, string, string, string, string, string);
     // parameter: Name of the material to show
-    callback search-material(string);
-    in-out property <[Material]> materials;
+    callback search-material(string); // Implemented
+    in-out property <[Material]> materials; // Implemented
     callback save-material-type(string,string); // Implemented
 
     // Navigation: -------------------------------------------------------------------------------------
@@ -59,8 +58,9 @@ export global Backend {
     callback showAddNewClientPopUp (); // Implemented
     callback showAddNewMaterialPopUp (); // Implemented
     callback showAddNewMaterialTypePopUp (); // Implemented
-    callback hideMaterialPopUp();
-    callback hideClientPopUp();
+    callback hideMaterialPopUp(); // Implemented
+    callback hideClientPopUp(); // Implemented
+    callback hideMaterialTypePopUp(); // Implemented
 
     // Variables for routing and navigation -------------------------------------------------------------------------------------
     in-out property <bool> showClientPopUp; // Implemented
