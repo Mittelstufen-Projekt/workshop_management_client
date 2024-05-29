@@ -1,3 +1,10 @@
+/*
+
+    Author: Jasha
+    Description: 
+
+*/
+
 import { ProjectDetailRow, ProjectDetailRowTwoBoxes } from "../Widgets/ProjectDetailRow.slint";
 import { VerticalBox, HorizontalBox, Button, ComboBox } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
@@ -15,14 +22,12 @@ import { Material } from "../models/MaterialModel.slint";
 import { Backend } from "../Backend.slint";
 import { ClientModel } from "../models/ClientModel.slint";
 
-// TODO(jmeusel): Save button anders anordnen, Email feld checken, X Button für Materialien, Listen müssen dabei geupdated werden
+// TODO(jmeusel): Save button anders anordnen, Email feld checken
 // TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
-// TODO(jmeusel): client muss durch dropdown geändert werden
 // TODO(jmeusel): Wenn die Liste Leer ist, müssen die Felder initial leer sein
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> clients;
-
 
     property <Material> mock;
     mock: { name: "Name", type: "Type", description: "", price: 0, quantity: 0 };
@@ -53,7 +58,7 @@ export component ProjectDetailView inherits VerticalLayout {
                 }
 
                 alignment: start;
-                projectName:= ProjectDetailRow {
+                projectName := ProjectDetailRow {
                     title: Constants.project_name;
                     textFieldName: project.name;
                 }
@@ -62,26 +67,22 @@ export component ProjectDetailView inherits VerticalLayout {
                     height: 20px;
                 }
 
-                clientName:= ProjectDetailRow {
+                clientName := ProjectDetailRow {
                     title: Constants.client + suffix;
                     textFieldName: project.client.firstName + " " + project.client.lastName;
                 }
-                ComboBox {
-                        model: clients;
-                        }
 
-                // Rectangle {
-                //     height: 20px;
-                // }
+                ComboBox {
+                    model: clients;
+                }
 
                 // TODO(jmeusel): Client.........fIeld
-                // TODO(jmeusel): BIG FUCKING TODO MEN
 
                 Rectangle {
                     height: 20px;
                 }
 
-                projectStart:= ProjectDetailRow {
+                projectStart := ProjectDetailRow {
                     title: Constants.project_start + suffix;
                     textFieldName: project.project-start;
                 }
@@ -90,7 +91,7 @@ export component ProjectDetailView inherits VerticalLayout {
                     height: 20px;
                 }
 
-                projectDeadline:= ProjectDetailRow {
+                projectDeadline := ProjectDetailRow {
                     title: Constants.project_deadline + suffix;
                     textFieldName: project.project-deadline;
                 }
@@ -99,7 +100,7 @@ export component ProjectDetailView inherits VerticalLayout {
                     height: 20px;
                 }
 
-                projectCalculatedCosts:= ProjectDetailRow {
+                projectCalculatedCosts := ProjectDetailRow {
                     title: Constants.calculated_costs + suffix;
                     textFieldName: project.calculated-costs;
                 }
@@ -108,7 +109,7 @@ export component ProjectDetailView inherits VerticalLayout {
                     height: 20px;
                 }
 
-                projectCurrentCosts:= ProjectDetailRow {
+                projectCurrentCosts := ProjectDetailRow {
                     title: Constants.currentCosts + suffix;
                     textFieldName: project.current-costs;
                 }
@@ -153,7 +154,6 @@ export component ProjectDetailView inherits VerticalLayout {
                     }
                 }
 
-                //  }
                 Rectangle {
                     height: 25px;
                 }

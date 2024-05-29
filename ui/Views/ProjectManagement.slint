@@ -1,3 +1,10 @@
+/*
+
+    Author: Jasha
+    Description: 
+
+*/
+
 import { HorizontalBox, VerticalBox, ScrollView } from "std-widgets.slint";
 import { Appbar } from "../Widgets/Appbar.slint";
 import { ProjectOverViewRowShort } from "../Widgets/ProjectOverViewRowShort.slint";
@@ -12,15 +19,11 @@ import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { Backend } from "../Backend.slint";
 
 
-//Refactor
+// TODO(jmeusel): Scrollview anpassen sodass nicht ALLES scrollable ist
 
-// TODO(jmeusel): lässt sch nur bis zu gewissen bereichen Scrollen und lässt sich ebenfalls nicht horizontal scrollen
-
-// TODO(jmeusel): Abstand des titles nach oben..
 export component ProjectManagement inherits ScrollView {
 
     in-out property <[ProjectModel]> allProjects;
-    //in-out property <bool> showPopup;
 
     VerticalBox {
         alignment: start;

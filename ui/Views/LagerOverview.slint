@@ -1,3 +1,9 @@
+/*
+
+    Author: Jasha
+    Description: 
+
+*/
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
 import { VerticalBox, HorizontalBox, GridBox, Slider } from "std-widgets.slint";
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
@@ -56,8 +62,6 @@ export component LagerOverview inherits VerticalBox {
     for material[i] in materials: LagerRow {
         name: materials[i].name;
         price: materials[i].price;
-        // TODO(jmeusel): type is falsch, sollte dropdown sein..? Oder? oder vielleicht doch n string? Und alle strings(Types), 
-            // werden dann in nh liste geworden? not sure
             type: materials[i].type;
         amount: materials[i].quantity;
         rememberWhen: "never";
@@ -67,50 +71,3 @@ export component LagerOverview inherits VerticalBox {
         onDeleteClicked => {}
     }
 }
-
-
-/*
-LagerText {
-            label: "name";
-        }
-
-        Rectangle {
-            width: 265px;
-        }
-
-        LagerText {
-            label: "price";
-        }
-
-        Rectangle {
-            width: 185px;
-        }
-
-        LagerText {
-            label: "type";
-        }
-
-        Rectangle {
-            width: 190px;
-        }
-
-        LagerText {
-            label: "amount";
-        }
-
-        Rectangle {
-            width: 150px;
-        }
-
-        LagerText {
-            label: "remember when";
-        }
-
-        Rectangle {
-            width: 35px;
-        }
-
-        LagerText {
-            label: "description";
-        }
-*/

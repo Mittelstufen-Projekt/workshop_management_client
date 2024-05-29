@@ -67,7 +67,7 @@ export component WorkshopClient inherits Window {
     }
     ProjectManagement { //FUNCTIONS CHECK
         //visible <=> Backend.projectManagementView;
-        visible: true;
+        visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
@@ -94,10 +94,8 @@ export component WorkshopClient inherits Window {
         }
     }
 
-    // Popup for the Client
-    // TODO(jmeusel): muss noch angepasst werden
     ClientPopUp {
-        //visible <=> Backend.showClientPopUp;
+        visible <=> Backend.showClientPopUp;
     }
 
     MaterialPopUp {
@@ -105,13 +103,4 @@ export component WorkshopClient inherits Window {
     }
 
 }
-
-/*
-NOTIZEN: 
-Die Preise sollten gerundet werden
-wäre schön wenn man das Textfield so umbauen könnte das ein Overflow mit reinpasst,
-da ansonsten ein overflow im Namen der Materials passieren könnte.
-
-Client hat nur Telefonnummer und Name
-*/
 
