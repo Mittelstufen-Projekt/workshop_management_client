@@ -177,14 +177,13 @@ export component ProjectDetailView inherits VerticalLayout {
                         height: 30px;
                         width: 130px;
                         clicked => {
-                            Backend.save-project-and-used-materials(
+                            Backend.save-project(
                                 projectName.textFieldName,
                                 clientName.textFieldName,
                                 projectStart.textFieldName,
                                 projectDeadline.textFieldName,
                                 projectCalculatedCosts.textFieldName,
                                 projectCurrentCosts.textFieldName,
-                                // TODO(jmeusel): Materialien müssen ebenfalls noch übergeben werden
                             )
                         }
                     }

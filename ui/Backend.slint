@@ -23,9 +23,8 @@ export global Backend {
     // Project Detail View -------------------------------------------------------------------------------------
     // parameter: ID of the material to delete
     callback deleteMaterial(int);
-    // Jasha: aktuell noch keine Materialien sondern nur die ProjektValues in folgender Reihenfole:
-    // projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
-    callback save-project-and-used-materials(string, string, string, string, string, string);
+    // Reihenfolge: projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
+    callback save-project(string, string, string, string, string, string);
     in-out property <ProjectModel> project;
     // Property: id of the material which should be edited 
     //Route to PopUp (Material)
