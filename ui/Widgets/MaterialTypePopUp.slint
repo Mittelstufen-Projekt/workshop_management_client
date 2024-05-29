@@ -1,0 +1,70 @@
+import { VerticalBox, HorizontalBox, StandardButton } from "std-widgets.slint";
+import { TextField } from "../Widgets/TextField.slint";
+import { Constants } from "../Constants.slint";
+import { Button } from "../Widgets/Button.slint";
+import { Material } from "../models/MaterialModel.slint";
+import { Backend } from "../Backend.slint";
+
+
+// TODO(jmeusel): Rahmen drum oder ggf andere farbe
+
+export component MaterialTypePopUp inherits Rectangle {
+    // TODO(jmeusel): Type ändern
+    in-out property <Material> material;
+    HorizontalLayout {
+        alignment: center;
+        VerticalLayout {
+            alignment: start;
+            padding-top: 200px;
+            Rectangle {
+                background: lightgray;
+                width: 400px;
+                height: 200px;
+                VerticalBox {
+                    HorizontalBox {
+                        Text {
+                            text: Constants.name + ":";
+                        }
+
+                        typeName := TextField {
+                            text: material.name;
+                        }
+                    }
+
+                    HorizontalBox {
+                        Text {
+                            text: Constants.description + ":";
+                        }
+
+                        typeDescription := TextField {
+                            text: material.price;
+                        }
+                    }
+
+                    Rectangle {
+                        height: 20px;
+                    }
+
+                    HorizontalBox {
+                        Button {
+                            text: Constants.cancel;
+                            clicked => {
+                                Backend.hideMaterialPopUp();
+                            }
+                        }
+
+                        Button {
+                            text: Constants.save;
+                            clicked => {
+                                Backend.save-material-type(
+                                    typeName.text,
+                                    typeDescription.text,
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

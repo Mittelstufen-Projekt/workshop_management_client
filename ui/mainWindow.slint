@@ -28,6 +28,7 @@ import { ClientPopUp } from "../ui/Views/ClientPopUp.slint";
 
 import { MockModel } from "../ui/models/MockModels.slint";
 import { MaterialPopUp } from "Widgets/MaterialPopUp.slint";
+import { MaterialTypePopUp } from "Widgets/MaterialTypePopUp.slint";
 
 // Exporting the Backend
 export { Backend }
@@ -69,6 +70,7 @@ export component WorkshopClient inherits Window {
     ProjectManagement { //FUNCTIONS CHECK
         //visible <=> Backend.projectManagementView;
         visible: false;
+        //allProjects: MockModel.allProjectsMockList;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
@@ -80,7 +82,7 @@ export component WorkshopClient inherits Window {
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: false;
+        visible: true;
         materials: MockModel.materialList;
     }
 
@@ -101,6 +103,11 @@ export component WorkshopClient inherits Window {
 
     MaterialPopUp {
         visible <=> Backend.showMaterialPopUp;
+    }
+
+    MaterialTypePopUp {
+        //visible: <=> Backend.show;
+        visible: true;
     }
 
 }

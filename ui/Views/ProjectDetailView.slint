@@ -19,6 +19,8 @@ import { MockModel } from "../models/MockModels.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { Backend } from "../Backend.slint";
 import { ClientModel } from "../models/ClientModel.slint";
+import { MaterialType } from "../models/MaterialTypeModel.slint";
+
 
 // TODO(jmeusel): Save button anders anordnen, Email feld checken
 // TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
@@ -28,7 +30,10 @@ export component ProjectDetailView inherits VerticalLayout {
     in-out property <[string]> clients;
 
     property <Material> mock;
-    mock: { name: "Name", type: "Type", description: "", price: 0, quantity: 0 };
+    property <MaterialType> type;
+    type: {name: "matType", description: "descrip"};
+
+    mock: { name: "Name", type: type, description: "", price: 0, quantity: 0 };
 
     property <string> suffix: ": ";
     property <length> topPadding: 20px;

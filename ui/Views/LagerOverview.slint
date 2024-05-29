@@ -59,7 +59,7 @@ export component LagerOverview inherits VerticalBox {
     for material[i] in materials: LagerRow {
         name: materials[i].name;
         price: materials[i].price;
-            type: materials[i].type;
+            type: materials[i].type.name;
         amount: materials[i].quantity;
         rememberWhen: "never";
         description: materials[i].description;

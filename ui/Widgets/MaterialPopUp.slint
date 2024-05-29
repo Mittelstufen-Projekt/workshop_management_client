@@ -12,18 +12,6 @@ export component MaterialPopUp inherits Rectangle {
     // TODO(jmeusel): Type ändern
     in-out property <Material> material;
 
-    /*
-    DB model:
-    pub struct Material {
-    pub id: i32,
-    pub name: String,
-    pub description: String,
-    pub type_id: i32,
-    pub amount: i32,
-    pub costs: f32,
-    pub threshold_value: i32,
-}
-    */
     HorizontalLayout {
         alignment: center;
         VerticalLayout {
@@ -60,7 +48,7 @@ export component MaterialPopUp inherits Rectangle {
                         }
 
                         materialType := TextField {
-                            text: material.type;
+                            text: material.type.name;
                         }
                     }
 

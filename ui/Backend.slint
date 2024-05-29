@@ -48,6 +48,7 @@ export global Backend {
     // parameter: Name of the material to show
     callback search-material(string);
     in-out property <[Material]> materials;
+    callback save-material-type(string,string);
 
     // Navigation: -------------------------------------------------------------------------------------
     callback route-to-project-management(); // Implemented
