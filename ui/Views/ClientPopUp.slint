@@ -2,23 +2,14 @@ import { VerticalBox, HorizontalBox, StandardButton } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { Constants } from "../Constants.slint";
 import { Button } from "../Widgets/Button.slint";
+import { ClientModel } from "../models/ClientModel.slint";
+import { Backend } from "../Backend.slint";
 
 
 export component ClientPopUp inherits Rectangle {
-    // TODO(jmeusel): Client hat nur email und name
-    in-out property <string> nameController;
-    in-out property <string> emailController;
-    in-out property <string> phoneController;
 
-    /*
-    DB model:
-    pub struct Client {
-    pub id: i32,
-    pub firstname: String,
-    pub lastname: String,
-    pub phone: String,
-}
-    */
+    in-out property <ClientModel> client;
+
     HorizontalLayout {
         alignment: center;
         VerticalLayout {
@@ -31,47 +22,51 @@ export component ClientPopUp inherits Rectangle {
                 VerticalBox {
                     HorizontalBox {
                         Text {
-                            text: Constants.name + ":";
+                            text: Constants.first_name;
                         }
-        
-                        TextField {
-                            text: nameController;
+
+                        clientFirstName := TextField {
+                            text: client.firstName;
                         }
                     }
-        
+
                     HorizontalBox {
                         Text {
-                            text: Constants.email + ":";
+                            text: Constants.last_name;
                         }
-        
-                        TextField {
-                            text: emailController;
+
+                        clientLastName := TextField {
+                            text: client.lastName;
                         }
                     }
-        
+
                     HorizontalBox {
                         Text {
                             text: Constants.phone + ":";
                         }
-        
-                        TextField {
-                            text: phoneController;
+
+                        ClientPhone := TextField {
+                            text: client.phone;
                         }
                     }
-        
+
                     HorizontalBox {
                         Button {
-                            text: "Cancel";
+                            text: Constants.cancel;
                             clicked => {
-                                // TODO(jmeusel): cancel
+                                Backend.hideClientPopUp();
+                            }
                         }
-                        }
-        
+
                         Button {
-                            text: "Save";
+                            text: Constants.save;
                             clicked => {
-                                // TODO(jmeusel): Save
-                        }
+                                Backend.saveClient(
+                                         clientFirstName.text,
+                                         clientLastName.text,
+                                         ClientPhone.text,
+                                      );
+                            }
                         }
                     }
                 }

@@ -67,12 +67,12 @@ export component WorkshopClient inherits Window {
     }
     ProjectManagement { //FUNCTIONS CHECK
         //visible <=> Backend.projectManagementView;
-        visible: false;
+        visible: true;
         allProjects: MockModel.allProjectsMockList;
     }
     ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
         //visible <=> Backend.projectDetailView;
-        visible: true;
+        visible: false;
         project: MockModel.projectWithMats;
         //clients: ;
     }
@@ -97,11 +97,11 @@ export component WorkshopClient inherits Window {
     // Popup for the Client
     // TODO(jmeusel): muss noch angepasst werden
     ClientPopUp {
-        visible <=> Backend.showClientPopUp;
+        //visible <=> Backend.showClientPopUp;
     }
 
     MaterialPopUp {
-        //visible <=> Backend.showMaterialPopUp;
+        visible <=> Backend.showMaterialPopUp;
     }
 
 }

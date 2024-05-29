@@ -39,6 +39,8 @@ export global Backend {
     // parameter: Name of the project to show
     callback search-project(string);
     in-out property <[ProjectModel]> allProjects;
+    // Reihenfolge: firstName, lastName, phone
+    callback saveClient(string, string, string);
 
     // LagerOverview -------------------------------------------------------------------------------------
     // Reihenfolge: name, price, type, amount, thresholdValue, description
