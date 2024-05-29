@@ -11,12 +11,13 @@ export component TitleSection {
             font-size: Palette.page-title-font-size * 1px;
             color: Palette.text-color;
         }
+
         Button {
             height: Palette.font-size * 2px;
             width: 40px;
             text: "⌂";
             clicked => {
-                Backend.goBack();
+                Backend.route-to-project-view();
             }
         }
     }

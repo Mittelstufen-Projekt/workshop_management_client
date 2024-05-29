@@ -10,6 +10,9 @@ mod utils;
 
 use std::sync::{Arc, Mutex};
 
+use models::material_type::MaterialType;
+use slint::SharedString;
+
 use crate::utils::keycloak_service::Keycloak;
 use crate::utils::workshop_service::WorkshopService;
 
@@ -19,7 +22,7 @@ slint::include_modules!();
 fn main() -> Result<(), slint::PlatformError> {
     // Make the window fullscreen
     // DISABLE ON MACOS (crashes for some reason)
-   // std::env::set_var("SLINT_FULLSCREEN", "1");
+    // std::env::set_var("SLINT_FULLSCREEN", "1");
 
     let ui = WorkshopClient::new()?;
 
@@ -50,7 +53,8 @@ fn main() -> Result<(), slint::PlatformError> {
 
             // Check if the user has entered a username and password
             if user.is_empty() || password.is_empty() {
-                ui.global::<Backend>().set_login_error("Please enter a username and password.".into());
+                ui.global::<Backend>()
+                    .set_login_error("Please enter a username and password.".into());
                 return;
             }
 
@@ -72,8 +76,7 @@ fn main() -> Result<(), slint::PlatformError> {
                         .lock()
                         .unwrap()
                         .set_password(password.to_string());
-                    ui.global::<Backend>().set_loginView(false);
-                    ui.global::<Backend>().set_projectView(true);
+                    ui.global::<Backend>().invoke_route_to_project_management();
                     ui.global::<Backend>().set_login_error("".into());
                 }
             }
@@ -115,32 +118,36 @@ fn main() -> Result<(), slint::PlatformError> {
         }
     });
 
-    // Route to lager overview
-    ui.global::<Backend>().on_route_to_warehouse_management({
+    // Route to project detail view
+    ui.global::<Backend>().on_route_to_project_view({
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
             // TODO: Set vars
+            // in-out property <[ProjectModel]> recentProjects;
+            // in-out property <[Material]> materialAlerts;
+            ui.global::<Backend>().set_loginView(false);
             ui.global::<Backend>().set_projectView(false);
             ui.global::<Backend>().set_projectManagementView(false);
-            ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_lagerOverviewView(true);
+            ui.global::<Backend>().set_projectDetailView(true);
+            ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_showMaterialTypePopUp(false);
         }
     });
 
-    // Go back (Aka route to project view)
-    ui.global::<Backend>().on_goBack({
+    // Route to lager overview
+    ui.global::<Backend>().on_route_to_warehouse_management({
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
             // TODO: Set vars
-            ui.global::<Backend>().set_projectView(true);
+            // in-out property <[Material]> materials;
+            ui.global::<Backend>().set_projectView(false);
             ui.global::<Backend>().set_projectManagementView(false);
             ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_lagerOverviewView(true);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_showMaterialTypePopUp(false);
@@ -162,10 +169,7 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_showMaterialTypePopUp(false);
             // Refresh the token
-            let token = keycloak_handle
-                .lock()
-                .unwrap()
-                .refresh_token();
+            let token = keycloak_handle.lock().unwrap().refresh_token();
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
@@ -233,6 +237,88 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_showMaterialTypePopUp(false);
+        }
+    });
+
+    ui.global::<Backend>().on_save_material_type({
+        let ui_handle = ui.as_weak();
+        let workshop_handle = arc_workshop_service.clone();
+        let keycloak_handle = arc_keycloak.clone();
+        move |name: SharedString, description: SharedString| {
+            let ui = ui_handle.unwrap();
+            // Refresh the token
+            let token = keycloak_handle.lock().unwrap().refresh_token();
+            // Check if the token was successfully retrieved otherwise handle the error
+            let token = match token {
+                Err(e) => {
+                    todo!("Set UI error message");
+                    return;
+                }
+                Ok(token) => token,
+            };
+            let material_type: MaterialType = MaterialType {
+                id: 0, // We can ignore it because the database will set it
+                name: name.to_string(),
+                description: description.to_string(),
+            };
+            let result = workshop_handle
+                .lock()
+                .unwrap()
+                .create_material_type(&material_type, &token);
+            // Check if the material type was successfully created otherwise handle the error
+            match result {
+                Err(e) => {
+                    todo!("Set UI error message");
+                    return;
+                }
+                Ok(_) => {
+                    ui.global::<Backend>().set_showMaterialTypePopUp(false);
+                    // Refresh the token
+                    let token = keycloak_handle.lock().unwrap().refresh_token();
+                    // Check if the token was successfully retrieved otherwise handle the error
+                    let token = match token {
+                        Err(e) => {
+                            todo!("Set UI error message");
+                            return;
+                        }
+                        Ok(token) => token,
+                    };
+                    let material_types = workshop_handle.lock().unwrap().get_material_types(&token);
+                    // Check if the material types were successfully retrieved otherwise handle the error
+                    let material_types = match material_types {
+                        Err(e) => {
+                            todo!("Set UI error message");
+                            return;
+                        }
+                        Ok(material_types) => material_types,
+                    };
+                    todo!("Set material types");
+                }
+            }
+        }
+    });
+
+    ui.global::<Backend>().on_search_material({
+        let ui_handle = ui.as_weak();
+        move |search: SharedString| {
+            let ui = ui_handle.unwrap();
+            // Refresh the token
+            let materials = ui.global::<Backend>().get_materials();
+            let materials = materials
+                .iter()
+                .filter(|material| {
+                    material
+                        .name
+                        .to_lowercase()
+                        .contains(&search.to_lowercase())
+                        || material
+                            .description
+                            .to_lowercase()
+                            .contains(&search.to_lowercase())
+                })
+                .cloned()
+                .collect::<Vec<Material>>();
+            ui.global::<Backend>().set_materials(materials);
         }
     });
 
