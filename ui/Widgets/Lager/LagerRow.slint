@@ -3,9 +3,7 @@ import { HorizontalBox, TextEdit, LineEdit } from "std-widgets.slint";
 import { TextField } from "../TextField.slint";
 import { Button } from "../Button.slint";
 
-export component LagerRow inherits HorizontalLayout{
-
-    callback clicked();
+export component LagerRow inherits Rectangle {
 
     in property <string> name;
     in property <float> price;
@@ -13,26 +11,71 @@ export component LagerRow inherits HorizontalLayout{
     in property <string> amount;
     in property <string> rememberWhen;
     in property <string> description;
+    callback clicked();
 
+    border-radius: 6px;
+    border-color: Palette.accent-color;
+    border-width: 1px;
 
-        TextField {text: name; width: 250px;}
-        Rectangle {width: 120px;}
-        TextField {text: price;}
-        Rectangle {width: 120px;}
-        TextField {text: amount;}
-        Rectangle {width: 120px;}
-        TextField {text: type;}
-        Rectangle {width: 120px;}
-        TextField {text: rememberWhen;}
-        Rectangle {width: 120px;}
-        TextField {text: description;}
-        Rectangle {width: 20px;}
-        Button {
-            width: 30px;
-            height: 30px;
-            text: "X";
-            clicked => {
-                // TODO(jmeusel): someHow auslagern
-            }
+    HorizontalLayout {
+
+        Text {
+            text: name;
+            width: 250px;
+            font-size: Palette.font-size * 1px;
         }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: price;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: amount;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: type;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: rememberWhen;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: description;
+        }
+
+        Rectangle {
+            width: 20px;
+        }
+
+        // Button {
+            //     width: 30px;
+            //     height: 30px;
+            //     text: "X";
+            //     clicked => {
+            //         // TODO(jmeusel): someHow auslagern
+            //     }
+            // }
+    }
 }
