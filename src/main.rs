@@ -36,6 +36,7 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.global::<Backend>().set_lagerOverviewView(false);
     ui.global::<Backend>().set_showClientPopUp(false);
     ui.global::<Backend>().set_showMaterialPopUp(false);
+    ui.global::<Backend>().set_showMaterialTypePopUp(false);
 
     // Login action
     ui.global::<Backend>().on_request_login({
@@ -89,10 +90,6 @@ fn main() -> Result<(), slint::PlatformError> {
             let ui = ui_handle.unwrap();
             ui.global::<Backend>().set_loginView(true);
             ui.global::<Backend>().set_projectView(false);
-            ui.global::<Backend>().set_projectManagementView(false);
-            ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_showClientPopUp(false);
-            ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_username("".into());
             ui.global::<Backend>().set_password("".into());
             keycloak_handle.lock().unwrap().clear();
@@ -107,12 +104,14 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
+            // TODO: Set vars
             ui.global::<Backend>().set_projectView(false);
             ui.global::<Backend>().set_projectManagementView(true);
             ui.global::<Backend>().set_projectDetailView(false);
             ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(false);
         }
     });
 
@@ -121,12 +120,30 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
+            // TODO: Set vars
             ui.global::<Backend>().set_projectView(false);
             ui.global::<Backend>().set_projectManagementView(false);
             ui.global::<Backend>().set_projectDetailView(false);
             ui.global::<Backend>().set_lagerOverviewView(true);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(false);
+        }
+    });
+
+    // Go back (Aka route to project view)
+    ui.global::<Backend>().on_goBack({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            // TODO: Set vars
+            ui.global::<Backend>().set_projectView(true);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(false);
         }
     });
 
@@ -143,6 +160,7 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(false);
             // Refresh the token
             let token = keycloak_handle
                 .lock()
@@ -176,12 +194,7 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            ui.global::<Backend>().set_projectView(false);
-            ui.global::<Backend>().set_projectManagementView(false);
-            ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(true);
-            ui.global::<Backend>().set_showMaterialPopUp(false);
         }
     });
 
@@ -189,26 +202,23 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            ui.global::<Backend>().set_projectView(false);
-            ui.global::<Backend>().set_projectManagementView(false);
-            ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_lagerOverviewView(false);
-            ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(true);
         }
     });
 
-    // Go back (Always route to the page before that)
-    ui.global::<Backend>().on_goBack({
+    ui.global::<Backend>().on_showAddNewMaterialTypePopUp({
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            ui.global::<Backend>().set_projectView(true);
-            ui.global::<Backend>().set_projectManagementView(false);
-            ui.global::<Backend>().set_projectDetailView(false);
-            ui.global::<Backend>().set_lagerOverviewView(false);
-            ui.global::<Backend>().set_showClientPopUp(false);
-            ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(true);
+        }
+    });
+
+    ui.global::<Backend>().on_showAddNewClientPopUp({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.global::<Backend>().set_showClientPopUp(true);
         }
     });
 
@@ -222,6 +232,7 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
+            ui.global::<Backend>().set_showMaterialTypePopUp(false);
         }
     });
 

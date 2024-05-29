@@ -7,19 +7,18 @@
 import { Material } from "../ui/models/MaterialModel.slint";
 import { ProjectModel } from "../ui/models/ProjectModel.slint";
 
-
 export global Backend {
-    /*
-
-        Callbacks
-
-    */
     // Login View
     callback request-login(); // Implemented
     callback request-exit(); // Implemented
+    in-out property <string> username; // Implemented
+    in-out property <string> password; // Implemented
+    in-out property <string> login_error; // Implemented
 
     // Project View
     callback request-logout(); // Implemented
+    in-out property <[ProjectModel]> recentProjects;
+    in-out property <[Material]> materialAlerts;
 
     // Project Detail View
     // parameter: ID of the material to delete
@@ -27,20 +26,22 @@ export global Backend {
     // Jasha: aktuell noch keine Materialien sondern nur die ProjektValues in folgender Reihenfole:
     // projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
     callback save-project-and-used-materials(string, string, string, string, string, string);
+    in-out property <ProjectModel> project;
 
     // Project Management View
     //Navigiert zu einem neuen Leeren Projekt und übergibt lediglich eine neue Liste
     callback create_new_project(); // Implemented
     // parameter: ID of the project to delete
     callback delete-project-i(int);
+    // parameter: Name of the project to show
     callback search-project(string);
-
-    // AppBar
-    callback goBack(); // Implemented
+    in-out property <[ProjectModel]> allProjects;
 
     // LagerOverview
     callback save-materials();
+    // parameter: Name of the material to show
     callback search-material(string);
+    in-out property <[Material]> materials;
 
     // Navigation:
     callback route-to-project-management(); // Implemented
@@ -49,48 +50,16 @@ export global Backend {
     callback route-to-project-i(int); // Implemented
     callback showAddNewClientPopUp (); // Implemented
     callback showAddNewMaterialPopUp (); // Implemented
-    callback showAddNewMateriaTypePopUp (); 
-
-    // TODO(jmeusel): Suche???????? aulagern jewails für kontent oder kann man das anders regeln?
-    //// Justin: Mach eine function die mir einfach den inhalt des searchfeldes via parameter übergibt
-    ////         jeweils für project und material
-
-
-
-    /*
-
-        Variables
-
-    */
-    // LoginView
-    in-out property <string> username; // Implemented
-    in-out property <string> password; // Implemented
-    in-out property <string> login_error; // Implemented
-
-    // ProjectView
-    in-out property <[ProjectModel]> recentProjects;
-    in-out property <[Material]> materialAlerts;
-
-    // ProjectManagement
-    in-out property <[ProjectModel]> allProjects;
-
-    // ProjectDetailView
-    in-out property <ProjectModel> project;
-
-    // LagerOverview
-    in-out property <[Material]> materials;
+    callback showAddNewMateriaTypePopUp (); // Implemented
+    callback goBack(); // Implemented
 
     // Variables for routing and navigation
-    in-out property <bool> showClientPopUp;
-    in-out property <bool> showMaterialPopUp;
-    in-out property <bool> showMaterialTypePopUp: false;
-    in-out property <bool> loginView: true;
-    in-out property <bool> projectView: false;
-    in-out property <bool> projectManagementView: false;
-    in-out property <bool> projectDetailView: false;
-    in-out property <bool> lagerOverviewView: false;
-
-
-
-    in-out property <string> searchValue;
+    in-out property <bool> showClientPopUp; // Implemented
+    in-out property <bool> showMaterialPopUp; // Implemented
+    in-out property <bool> showMaterialTypePopUp; // Implemented
+    in-out property <bool> loginView; // Implemented
+    in-out property <bool> projectView; // Implemented
+    in-out property <bool> projectManagementView; // Implemented
+    in-out property <bool> projectDetailView; // Implemented
+    in-out property <bool> lagerOverviewView; // Implemented
 }
