@@ -2,18 +2,15 @@ import { VerticalBox, HorizontalBox, StandardButton } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { Constants } from "../Constants.slint";
 import { Button } from "../Widgets/Button.slint";
+import { Material } from "../models/MaterialModel.slint";
+import { Backend } from "../Backend.slint";
 
+
+// TODO(jmeusel): Rahmen drum oder ggf andere farbe
 
 export component MaterialPopUp inherits Rectangle {
     // TODO(jmeusel): Type ändern
-    in-out property <string> nameController;
-    in-out property <string> priceController;
-    in-out property <string> typeController;
-    in-out property <string> amountController;
-    in-out property <string> rememberWhenController;
-    in-out property <string> descriptionController;
-    in-out property <string> thresholdValueController;
-
+    in-out property <Material> material;
 
     /*
     DB model:
@@ -26,7 +23,6 @@ export component MaterialPopUp inherits Rectangle {
     pub costs: f32,
     pub threshold_value: i32,
 }
-
     */
     HorizontalLayout {
         alignment: center;
@@ -36,94 +32,88 @@ export component MaterialPopUp inherits Rectangle {
             Rectangle {
                 background: lightgray;
                 width: 400px;
-                height: 460px;
+                height: 400px;
                 VerticalBox {
                     HorizontalBox {
                         Text {
                             text: Constants.name + ":";
                         }
-        
-                        TextField {
-                            text: nameController;
+
+                        materialName := TextField {
+                            text: material.name;
                         }
                     }
-        
+
                     HorizontalBox {
                         Text {
                             text: Constants.price + ":";
                         }
-        
-                        TextField {
-                            text: priceController;
+
+                        materialPrice := TextField {
+                            text: material.price;
                         }
                     }
-        
+
                     HorizontalBox {
                         Text {
                             text: Constants.type + ":";
                         }
-        
-                        TextField {
-                            text: typeController;
+
+                        materialType := TextField {
+                            text: material.type;
                         }
-                        
                     }
 
                     HorizontalBox {
                         Text {
                             text: Constants.amount + ":";
                         }
-        
-                        TextField {
-                            text: amountController;
+
+                        materialAmount := TextField {
+                            text: material.quantity;
                         }
-                        
                     }
+
                     HorizontalBox {
                         Text {
                             text: Constants.remember_when + ":";
                         }
-        
-                        TextField {
-                            text: rememberWhenController;
+
+                        materialThreshold := TextField {
+                            text: material.threshold-value;
                         }
-                        
                     }
+
                     HorizontalBox {
                         Text {
                             text: Constants.description + ":";
                         }
-        
-                        TextField {
-                            text: descriptionController;
+
+                        materialDescription := TextField {
+                            text: material.description;
                         }
-                        
                     }
-                    HorizontalBox {
-                        Text {
-                            text: Constants.remember_when + ":";
-                        }
-        
-                        TextField {
-                            text: thresholdValueController;
-                        }
-                        
-                    }
-                    
-        
+
                     HorizontalBox {
                         Button {
-                            text: "Cancel";
+                            text: Constants.cancel;
                             clicked => {
-                                // TODO(jmeusel): cancel
+                                Backend.hideMaterialPopUp();
                         }
                         }
-        
+
                         Button {
-                            text: "Save";
+                            text: Constants.save;
                             clicked => {
-                                // TODO(jmeusel): Save
-                        }
+                                Backend.save-materials(
+                                materialName.text,
+                                materialPrice.text,
+                                materialType.text,
+                                materialAmount.text,
+                                materialThreshold.text,
+                                materialDescription.text,
+                               );
+                            }
                         }
                     }
                 }
@@ -131,5 +121,3 @@ export component MaterialPopUp inherits Rectangle {
         }
     }
 }
-
-

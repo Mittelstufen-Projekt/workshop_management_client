@@ -30,6 +30,7 @@ export global Backend {
     // Property: id of the material which should be edited 
     //Route to PopUp (Material)
     callback editMaterial(int);
+    
 
     // Project Management View -------------------------------------------------------------------------------------
     //Navigiert zu einem neuen Leeren Projekt und übergibt lediglich eine neue Liste
@@ -41,7 +42,8 @@ export global Backend {
     in-out property <[ProjectModel]> allProjects;
 
     // LagerOverview -------------------------------------------------------------------------------------
-    callback save-materials();
+    // Reihenfolge: name, price, type, amount, thresholdValue, description
+    callback save-materials(string, string, string, string, string, string);
     // parameter: Name of the material to show
     callback search-material(string);
     in-out property <[Material]> materials;
@@ -55,6 +57,8 @@ export global Backend {
     callback showAddNewMaterialPopUp (); // Implemented
     callback showAddNewMaterialTypePopUp (); // Implemented
     callback goBack(); // Implemented
+    callback hideMaterialPopUp();
+    callback hideClientPopUp();
 
     // Variables for routing and navigation -------------------------------------------------------------------------------------
     in-out property <bool> showClientPopUp; // Implemented
