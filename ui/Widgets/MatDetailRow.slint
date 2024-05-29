@@ -7,7 +7,8 @@ export component MatDetailRow inherits Rectangle {
     in-out property <Material> material;
     in-out property <bool> disableBorder;
     in-out property <bool> disableCancelButton;
-    callback onClick();
+    callback onEditClick();
+    callback onDeleteClick();
     //background: lightblue;
     // TODO(jmeusel): init
     property <length> maxWidth: 175px;
@@ -61,9 +62,17 @@ export component MatDetailRow inherits Rectangle {
         Rectangle {width: 20px;}
         if(!disableCancelButton): Button {
             width: 40px;
+            text: "✎";
+            clicked => {
+                onEditClick()
+            }
+        }
+        Rectangle {width: 10px;}
+        Button {
+            width: 40px;
             text: "X";
             clicked => {
-                onClick()
+                onDeleteClick();
             }
         }
     }

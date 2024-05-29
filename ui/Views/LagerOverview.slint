@@ -15,7 +15,6 @@ import { TitleSection } from "../Widgets/TitleSeciton.slint";
 
 // TODO(jmeusel): Material Count sollte Rot angezeigt werden falls der Wert unterschritten wird
 export component LagerOverview inherits VerticalBox {
-
     in-out property <[Material]> materials;
     in-out property <string> searchText;
     property <length> topPadding: 20px;
@@ -41,7 +40,7 @@ export component LagerOverview inherits VerticalBox {
         buttonTitleSecond: "Add Material Type";
         secondButtonWidth: 167px;
         onSecondButtonPress => {
-            Backend.showAddNewMateriaTypePopUp();
+            Backend.showAddNewMaterialTypePopUp();
         }
     }
 

@@ -8,27 +8,30 @@ import { Material } from "../ui/models/MaterialModel.slint";
 import { ProjectModel } from "../ui/models/ProjectModel.slint";
 
 export global Backend {
-    // Login View
+    // Login View -------------------------------------------------------------------------------------
     callback request-login(); // Implemented
     callback request-exit(); // Implemented
     in-out property <string> username; // Implemented
     in-out property <string> password; // Implemented
     in-out property <string> login_error; // Implemented
 
-    // Project View
+    // Project View -------------------------------------------------------------------------------------
     callback request-logout(); // Implemented
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
 
-    // Project Detail View
+    // Project Detail View -------------------------------------------------------------------------------------
     // parameter: ID of the material to delete
     callback deleteMaterial(int);
     // Jasha: aktuell noch keine Materialien sondern nur die ProjektValues in folgender Reihenfole:
     // projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
     callback save-project-and-used-materials(string, string, string, string, string, string);
     in-out property <ProjectModel> project;
+    // Property: id of the material which should be edited 
+    //Route to PopUp (Material)
+    callback editMaterial(int);
 
-    // Project Management View
+    // Project Management View -------------------------------------------------------------------------------------
     //Navigiert zu einem neuen Leeren Projekt und übergibt lediglich eine neue Liste
     callback create_new_project(); // Implemented
     // parameter: ID of the project to delete
@@ -37,23 +40,23 @@ export global Backend {
     callback search-project(string);
     in-out property <[ProjectModel]> allProjects;
 
-    // LagerOverview
+    // LagerOverview -------------------------------------------------------------------------------------
     callback save-materials();
     // parameter: Name of the material to show
     callback search-material(string);
     in-out property <[Material]> materials;
 
-    // Navigation:
+    // Navigation: -------------------------------------------------------------------------------------
     callback route-to-project-management(); // Implemented
     callback route-to-warehouse-management(); // Implemented
     // parameter: ID of the project to show
     callback route-to-project-i(int); // Implemented
     callback showAddNewClientPopUp (); // Implemented
     callback showAddNewMaterialPopUp (); // Implemented
-    callback showAddNewMateriaTypePopUp (); // Implemented
+    callback showAddNewMaterialTypePopUp (); // Implemented
     callback goBack(); // Implemented
 
-    // Variables for routing and navigation
+    // Variables for routing and navigation -------------------------------------------------------------------------------------
     in-out property <bool> showClientPopUp; // Implemented
     in-out property <bool> showMaterialPopUp; // Implemented
     in-out property <bool> showMaterialTypePopUp; // Implemented

@@ -144,12 +144,11 @@ export component ProjectDetailView inherits VerticalLayout {
 
                     for material[i] in project.mats: MatDetailRow {
                         material: project.mats[i];
-                        onClick => {
-                            Backend.deleteMaterial(project.mats[i].id)
+                        onEditClick => {
+                            Backend.editMaterial(project.mats[i].id);
                         }
-                        // TODO(jmeusel): unnötig?
-                            for name[index] in project.mats: Rectangle {
-                            height: 85px;
+                        onDeleteClick => {
+                            Backend.deleteMaterial(project.mats[i].id)
                         }
                     }
                 }
