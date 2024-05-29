@@ -63,9 +63,9 @@ export component LagerOverview inherits VerticalBox {
         amount: materials[i].quantity;
         rememberWhen: "never";
         description: materials[i].description;
-        clicked => {
-            // TODO(jmeusel): BE - Function Delete Material[i]
-            }
+        onEditClicked => {
+        }
+        onDeleteClicked => {}
     }
 }
 

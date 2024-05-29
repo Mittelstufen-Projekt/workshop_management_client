@@ -72,14 +72,14 @@ export component WorkshopClient inherits Window {
     }
     ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
         //visible <=> Backend.projectDetailView;
-        visible: false;
+        visible: true;
         project: MockModel.projectWithMats;
         //clients: ;
     }
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: true;
+        visible: false;
         materials: MockModel.materialList;
     }
 

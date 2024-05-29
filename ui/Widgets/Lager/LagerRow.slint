@@ -11,95 +11,93 @@ export component LagerRow inherits Rectangle {
     in property <string> amount;
     in property <string> rememberWhen;
     in property <string> description;
-    callback clicked();
+    callback onEditClicked();
+    callback onDeleteClicked();
     
     border-radius: 6px;
     border-color: Palette.accent-color;
     border-width: 1px;
     
     HorizontalLayout {
-        HorizontalLayout {
-            padding: 8px;
-            alignment: start;
-            Text {
-                text: name;
-                width: 250px;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-    
-            Rectangle {
-                width: 120px;
-            }
-    
-            Text {
-                width: 200px;
-                text: price;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-    
-            Rectangle {
-                width: 120px;
-                
-            }
-    
-            Text {
-                width: 200px;
-                text: amount;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-    
-            Rectangle {
-                width: 120px;
-            }
-    
-            Text {
-                width: 200px;
-                text: type;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-    
-            Rectangle {
-                width: 120px;
-            }
-    
-            Text {
-                width: 200px;
-                text: rememberWhen;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-    
-            Rectangle {
-                width: 100px;
-            }
-    
-            Text {
-                text: description;
-                font-size: Palette.font-size * 1px;
-                overflow: TextOverflow.elide;
-            }
-            Rectangle {width: 20px;}
+        padding: 8px;
+        alignment: start;
+        Text {
+            text: name;
+            width: 250px;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            width: 100px;
+            text: price;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
+        }
+
+        Rectangle {
+            width: 80px;
             
+        }
+
+        Text {
+            width: 80px;
+            text: amount;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
+        }
+
+        Rectangle {
+            width: 80px;
+        }
+
+        Text {
+            width: 100px;
+            text: type;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
+        }
+
+        Rectangle {
+            width: 80px;
+        }
+
+        Text {
+            width: 100px;
+            text: rememberWhen;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
+        }
+
+        Rectangle {
+            width: 50px;
+        }
+
+        Text {
+            width: 400px;
+            text: description;
+            font-size: Palette.font-size * 1px;
+            overflow: TextOverflow.elide;
         }
         Button {
             width: 30px;
             height: 30px;
-            text: "X";
+            text: "✎";
             clicked => {
-                // TODO(jmeusel): someHow auslagern
+                onEditClicked();
             }
         }
         Rectangle {width: 20px;}
         Button {
             width: 30px;
             height: 30px;
-            text: "✎";
+            text: "X";
             clicked => {
-                // TODO(jmeusel): someHow auslagern
+                onDeleteClicked();
             }
         }
     }
