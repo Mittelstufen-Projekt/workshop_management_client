@@ -36,7 +36,7 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.global::<Backend>().set_lagerOverviewView(false);
     ui.global::<Backend>().set_showClientPopUp(false);
     ui.global::<Backend>().set_showMaterialPopUp(false);
-    
+
     // Login action
     ui.global::<Backend>().on_request_login({
         // Get the handlers that we need to manipulate the UI and Keycloak
@@ -171,7 +171,7 @@ fn main() -> Result<(), slint::PlatformError> {
             todo!("Set project details");
         }
     });
-    
+
     ui.global::<Backend>().on_showAddNewClientPopUp({
         let ui_handle = ui.as_weak();
         move || {
@@ -206,6 +206,19 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_projectView(true);
             ui.global::<Backend>().set_projectManagementView(false);
             ui.global::<Backend>().set_projectDetailView(false);
+            ui.global::<Backend>().set_lagerOverviewView(false);
+            ui.global::<Backend>().set_showClientPopUp(false);
+            ui.global::<Backend>().set_showMaterialPopUp(false);
+        }
+    });
+
+    ui.global::<Backend>().on_create_new_project({
+        let ui_handle = ui.as_weak();
+        move || {
+            let ui = ui_handle.unwrap();
+            ui.global::<Backend>().set_projectView(false);
+            ui.global::<Backend>().set_projectManagementView(false);
+            ui.global::<Backend>().set_projectDetailView(true);
             ui.global::<Backend>().set_lagerOverviewView(false);
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
