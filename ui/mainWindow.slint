@@ -16,7 +16,6 @@ import { VerticalBox, ComboBox, LineEdit, Button } from "std-widgets.slint";
 
 // Importing self made Widgets
 import { ToggleSwitch } from "Widgets/ToggleSwitch.slint";
-import { CheckBox } from "Widgets/CheckBox.slint";
 
 // Importing the Views
 import { LoginView } from "Views/LoginView.slint";
@@ -51,38 +50,44 @@ export component WorkshopClient inherits Window {
         }
     }
 
-
     // Actual content
-    LoginView { //FUNCTIONS CHECK
+    LoginView {
+        //FUNCTIONS CHECK
         username <=> Backend.username;
         password <=> Backend.password;
         login_error <=> Backend.login_error;
-        //visible <=> Backend.loginView;
-        visible: false;
+        visible <=> Backend.loginView;
+        //visible: false;
     }
-    ProjectView { // Fertig, bis auf Errormeldung
-        //visible <=> Backend.projectView;
-        visible: false;
+
+    ProjectView {
+        // Fertig, bis auf Errormeldung
+        visible <=> Backend.projectView;
+        //visible: false;
         recentProjects: MockModel.recentProjects;
         //materialAlerts: MockModel.materials;
         materialAlerts: MockModel.materials;
     }
-    ProjectManagement { //FUNCTIONS CHECK
-        //visible <=> Backend.projectManagementView;
-        visible: false;
+
+    ProjectManagement {
+        //FUNCTIONS CHECK
+        visible <=> Backend.projectManagementView;
+        //visible: false;
         //allProjects: MockModel.allProjectsMockList;
         allProjects: MockModel.allProjectsMockList;
     }
-    ProjectDetailView { //FUNCTIONS NOT CHECKED A LOT OF TODOS!
-        //visible <=> Backend.projectDetailView;
-        visible: false;
+
+    ProjectDetailView {
+        //FUNCTIONS NOT CHECKED A LOT OF TODOS!
+        visible <=> Backend.projectDetailView;
+        //visible: false;
         project: MockModel.projectWithMats;
         //clients: ;
     }
 
     LagerOverview {
-        //visible <=> Backend.lagerOverviewView;
-        visible: true;
+        visible <=> Backend.lagerOverviewView;
+        //visible: true;
         materials: MockModel.materialList;
     }
 
@@ -109,6 +114,4 @@ export component WorkshopClient inherits Window {
         //visible: <=> Backend.show;
         visible: true;
     }
-
 }
-

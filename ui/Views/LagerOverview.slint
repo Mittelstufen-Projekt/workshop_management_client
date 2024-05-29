@@ -1,7 +1,7 @@
 /*
 
     Author: Jasha
-    Description: 
+    Description:
 
 */
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
@@ -53,18 +53,18 @@ export component LagerOverview inherits VerticalBox {
 
     HorizontalBox {
         alignment: LayoutAlignment.start;
-        
     }
 
     for material[i] in materials: LagerRow {
         name: materials[i].name;
         price: materials[i].price;
-            type: materials[i].type.name;
+        m_type: materials[i].m_type.name;
         amount: materials[i].quantity;
         rememberWhen: "never";
         description: materials[i].description;
         onEditClicked => {
         }
-        onDeleteClicked => {}
+        onDeleteClicked => {
+        }
     }
 }

@@ -10,7 +10,13 @@ mod utils;
 
 use std::sync::{Arc, Mutex};
 
-use models::material_type::MaterialType;
+use models::client::Client as r_Client;
+use models::material::Material as r_Material;
+use models::material_type::MaterialType as r_MaterialType;
+use models::project::Project as r_Project;
+use models::project_material::ProjectMaterial as r_ProjectMaterial;
+
+use slint::Model;
 use slint::SharedString;
 
 use crate::utils::keycloak_service::Keycloak;
@@ -140,6 +146,8 @@ fn main() -> Result<(), slint::PlatformError> {
     // Route to lager overview
     ui.global::<Backend>().on_route_to_warehouse_management({
         let ui_handle = ui.as_weak();
+        let workshop_handle = arc_workshop_service.clone();
+        let keycloak_handle = arc_keycloak.clone();
         move || {
             let ui = ui_handle.unwrap();
             // TODO: Set vars
@@ -151,6 +159,27 @@ fn main() -> Result<(), slint::PlatformError> {
             ui.global::<Backend>().set_showClientPopUp(false);
             ui.global::<Backend>().set_showMaterialPopUp(false);
             ui.global::<Backend>().set_showMaterialTypePopUp(false);
+            // Refresh the token
+            let token = keycloak_handle.lock().unwrap().refresh_token();
+            let token = match token {
+                Ok(token) => token,
+                Err(_) => return,
+            };
+            // Get the materials
+            workshop_handle.lock().unwrap().get_materials(&token);
+            let materials: Vec<r_Material> = workshop_handle.lock().unwrap().materials.clone();
+            let materials: Vec<Material> = materials
+                .iter()
+                .map(|m| Material {
+                    id: m.id,
+                    name: m.name.clone().into(),
+                    m_type: m.material_type.clone(),
+                    description: m.description.clone().into(),
+                    price: m.costs,
+                    quantity: m.amount,
+                    threshold_value: m.threshold_value,
+                })
+                .collect();
         }
     });
 
@@ -302,22 +331,10 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move |search: SharedString| {
             let ui = ui_handle.unwrap();
-            // Refresh the token
             let materials = ui.global::<Backend>().get_materials();
-            let materials = materials
-                .iter()
-                .filter(|material| {
-                    material
-                        .name
-                        .to_lowercase()
-                        .contains(&search.to_lowercase())
-                        || material
-                            .description
-                            .to_lowercase()
-                            .contains(&search.to_lowercase())
-                })
-                .cloned()
-                .collect::<Vec<Material>>();
+            materials.filter(|m| {
+                m.name.to_lowercase().contains(&search.to_lowercase()) || m.description.to_lowercase().contains(&search.to_lowercase())
+            });
             ui.global::<Backend>().set_materials(materials);
         }
     });

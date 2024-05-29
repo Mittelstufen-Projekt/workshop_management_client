@@ -32,18 +32,18 @@ export component MatDetailRow inherits Rectangle {
                             overflow: TextOverflow.elide;
                         }
                     }
-    
+
                     Rectangle {
                         max-width: maxWidth;
                         Text {
                             max-width: maxWidth;
-                            text: material.type.name == "" ? "–" : material.type.name;
+                            text: material.m_type.name == "" ? "–" : material.m_type.name;
                             font-size: Palette.font-size * 1px;
                             color: Palette.text-color;
                             overflow: TextOverflow.elide;
                         }
                     }
-    
+
                     Rectangle {
                         max-width: maxWidth;
                         Text {
@@ -54,12 +54,14 @@ export component MatDetailRow inherits Rectangle {
                             overflow: TextOverflow.elide;
                         }
                     }
-    
-                   
                 }
             }
         }
-        Rectangle {width: 20px;}
+
+        Rectangle {
+            width: 20px;
+        }
+
         if(!disableCancelButton): Button {
             width: 40px;
             text: "✎";
@@ -67,7 +69,10 @@ export component MatDetailRow inherits Rectangle {
                 onEditClick()
             }
         }
-        Rectangle {width: 10px;}
+        Rectangle {
+            width: 10px;
+        }
+
         Button {
             width: 40px;
             text: "X";
