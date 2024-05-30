@@ -1,7 +1,7 @@
 /*
 
     Author: Jasha
-    Description: 
+    Description: Overview of the warehouse and its stocks
 
 */
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
@@ -15,9 +15,9 @@ import { Constants } from "../Constants.slint";
 import { Backend } from "../Backend.slint";
 import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { ErrorMessage } from "../Widgets/Errormessage.slint";
+import { Backend } from "../Backend.slint";
 
 
-// TODO(jmeusel): Material Count sollte Rot angezeigt werden falls der Wert unterschritten wird
 export component LagerOverview inherits VerticalBox {
     in-out property <[Material]> materials;
     in-out property <string> searchText;
@@ -31,7 +31,6 @@ export component LagerOverview inherits VerticalBox {
     TitleSection {
         title: Constants.warehouse_management;
     }
-    
 
     WMSAppbar {
         buttonTitleFirst: "Add Material";
@@ -48,6 +47,7 @@ export component LagerOverview inherits VerticalBox {
             Backend.showAddNewMaterialTypePopUp();
         }
     }
+
     HorizontalLayout {
         alignment: start;
         ErrorMessage {
@@ -61,7 +61,69 @@ export component LagerOverview inherits VerticalBox {
 
     HorizontalBox {
         alignment: LayoutAlignment.start;
-        
+    }
+
+    HorizontalLayout {
+        alignment: start;
+        Text {
+            text: "Name";
+            font-size: Palette.font-size * 1px;
+        }
+
+        Rectangle {
+            width: 330px;
+        }
+
+        Text {
+            text: "Price";
+            font-size: Palette.font-size * 1px;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: "Type";
+            font-size: Palette.font-size * 1px;
+        }
+
+        Rectangle {
+            width: 110px;
+        }
+
+        Text {
+            text: "Amount";
+            font-size: Palette.font-size * 1px;
+        }
+
+        Rectangle {
+            width: 120px;
+        }
+
+        Text {
+            text: "Threshold";
+            font-size: Palette.font-size * 1px;
+        }
+
+        Rectangle {
+            width: 65px;
+        }
+
+        Text {
+            text: "Description";
+            font-size: Palette.font-size * 1px;
+        }
+        Rectangle {width: 300px;}
+        Text {
+            text: "Edit";
+            font-size: Palette.font-size * 1px;
+        }
+        Rectangle {width: 15px;}
+        Text {
+            text: "Delete";
+            font-size: Palette.font-size * 1px;
+        }
     }
 
     for material[i] in materials: LagerRow {
@@ -72,9 +134,10 @@ export component LagerOverview inherits VerticalBox {
         rememberWhen: "never";
         description: materials[i].description;
         onEditClicked => {
-            // TODO(jmeusel): hinzufügen im BE glaube ich und hier aufrufen .. 
-            
+            Backend.editMaterial(materials[i].id); 
         }
-        onDeleteClicked => {}
+        onDeleteClicked => {
+            Backend.delete-material(materials[i].id);
+        }
     }
 }

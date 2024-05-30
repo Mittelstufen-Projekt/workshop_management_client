@@ -1,3 +1,9 @@
+/*
+
+    Author: Jasha
+    Description: The Appbar to use in the screens
+
+*/
 import { TextField } from "TextField.slint";
 
 
@@ -11,8 +17,6 @@ import { Button } from "../Widgets/Button.slint";
 import { Constants } from "../Constants.slint";
 import { Backend } from "../Backend.slint";
 
-// TODO(jmeusel): Bools um Search auszublenden, sowie buttons 
-
 export component WMSAppbar inherits Rectangle {
 
     in-out property <string> title;
@@ -22,7 +26,6 @@ export component WMSAppbar inherits Rectangle {
     callback onFirstButtonPressed();
     callback onSecondButtonPress();
     callback onThirdButtonPressed();
-    // TODO(jmeusel): rename
     in-out property <bool> showFirstButton: true;
     in-out property <bool> showSecondButton: false;
     in-out property <bool> showThirdButton: false;
