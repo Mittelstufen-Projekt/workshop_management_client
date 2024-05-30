@@ -69,20 +69,18 @@ export component WorkshopClient inherits Window {
         materialAlerts: MockModel.materials;
     }
 
-    ProjectManagement {
-        //FUNCTIONS CHECK
+    ProjectManagement { // Fertig bis auf error und scrollbereich
         //visible <=> Backend.projectManagementView;
-        visible: true;
+        visible: false;
         //allProjects: MockModel.allProjectsMockList;
         allProjects: MockModel.allProjectsMockList;
     }
 
     ProjectDetailView {
-        //FUNCTIONS NOT CHECKED A LOT OF TODOS!
         //visible <=> Backend.projectDetailView;
-        visible: false;
+        visible: true;
         project: MockModel.projectWithMats;
-        //clients: ;
+        clients: MockModel.clientListAsString;
     }
 
     LagerOverview {

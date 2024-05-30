@@ -16,8 +16,6 @@ import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { Backend } from "../Backend.slint";
 
 
-// TODO(jmeusel): Scrollview anpassen sodass nicht ALLES scrollable ist
-
 export component ProjectManagement inherits ScrollView {
 
     in-out property <[ProjectModel]> allProjects;
@@ -49,7 +47,6 @@ export component ProjectManagement inherits ScrollView {
         }
 
         HorizontalLayout {
-            // TODO(jmeusel): abheben von liste darunter
             ProjectRowShort {
                 project: "Project Name";
                 client: "Client";
@@ -63,6 +60,7 @@ export component ProjectManagement inherits ScrollView {
             height: 40px;
         }
         }
+        // iterates over the list of AllProjects
         for project[i] in allProjects: HorizontalLayout {
             ProjectRowShort {
                 client: allProjects[i].client.lastName;

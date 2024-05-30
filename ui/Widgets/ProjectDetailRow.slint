@@ -24,21 +24,4 @@ export component ProjectDetailRow inherits HorizontalLayout {
     }
 }
 
-export component ProjectDetailRowTwoBoxes inherits ProjectDetailRow {
-    in-out property <string> title2;
-    Rectangle {
-        width: 10px;
-    }
-    
-    textFieldName:=Text {
-        vertical-alignment: center;
-        text: title2;
-        color: Palette.accent-color;
-        font-size: Palette.font-size * 1px;
-    }
 
-    textFieldName2 := TextField {
-        height: Palette.font-size * 2px;
-        width: 300px;
-     }
-}

@@ -1,3 +1,10 @@
+/*
+
+    Author: Jasha
+    Description: Widget to display a Material in the DetailView of a project
+
+*/
+
 import { Material } from "../models/MaterialModel.slint";
 import { Palette } from "../Palette.slint";
 import { LineEdit, Button } from "std-widgets.slint";
@@ -9,9 +16,9 @@ export component MatDetailRow inherits Rectangle {
     in-out property <bool> disableCancelButton;
     callback onEditClick();
     callback onDeleteClick();
-    //background: lightblue;
-    // TODO(jmeusel): init
     property <length> maxWidth: 175px;
+
+    //Widget
     HorizontalLayout {
         VerticalLayout {
             alignment: center;
@@ -43,6 +50,8 @@ export component MatDetailRow inherits Rectangle {
                             overflow: TextOverflow.elide;
                         }
                     }
+
+                    Rectangle {width: 160px;}
 
                     Rectangle {
                         max-width: maxWidth;

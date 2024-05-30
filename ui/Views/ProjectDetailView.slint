@@ -1,11 +1,10 @@
 /*
 
     Author: Jasha
-    Description: 
+    Description: The detailed view of a project with all relevant information
 
 */
 
-import { ProjectDetailRow, ProjectDetailRowTwoBoxes } from "../Widgets/ProjectDetailRow.slint";
 import { VerticalBox, HorizontalBox, Button, ComboBox } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
@@ -20,18 +19,16 @@ import { Material } from "../models/MaterialModel.slint";
 import { Backend } from "../Backend.slint";
 import { ClientModel } from "../models/ClientModel.slint";
 import { MaterialType } from "../models/MaterialTypeModel.slint";
+import { ProjectDetailRow } from "../Widgets/ProjectDetailRow.slint";
 
 
-// TODO(jmeusel): Save button anders anordnen, Email feld checken
-// TODO(jmeusel): client, phone und email benötigen eigenes Feld und eigenen Screen 
-// TODO(jmeusel): Wenn die Liste Leer ist, müssen die Felder initial leer sein
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> clients;
 
     property <Material> mock;
     property <MaterialType> type;
-    type: {name: "matType", description: "descrip"};
+    type: { name: "matType", description: "descrip" };
 
     mock: { name: "Name", m_type: type, description: "", price: 0, quantity: 0 };
 
@@ -69,18 +66,19 @@ export component ProjectDetailView inherits VerticalLayout {
                 Rectangle {
                     height: 20px;
                 }
+                HorizontalLayout {
+                     Text {
+                        vertical-alignment: center;
+                        text: Constants.client;
+                        color: Palette.accent-color;
+                        font-size: Palette.font-size * 2px;
+                    }
+                    Rectangle {width: 210px;}
+                    clientName := ComboBox {
+                        model: clients;
 
-                clientName := ProjectDetailRow {
-                    title: Constants.client + suffix;
-                    textFieldName: project.client.firstName + " " + project.client.lastName;
+                    }
                 }
-
-                ComboBox {
-                    model: clients;
-                }
-
-                // TODO(jmeusel): Client.........fIeld
-
                 Rectangle {
                     height: 20px;
                 }
@@ -115,6 +113,24 @@ export component ProjectDetailView inherits VerticalLayout {
                 projectCurrentCosts := ProjectDetailRow {
                     title: Constants.currentCosts + suffix;
                     textFieldName: project.current-costs;
+                }
+                Rectangle {
+                    height: 20px;
+                }
+                Button {
+                    text: Constants.save_project;
+                    height: 30px;
+                    width: 130px;
+                    clicked => {
+                        Backend.save-project(
+                            projectName.textFieldName,
+                            clientName.current-value,
+                            projectStart.textFieldName,
+                            projectDeadline.textFieldName,
+                            projectCalculatedCosts.textFieldName,
+                            projectCurrentCosts.textFieldName,
+                        )
+                    }
                 }
             }
 
@@ -167,28 +183,14 @@ export component ProjectDetailView inherits VerticalLayout {
                         text: Constants.add_material;
                         height: 30px;
                         width: 130px;
-                        callback addMaterial(// TODO(jmeusel): implement
-                        );
+                        clicked => {
+                            //Muss dies hier ein anderer Callback sein als der Ursprüngliche? 
+                            Backend.showAddNewClientPopUp();
+                        }
                     }
 
                     Rectangle {
                         width: 100px;
-                    }
-
-                    Button {
-                        text: Constants.save;
-                        height: 30px;
-                        width: 130px;
-                        clicked => {
-                            Backend.save-project(
-                                projectName.textFieldName,
-                                clientName.textFieldName,
-                                projectStart.textFieldName,
-                                projectDeadline.textFieldName,
-                                projectCalculatedCosts.textFieldName,
-                                projectCurrentCosts.textFieldName,
-                            )
-                        }
                     }
                 }
             }

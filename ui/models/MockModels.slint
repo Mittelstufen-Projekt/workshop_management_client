@@ -53,7 +53,9 @@ export global MockModel {
 
 
     clientList: [clientMock, clientMock1, clientMock2, clientMock3, clientMock4];
-
+    //ClientList as Strings
+    in-out property <[string]> clientListAsString;
+    clientListAsString: [clientMock.lastName, clientMock1.lastName, clientMock2.lastName, clientMock3.lastName, clientMock4.lastName];
 
     //List of Materials 
     in-out property <Material> mat1;
