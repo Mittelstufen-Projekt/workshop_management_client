@@ -62,7 +62,7 @@ export component ProjectView inherits Rectangle {
                 }
             }
 
-            //Leeres Rectangle um das Alignment zu beeinflussen
+            // Empty rectangle to influence the alignment
             Rectangle { }
 
             Text {
@@ -77,7 +77,6 @@ export component ProjectView inherits Rectangle {
 
         HorizontalLayout {
             height: txt + 50px;
-            // TODO(jmeusel): ändern
             padding-left: root.padding-left + 20px;
             HorizontalBox {
                 Text {
@@ -86,10 +85,6 @@ export component ProjectView inherits Rectangle {
                     vertical-alignment: center;
                     color: Palette.accent-color;
                 }
-            }
-
-            Rectangle {
-                width: 250px;
             }
 
             HorizontalBox {
@@ -103,6 +98,7 @@ export component ProjectView inherits Rectangle {
 
         HorizontalBox {
             VerticalBox {
+                // iterates over the list of projects that has been used recently
                 for item[i] in recentProjects: ProjectRowShort {
                     project: recentProjects[i].name;
                     client: recentProjects[i].client.firstName + " " + recentProjects[i].client.lastName;
@@ -115,12 +111,13 @@ export component ProjectView inherits Rectangle {
                 Rectangle { }
             }
 
-            //Material Section
+            // Material Section
             VerticalBox {
-                // TODO(jmeusel): IF-Statement um quantity mit alert zu vergleichen
+                // iterates over the list of materials which are in short supply
                 for material[i] in materialAlerts: MaterialAlertShort {
                     materialName: materialAlerts[i].name;
-                    count: materialAlerts[i].quantity;
+                    quantity: materialAlerts[i].quantity;
+                    thresholdValue: materialAlerts[i].threshold_value;
                 }
                 Button {
                     fontSizeMultiplier: 1.5px;

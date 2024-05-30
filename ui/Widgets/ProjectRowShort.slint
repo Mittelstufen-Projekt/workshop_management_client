@@ -1,3 +1,9 @@
+/*
+
+    Author: Jasha
+    Description: Shows a rough overview of a project as Row
+
+*/
 import { VerticalBox } from "std-widgets.slint";
 import { Palette } from "../Palette.slint";
 
@@ -19,38 +25,44 @@ export component ProjectRowShort inherits Rectangle {
     in-out property <string> client;
     in-out property <string> costs;
     in-out property <string> deadline;
-    //callback clicked <=> touch.clicked;
-    callback clicked <=> touch.clicked; // The callback for when the button is clicked
+    callback clicked <=> touch.clicked;
+    // The callback for when the button is clicked
+    in-out property <bool> turnOffBackgroundAndBorder: false;
 
-
-    background: Palette.accent-color;
+    background: turnOffBackgroundAndBorder ? Palette.background-color : Palette.accent-color;
     height: 65px;
     border-color: white;
-    border-width: 2px;
+    border-width: turnOffBackgroundAndBorder ? 0px : 2px;
     border-radius: 8px;
 
     Rectangle {
         // TODO(jmeusel): response für click anpassen 
         HorizontalLayout {
-            x: (parent.width - self.width)/2 + (touch.pressed ? 2px : 0);
-            y: (parent.height - self.height)/2 + (touch.pressed ? 1px : 0);
+            x: (parent.width - self.width) / 2 + (touch.pressed ? 2px : 0);
+            y: (parent.height - self.height) / 2 + (touch.pressed ? 1px : 0);
             alignment: stretch;
             padding: 16px;
             WMSText {
                 title: project;
                 font-size: txt;
             }
-            Rectangle {}
+
+            Rectangle { }
+
             WMSText {
                 title: client;
                 font-size: txt;
             }
-            Rectangle {}
+
+            Rectangle { }
+
             WMSText {
                 title: costs;
                 font-size: txt;
             }
-            Rectangle {}
+
+            Rectangle { }
+
             WMSText {
                 title: deadline;
                 font-size: txt;
@@ -58,6 +70,5 @@ export component ProjectRowShort inherits Rectangle {
         }
     }
 
-    touch := TouchArea {}
-
+    touch := TouchArea { }
 }

@@ -1,13 +1,15 @@
 import { HorizontalBox } from "std-widgets.slint";
 import { Palette } from "../Palette.slint";
-
+import { Material } from "../models/MaterialModel.slint";
 
 
 export  component MaterialAlertShort inherits HorizontalLayout {
 
     in-out property <string> materialName;
-    in-out property <int> count;
+    in-out property <int> quantity;
+    in-out property <int> thresholdValue;
     property <length> txt;
+    in-out property <Material> material;
     txt: Palette.font-size * 1px;
 
     Rectangle {
@@ -25,9 +27,9 @@ export  component MaterialAlertShort inherits HorizontalLayout {
             Rectangle { }
 
             Text {
-                text: root.count;
+                text: root.quantity;
                 font-size: txt;
-                color: Palette.accent-color;
+                color: quantity <= thresholdValue ? Colors.red : Palette.accent-color;
                 vertical-alignment: center;
             }
         }

@@ -1,7 +1,7 @@
 /*
 
     Author: Jasha
-    Description: 
+    Description: Overview of all projects with the option of a search
 
 */
 
@@ -49,11 +49,13 @@ export component ProjectManagement inherits ScrollView {
         }
 
         HorizontalLayout {
+            // TODO(jmeusel): abheben von liste darunter
             ProjectRowShort {
-                project: Constants.project_name;
+                project: "Project Name";
                 client: "Client";
                 costs: "Costs";
                 deadline: "Deadline";
+                turnOffBackgroundAndBorder: true;
             }
             // invisible Rectangle to align with the listView lower in the Code
             Rectangle {
@@ -61,7 +63,6 @@ export component ProjectManagement inherits ScrollView {
             height: 40px;
         }
         }
-        // TODO(jmeusel): abheben von liste darunter
         for project[i] in allProjects: HorizontalLayout {
             ProjectRowShort {
                 client: allProjects[i].client.lastName;

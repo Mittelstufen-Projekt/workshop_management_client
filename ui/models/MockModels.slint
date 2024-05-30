@@ -64,12 +64,12 @@ export global MockModel {
     in-out property <Material> mat6;
     in-out property <[Material]> materials;
 
-    mat1: {name: "Material1 ", m_type: mataType,description: "Description1", price: 11.11, quantity: 11};
-    mat2: {name: "Material2", m_type: mataType1,description: "Description2", price: 22.22, quantity: 22};
-    mat3: {name: "Material3", m_type: mataType2,description: "Description3", price: 33.33, quantity: 33};
-    mat4: {name: "Material4", m_type: mataType3,description: "Description4", price: 44.44, quantity: 44};
-    mat5: {name: "Material5", m_type: mataType2,description: "Description5", price: 55.55, quantity: 55};
-    mat6: {name: "Material6", m_type: mataType3,description: "Description6", price: 66.66, quantity: 66};
+    mat1: {name: "Material1 ", m_type: mataType,description: "Description1", price: 11.11, quantity: 11, threshold_value: 10};
+    mat2: {name: "Material2", m_type: mataType1,description: "Description2", price: 22.22, quantity: 22, threshold_value: 0};
+    mat3: {name: "Material3", m_type: mataType2,description: "Description3", price: 33.33, quantity: 33, threshold_value: 80};
+    mat4: {name: "Material4", m_type: mataType3,description: "Description4", price: 44.44, quantity: 44, threshold_value: 10};
+    mat5: {name: "Material5", m_type: mataType2,description: "Description5", price: 55.55, quantity: 55, threshold_value: 10};
+    mat6: {name: "Material6", m_type: mataType3,description: "Description6", price: 66.66, quantity: 66, threshold_value: 10};
 
     materials: [mat1,mat2,mat3,mat4,mat5,mat6];
 

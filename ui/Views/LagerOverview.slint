@@ -1,7 +1,7 @@
 /*
 
     Author: Jasha
-    Description:
+    Description: 
 
 */
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
@@ -53,6 +53,7 @@ export component LagerOverview inherits VerticalBox {
 
     HorizontalBox {
         alignment: LayoutAlignment.start;
+        
     }
 
     for material[i] in materials: LagerRow {
@@ -64,7 +65,6 @@ export component LagerOverview inherits VerticalBox {
         description: materials[i].description;
         onEditClicked => {
         }
-        onDeleteClicked => {
-        }
+        onDeleteClicked => {}
     }
 }
