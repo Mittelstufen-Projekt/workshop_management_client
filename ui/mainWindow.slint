@@ -55,15 +55,15 @@ export component WorkshopClient inherits Window {
         //FUNCTIONS CHECK
         username <=> Backend.username;
         password <=> Backend.password;
-        //login_error <=> Backend.login_error;
-        //visible <=> Backend.loginView;
-        visible: true;
+        login_error <=> Backend.login_error;
+        visible <=> Backend.loginView;
+        //visible: false;
     }
 
     ProjectView {
         // Fertig, bis auf Errormeldung
         //visible <=> Backend.projectView;
-        visible: false;
+        visible: true;
         recentProjects: MockModel.recentProjects;
         //materialAlerts: MockModel.materials;
         materialAlerts: MockModel.materials;
