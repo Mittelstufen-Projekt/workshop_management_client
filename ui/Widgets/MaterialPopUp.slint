@@ -7,13 +7,11 @@ import { Backend } from "../Backend.slint";
 import { Palette } from "../Palette.slint";
 
 
-// TODO(jmeusel): Rahmen drum oder ggf andere farbe
 
 export component MaterialPopUp inherits Rectangle {
-    // TODO(jmeusel): Type ändern
     in-out property <Material> material;
 
-    
+    // TODO(jmeusel): ggf typ als ComboBox ändern    
     HorizontalLayout {
         alignment: center;
         VerticalLayout {
