@@ -41,8 +41,9 @@ export component LagerOverview inherits VerticalBox {
         edited => {
             Backend.search-material(self.searchText);
         }
+        firstButtonWidth: 150px;
         buttonTitleSecond: "Add Material Type";
-        secondButtonWidth: 167px;
+        secondButtonWidth: 200px;
         onSecondButtonPress => {
             Backend.showAddNewMaterialTypePopUp();
         }
@@ -84,7 +85,7 @@ export component LagerOverview inherits VerticalBox {
         }
 
         Text {
-            text: "Type";
+            text: "Amount";
             font-size: Palette.font-size * 1px;
         }
 
@@ -93,7 +94,7 @@ export component LagerOverview inherits VerticalBox {
         }
 
         Text {
-            text: "Amount";
+            text: "Type";
             font-size: Palette.font-size * 1px;
         }
 
@@ -114,12 +115,20 @@ export component LagerOverview inherits VerticalBox {
             text: "Description";
             font-size: Palette.font-size * 1px;
         }
-        Rectangle {width: 300px;}
+
+        Rectangle {
+            width: 300px;
+        }
+
         Text {
             text: "Edit";
             font-size: Palette.font-size * 1px;
         }
-        Rectangle {width: 15px;}
+
+        Rectangle {
+            width: 15px;
+        }
+
         Text {
             text: "Delete";
             font-size: Palette.font-size * 1px;
@@ -134,7 +143,7 @@ export component LagerOverview inherits VerticalBox {
         rememberWhen: "never";
         description: materials[i].description;
         onEditClicked => {
-            Backend.editMaterial(materials[i].id); 
+            Backend.editMaterial(materials[i].id);
         }
         onDeleteClicked => {
             Backend.delete-material(materials[i].id);

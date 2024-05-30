@@ -63,7 +63,7 @@ export component WorkshopClient inherits Window {
     ProjectView {
         // Fertig, bis auf Errormeldung
         //visible <=> Backend.projectView;
-        visible: true;
+        visible: false;
         recentProjects: MockModel.recentProjects;
         //materialAlerts: MockModel.materials;
         materialAlerts: MockModel.materials;
@@ -85,7 +85,7 @@ export component WorkshopClient inherits Window {
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: false;
+        visible: true;
         materials: MockModel.materialList;
     }
 
