@@ -62,8 +62,8 @@ export component WorkshopClient inherits Window {
 
     ProjectView {
         // Fertig, bis auf Errormeldung
-        visible <=> Backend.projectView;
-        //visible: false;
+        //visible <=> Backend.projectView;
+        visible: false;
         recentProjects: MockModel.recentProjects;
         //materialAlerts: MockModel.materials;
         materialAlerts: MockModel.materials;
@@ -71,23 +71,23 @@ export component WorkshopClient inherits Window {
 
     ProjectManagement {
         //FUNCTIONS CHECK
-        visible <=> Backend.projectManagementView;
-        //visible: false;
+        //visible <=> Backend.projectManagementView;
+        visible: true;
         //allProjects: MockModel.allProjectsMockList;
         allProjects: MockModel.allProjectsMockList;
     }
 
     ProjectDetailView {
         //FUNCTIONS NOT CHECKED A LOT OF TODOS!
-        visible <=> Backend.projectDetailView;
-        //visible: false;
+        //visible <=> Backend.projectDetailView;
+        visible: false;
         project: MockModel.projectWithMats;
         //clients: ;
     }
 
     LagerOverview {
-        visible <=> Backend.lagerOverviewView;
-        //visible: true;
+        //visible <=> Backend.lagerOverviewView;
+        visible: false;
         materials: MockModel.materialList;
     }
 
@@ -103,14 +103,17 @@ export component WorkshopClient inherits Window {
     }
 
     ClientPopUp {
-        visible <=> Backend.showClientPopUp;
+        //visible <=> Backend.showClientPopUp;
+        visible: false;
     }
 
     MaterialPopUp {
-        visible <=> Backend.showMaterialPopUp;
+        //visible <=> Backend.showMaterialPopUp;
+        visible: false;
     }
 
     MaterialTypePopUp {
-        visible <=> Backend.showMaterialTypePopUp;
+        //visible <=> Backend.showMaterialTypePopUp;
+        visible: false;
     }
 }
