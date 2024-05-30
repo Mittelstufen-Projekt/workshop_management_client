@@ -29,7 +29,7 @@ slint::include_modules!();
 fn main() -> Result<(), slint::PlatformError> {
     // Make the window fullscreen
     // DISABLE ON MACOS (crashes for some reason)
-    //std::env::set_var("SLINT_FULLSCREEN", "1");
+    std::env::set_var("SLINT_FULLSCREEN", "1");
 
     let ui = WorkshopClient::new()?;
 
@@ -125,7 +125,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -134,7 +134,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the projects were successfully retrieved otherwise handle the error
             let projects = match projects {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(projects) => projects,
@@ -147,28 +147,28 @@ fn main() -> Result<(), slint::PlatformError> {
             {
                 Ok(project_materials) => project_materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let clients = match workshop_handle.lock().unwrap().get_clients(&token) {
                 Ok(clients) => clients,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let materials = match workshop_handle.lock().unwrap().get_materials(&token) {
                 Ok(materials) => materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let material_types = match workshop_handle.lock().unwrap().get_material_types(&token) {
                 Ok(material_types) => material_types,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -191,7 +191,7 @@ fn main() -> Result<(), slint::PlatformError> {
                             phone: client.phone.clone().into(),
                         },
                         Err(e) => {
-                            todo!("Set UI error message");
+                            todo!();
                         }
                     };
 
@@ -229,7 +229,7 @@ fn main() -> Result<(), slint::PlatformError> {
                                             description: m_type.description.clone().into(),
                                         },
                                         Err(e) => {
-                                            todo!("Set UI error message");
+                                            todo!()
                                         }
                                     };
 
@@ -243,8 +243,8 @@ fn main() -> Result<(), slint::PlatformError> {
                                         threshold_value: material.threshold_value,
                                     }
                                 }
-                                Err(_) => {
-                                    todo!("Set UI error message");
+                                Err(e) => {
+                                    todo!()
                                 }
                             };
                             material
@@ -291,7 +291,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -300,7 +300,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the projects were successfully retrieved otherwise handle the error
             let projects = match projects {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(projects) => projects,
@@ -313,28 +313,28 @@ fn main() -> Result<(), slint::PlatformError> {
             {
                 Ok(project_materials) => project_materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let clients = match workshop_handle.lock().unwrap().get_clients(&token) {
                 Ok(clients) => clients,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let materials = match workshop_handle.lock().unwrap().get_materials(&token) {
                 Ok(materials) => materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
             let material_types = match workshop_handle.lock().unwrap().get_material_types(&token) {
                 Ok(material_types) => material_types,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -357,7 +357,7 @@ fn main() -> Result<(), slint::PlatformError> {
                             phone: client.phone.clone().into(),
                         },
                         Err(e) => {
-                            todo!("Set UI error message");
+                            todo!()
                         }
                     };
 
@@ -395,7 +395,20 @@ fn main() -> Result<(), slint::PlatformError> {
                                             description: m_type.description.clone().into(),
                                         },
                                         Err(e) => {
-                                            todo!("Set UI error message");
+                                            ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
+                                            return Material {
+                                                id: material.id,
+                                                name: material.name.clone().into(),
+                                                description: material.description.clone().into(),
+                                                m_type: MaterialType {
+                                                    id: 0,
+                                                    name: "".into(),
+                                                    description: "".into(),
+                                                },
+                                                quantity: m.amount,
+                                                price: material.costs,
+                                                threshold_value: material.threshold_value,
+                                            };
                                         }
                                     };
 
@@ -409,8 +422,21 @@ fn main() -> Result<(), slint::PlatformError> {
                                         threshold_value: material.threshold_value,
                                     }
                                 }
-                                Err(_) => {
-                                    todo!("Set UI error message");
+                                Err(e) => {
+                                    ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
+                                    return Material {
+                                        id: 0,
+                                        name: "".into(),
+                                        description: "".into(),
+                                        m_type: MaterialType {
+                                            id: 0,
+                                            name: "".into(),
+                                            description: "".into(),
+                                        },
+                                        quantity: 0,
+                                        price: 0.0,
+                                        threshold_value: 0,
+                                    };
                                 }
                             };
                             material
@@ -455,7 +481,12 @@ fn main() -> Result<(), slint::PlatformError> {
                             description: m_type.description.clone().into(),
                         },
                         Err(e) => {
-                            todo!("Set UI error message");
+                            ui.global::<Backend>().set_projectViewErrorMessage(e.to_string().into());
+                            MaterialType {
+                                id: 0,
+                                name: "".into(),
+                                description: "".into(),
+                            }
                         }
                     };
 
@@ -496,8 +527,8 @@ fn main() -> Result<(), slint::PlatformError> {
             let token = keycloak_handle.lock().unwrap().refresh_token();
             let token = match token {
                 Ok(token) => token,
-                Err(_) => {
-                    todo!("Set UI error message");
+                Err(e) => {
+                    ui.global::<Backend>().set_lagerOverviewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -506,8 +537,8 @@ fn main() -> Result<(), slint::PlatformError> {
                 workshop_handle.lock().unwrap().get_materials(&token);
             let materials: Vec<r_Material> = match materials {
                 Ok(materials) => materials,
-                Err(_) => {
-                    todo!("Set UI error message");
+                Err(e) => {
+                    ui.global::<Backend>().set_lagerOverviewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -524,8 +555,13 @@ fn main() -> Result<(), slint::PlatformError> {
                             name: m_type.name.clone().into(),
                             description: m_type.description.clone().into(),
                         },
-                        Err(_) => {
-                            todo!("Set UI error message");
+                        Err(e) => {
+                            ui.global::<Backend>().set_lagerOverviewErrorMessage(e.to_string().into());
+                            MaterialType {
+                                id: 0,
+                                name: "".into(),
+                                description: "".into(),
+                            }
                         }
                     };
 
@@ -564,7 +600,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -576,7 +612,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the project was successfully retrieved otherwise handle the error
             let project = match project {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(project) => project,
@@ -589,7 +625,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the client was successfully retrieved otherwise handle the error
             let client = match client {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(client) => client,
@@ -602,7 +638,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the project materials were successfully retrieved otherwise handle the error
             let project_materials = match project_materials {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(project_materials) => project_materials,
@@ -612,7 +648,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the materials were successfully retrieved otherwise handle the error
             let materials = match materials {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(materials) => materials,
@@ -622,7 +658,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the material types were successfully retrieved otherwise handle the error
             let material_types = match material_types {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(material_types) => material_types,
@@ -650,7 +686,20 @@ fn main() -> Result<(), slint::PlatformError> {
                                     description: m_type.description.clone().into(),
                                 },
                                 Err(e) => {
-                                    todo!("Set UI error message");
+                                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
+                                    return Material {
+                                        id: 0,
+                                        name: "".into(),
+                                        description: "".into(),
+                                        m_type: MaterialType {
+                                            id: 0,
+                                            name: "".into(),
+                                            description: "".into(),
+                                        },
+                                        quantity: 0,
+                                        price: 0.0,
+                                        threshold_value: 0,
+                                    };
                                 }
                             };
                             Material {
@@ -663,8 +712,21 @@ fn main() -> Result<(), slint::PlatformError> {
                                 threshold_value: material.threshold_value,
                             }
                         }
-                        Err(_) => {
-                            todo!("Set UI error message");
+                        Err(e) => {
+                            ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
+                            return Material {
+                                id: 0,
+                                name: "".into(),
+                                description: "".into(),
+                                m_type: MaterialType {
+                                    id: 0,
+                                    name: "".into(),
+                                    description: "".into(),
+                                },
+                                quantity: 0,
+                                price: 0.0,
+                                threshold_value: 0,
+                            };
                         }
                     };
                     material
@@ -774,7 +836,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -791,7 +853,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let materials = match materials {
                 Ok(materials) => materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -799,7 +861,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let project_materials = match project_materials {
                 Ok(project_materials) => project_materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -807,7 +869,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let material_types = match material_types {
                 Ok(material_types) => material_types,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -828,7 +890,8 @@ fn main() -> Result<(), slint::PlatformError> {
                                 description: m_type.description.clone().into(),
                             },
                             Err(e) => {
-                                todo!("Set UI error message");
+                                ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
+                                return;
                             }
                         };
                         let project_material: Option<&r_ProjectMaterial> = project_materials
@@ -849,11 +912,12 @@ fn main() -> Result<(), slint::PlatformError> {
                         }
                     }
                     None => {
-                        todo!("Set UI error message");
+                        ui.global::<Backend>().set_projectDetailViewErrorMessage("Material not found".into());
+                        return;
                     }
                 };
 
-            todo!("Need variable to set material");
+            todo!("Subtract the amount of the material from the project material amount")
         }
     });
 
@@ -869,7 +933,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -884,7 +948,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     ui.global::<Backend>().invoke_route_to_project_management();
                 }
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                 }
             }
         }
@@ -902,7 +966,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -918,7 +982,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let project_materials = match project_materials {
                 Ok(project_materials) => project_materials,
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                     return;
                 }
             };
@@ -930,7 +994,7 @@ fn main() -> Result<(), slint::PlatformError> {
             let project_material = match project_material {
                 Some(m) => m,
                 None => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectDetailViewErrorMessage("Material not found".into());
                     return;
                 }
             };
@@ -941,7 +1005,7 @@ fn main() -> Result<(), slint::PlatformError> {
                 .delete_project_material(project_material.id, &token);
             // Check if the material was successfully deleted otherwise handle the error
             if let Err(e) = result {
-                todo!("Set UI error message");
+                ui.global::<Backend>().set_projectDetailViewErrorMessage(e.to_string().into());
                 return;
             }
 
@@ -962,7 +1026,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -979,7 +1043,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the material type was successfully created otherwise handle the error
             match result {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(_) => {
@@ -988,7 +1052,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     // Check if the material types were successfully retrieved otherwise handle the error
                     let types = match types {
                         Err(e) => {
-                            todo!("Set UI error message");
+                            ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                             return;
                         }
                         Ok(types) => types,
@@ -1010,7 +1074,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the token was successfully retrieved otherwise handle the error
             let token = match token {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(token) => token,
@@ -1028,7 +1092,7 @@ fn main() -> Result<(), slint::PlatformError> {
             // Check if the client was successfully created otherwise handle the error
             match result {
                 Err(e) => {
-                    todo!("Set UI error message");
+                    ui.global::<Backend>().set_projectManagementErrorMessage(e.to_string().into());
                     return;
                 }
                 Ok(_) => {
