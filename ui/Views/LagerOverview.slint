@@ -5,7 +5,7 @@
 
 */
 import { WMSAppbar } from "../Widgets/WMSAppbar.slint";
-import { VerticalBox, HorizontalBox, GridBox, Slider } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox, GridBox, Slider, ScrollView } from "std-widgets.slint";
 import { TextField } from "../Widgets/TextField.slint";
 import { Button } from "../Widgets/Button.slint";
 import { Palette } from "../Palette.slint";
@@ -18,135 +18,139 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 import { Backend } from "../Backend.slint";
 
 
-export component LagerOverview inherits VerticalBox {
+export component LagerOverview inherits ScrollView {
     in-out property <[Material]> materials;
     in-out property <string> searchText;
     property <length> topPadding: 20px;
+    
+    VerticalBox {
+        
 
-    alignment: start;
-    Rectangle {
-        height: topPadding;
-    }
-
-    TitleSection {
-        title: Constants.warehouse_management;
-    }
-
-    WMSAppbar {
-        buttonTitleFirst: "Add Material";
-        showSecondButton: true;
-        onFirstButtonPressed => {
-            Backend.showAddNewMaterialPopUp();
-        }
-        edited => {
-            Backend.search-material(self.searchText);
-        }
-        firstButtonWidth: 150px;
-        buttonTitleSecond: "Add Material Type";
-        secondButtonWidth: 200px;
-        onSecondButtonPress => {
-            Backend.showAddNewMaterialTypePopUp();
-        }
-    }
-
-    HorizontalLayout {
         alignment: start;
-        ErrorMessage {
-            title: Backend.lagerOverviewErrorMessage;
+        Rectangle {
+            height: topPadding;
         }
-    }
 
-    Rectangle {
-        height: 30px;
-    }
+        TitleSection {
+            title: Constants.warehouse_management;
+        }
 
-    HorizontalBox {
-        alignment: LayoutAlignment.start;
-    }
+        WMSAppbar {
+            buttonTitleFirst: "Add Material";
+            showSecondButton: true;
+            onFirstButtonPressed => {
+                Backend.showAddNewMaterialPopUp();
+            }
+            edited => {
+                Backend.search-material(self.searchText);
+            }
+            firstButtonWidth: 150px;
+            buttonTitleSecond: "Add Material Type";
+            secondButtonWidth: 200px;
+            onSecondButtonPress => {
+                Backend.showAddNewMaterialTypePopUp();
+            }
+        }
 
-    HorizontalLayout {
-        alignment: start;
-        Text {
-            text: "Name";
-            font-size: Palette.font-size * 1px;
+        HorizontalLayout {
+            alignment: start;
+            ErrorMessage {
+                title: Backend.lagerOverviewErrorMessage;
+            }
         }
 
         Rectangle {
-            width: 330px;
+            height: 30px;
         }
 
-        Text {
-            text: "Price";
-            font-size: Palette.font-size * 1px;
+        HorizontalBox {
+            alignment: LayoutAlignment.start;
         }
 
-        Rectangle {
-            width: 120px;
+        HorizontalLayout {
+            alignment: start;
+            Text {
+                text: "Name";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 330px;
+            }
+
+            Text {
+                text: "Price";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 120px;
+            }
+
+            Text {
+                text: "Amount";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 110px;
+            }
+
+            Text {
+                text: "Type";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 120px;
+            }
+
+            Text {
+                text: "Threshold";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 65px;
+            }
+
+            Text {
+                text: "Description";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 300px;
+            }
+
+            Text {
+                text: "Edit";
+                font-size: Palette.font-size * 1px;
+            }
+
+            Rectangle {
+                width: 15px;
+            }
+
+            Text {
+                text: "Delete";
+                font-size: Palette.font-size * 1px;
+            }
         }
 
-        Text {
-            text: "Amount";
-            font-size: Palette.font-size * 1px;
-        }
-
-        Rectangle {
-            width: 110px;
-        }
-
-        Text {
-            text: "Type";
-            font-size: Palette.font-size * 1px;
-        }
-
-        Rectangle {
-            width: 120px;
-        }
-
-        Text {
-            text: "Threshold";
-            font-size: Palette.font-size * 1px;
-        }
-
-        Rectangle {
-            width: 65px;
-        }
-
-        Text {
-            text: "Description";
-            font-size: Palette.font-size * 1px;
-        }
-
-        Rectangle {
-            width: 300px;
-        }
-
-        Text {
-            text: "Edit";
-            font-size: Palette.font-size * 1px;
-        }
-
-        Rectangle {
-            width: 15px;
-        }
-
-        Text {
-            text: "Delete";
-            font-size: Palette.font-size * 1px;
-        }
-    }
-
-    for material[i] in materials: LagerRow {
-        name: materials[i].name;
-        price: materials[i].price;
-        m_type: materials[i].m_type.name;
-        amount: materials[i].quantity;
-        rememberWhen: "never";
-        description: materials[i].description;
-        onEditClicked => {
-            Backend.editMaterial(materials[i].id);
-        }
-        onDeleteClicked => {
-            Backend.delete-material(materials[i].id);
+        for material[i] in materials: LagerRow {
+            name: materials[i].name;
+            price: materials[i].price;
+            m_type: materials[i].m_type.name;
+            amount: materials[i].quantity;
+            rememberWhen: "never";
+            description: materials[i].description;
+            onEditClicked => {
+                Backend.editMaterial(materials[i].id);
+            }
+            onDeleteClicked => {
+                Backend.delete-material(materials[i].id);
+            }
         }
     }
 }

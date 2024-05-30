@@ -100,8 +100,17 @@ export component ProjectView inherits Rectangle {
         }
 
         HorizontalBox {
+        
             VerticalBox {
                 // iterates over the list of projects that has been used recently
+                ProjectRowShort {
+                    turnOffBackgroundAndBorder: true;
+                    project: "Name";
+                    client: "Client";
+                    costs: "Current Costs";
+                    deadline: "Deadline";
+                
+                }
                 for item[i] in recentProjects: ProjectRowShort {
                     project: recentProjects[i].name;
                     client: recentProjects[i].client.firstName + " " + recentProjects[i].client.lastName;
@@ -111,7 +120,8 @@ export component ProjectView inherits Rectangle {
                         Backend.route-to-project-i(recentProjects[i].id);
                     }
                 }
-                Rectangle { }
+                // Some space at the end of the screen if there are more projects
+                Rectangle { height: 20px;}
             }
 
             // Material Section
