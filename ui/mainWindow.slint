@@ -62,30 +62,28 @@ export component WorkshopClient inherits Window {
 
     ProjectView {
         // Fertig, bis auf Errormeldung
-        //visible <=> Backend.projectView;
-        visible: false;
+        visible <=> Backend.projectView;
+        //visible: false;
         recentProjects: MockModel.recentProjects;
-        //materialAlerts: MockModel.materials;
         materialAlerts: MockModel.materials;
     }
 
     ProjectManagement { // Fertig bis auf error und scrollbereich
-        //visible <=> Backend.projectManagementView;
-        visible: false;
-        //allProjects: MockModel.allProjectsMockList;
+        visible <=> Backend.projectManagementView;
+        //visible: false;
         allProjects: MockModel.allProjectsMockList;
     }
 
     ProjectDetailView {
-        //visible <=> Backend.projectDetailView;
-        visible: false;
+        visible <=> Backend.projectDetailView;
+        //visible: false;
         project: MockModel.projectWithMats;
         clients: MockModel.clientListAsString;
     }
 
     LagerOverview {
-        //visible <=> Backend.lagerOverviewView;
-        visible: true;
+        visible <=> Backend.lagerOverviewView;
+        //visible: true;
         materials: MockModel.materialList;
     }
 
@@ -101,23 +99,18 @@ export component WorkshopClient inherits Window {
     }
 
     ClientPopUp {
-        //visible <=> Backend.showClientPopUp;
-        visible: false;
+        visible <=> Backend.showClientPopUp;
+        //visible: false;
     }
 
     MaterialPopUp {
-        //visible <=> Backend.showMaterialPopUp;
-        visible: false;
+        visible <=> Backend.showMaterialPopUp;
+        //visible: false;
     }
 
     MaterialTypePopUp {
-        //visible <=> Backend.showMaterialTypePopUp;
-        visible: false;
+        visible <=> Backend.showMaterialTypePopUp;
+        //visible: false;
     }
 }
 
-
-//TODOS: 
-// TODO(jmeusel): MaterialPopUp ggf. nach Absprache anpassen ( Type Combobox )
-// TODO(jmeusel): ClientScreen bauen
-// TODO(jmeusel): functions anbinden  -> materials:  add_new_material, delete_material, update_material 

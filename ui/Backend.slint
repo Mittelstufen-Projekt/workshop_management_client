@@ -10,74 +10,72 @@ import { ProjectModel } from "../ui/models/ProjectModel.slint";
 
 export global Backend {
 
-    // Folgende funktionen müssen noch zugeordnet und sortiert werden!!!!!!!!1
+    // Material exclusive
     callback update-material();
     // Property: id from the Material which should be deleted
     callback delete-material(int);
     callback create-material();
 
     // Login View -------------------------------------------------------------------------------------
-    callback request-login(); // Implemented
-    callback request-exit(); // Implemented
-    in-out property <string> username; // Implemented
-    in-out property <string> password; // Implemented
-    in-out property <string> login_error; // Implemented
+    callback request-login(); 
+    callback request-exit(); 
+    in-out property <string> username; 
+    in-out property <string> password; 
+    in-out property <string> login_error; 
 
     // Project View -------------------------------------------------------------------------------------
-    callback request-logout(); // Implemented
-    in-out property <[ProjectModel]> recentProjects; // Implemented
-    in-out property <[Material]> materialAlerts; // Implemented
+    callback request-logout(); 
+    in-out property <[ProjectModel]> recentProjects; 
+    in-out property <[Material]> materialAlerts; 
 
     // Project Detail View -------------------------------------------------------------------------------------
     // parameter: ID of the material to delete
-    callback deleteMaterial(int); // Implemented
-    // Reihenfolge: projectName, clientName, projectStart, projectDeadline, CalculatedCosts, currentCosts
+    callback deleteMaterial(int); 
     callback save-project(string, string, string, string, string, string);
     // parameter: ID of the material to edit
-    callback editMaterial(int); // Implemented
-    in-out property <ProjectModel> project; // Implemented    
+    callback editMaterial(int); 
+    in-out property <ProjectModel> project; 
 
     // Project Management View -------------------------------------------------------------------------------------
     //Navigiert zu einem neuen Leeren Projekt und übergibt lediglich eine neue Liste
-    callback create_new_project(); // Implemented
+    callback create_new_project(); 
     // parameter: ID of the project to delete
-    callback delete-project-i(int); // Implemented
+    callback delete-project-i(int); 
     // parameter: Name of the project to show
-    callback search-project(string); // Implemented
-    in-out property <[ProjectModel]> allProjects; // Implemented
+    callback search-project(string); 
+    in-out property <[ProjectModel]> allProjects; 
     // Reihenfolge: firstName, lastName, phone
-    callback saveClient(string, string, string); // Implemented
+    callback saveClient(string, string, string); 
 
     // LagerOverview -------------------------------------------------------------------------------------
-    // Reihenfolge: name, price, type, amount, thresholdValue, description
     callback save-materials(string, string, string, string, string, string);
     // parameter: Name of the material to show
-    callback search-material(string); // Implemented
-    in-out property <[Material]> materials; // Implemented
-    callback save-material-type(string,string); // Implemented
+    callback search-material(string); 
+    in-out property <[Material]> materials; 
+    callback save-material-type(string,string); 
 
     // Navigation: -------------------------------------------------------------------------------------
-    callback route-to-project-view(); // Implemented
-    callback route-to-project-management(); // Implemented
-    callback route-to-warehouse-management(); // Implemented
+    callback route-to-project-view(); 
+    callback route-to-project-management(); 
+    callback route-to-warehouse-management(); 
     // parameter: ID of the project to show
-    callback route-to-project-i(int); // Implemented
-    callback showAddNewClientPopUp (); // Implemented
-    callback showAddNewMaterialPopUp (); // Implemented
-    callback showAddNewMaterialTypePopUp (); // Implemented
-    callback hideMaterialPopUp(); // Implemented
-    callback hideClientPopUp(); // Implemented
-    callback hideMaterialTypePopUp(); // Implemented
+    callback route-to-project-i(int); 
+    callback showAddNewClientPopUp (); 
+    callback showAddNewMaterialPopUp (); 
+    callback showAddNewMaterialTypePopUp (); 
+    callback hideMaterialPopUp(); 
+    callback hideClientPopUp(); 
+    callback hideMaterialTypePopUp(); 
 
     // Variables for routing and navigation -------------------------------------------------------------------------------------
-    in-out property <bool> showClientPopUp; // Implemented
-    in-out property <bool> showMaterialPopUp; // Implemented
-    in-out property <bool> showMaterialTypePopUp; // Implemented
-    in-out property <bool> loginView; // Implemented
-    in-out property <bool> projectView; // Implemented
-    in-out property <bool> projectManagementView; // Implemented
-    in-out property <bool> projectDetailView; // Implemented
-    in-out property <bool> lagerOverviewView; // Implemented
+    in-out property <bool> showClientPopUp; 
+    in-out property <bool> showMaterialPopUp; 
+    in-out property <bool> showMaterialTypePopUp; 
+    in-out property <bool> loginView; 
+    in-out property <bool> projectView; 
+    in-out property <bool> projectManagementView; 
+    in-out property <bool> projectDetailView; 
+    in-out property <bool> lagerOverviewView; 
 
     in-out property <string> projectViewErrorMessage;
     in-out property <string> projectManagementErrorMessage;
