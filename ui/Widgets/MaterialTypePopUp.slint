@@ -4,6 +4,7 @@ import { Constants } from "../Constants.slint";
 import { Button } from "../Widgets/Button.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { Backend } from "../Backend.slint";
+import { Palette } from "../Palette.slint";
 
 
 // TODO(jmeusel): Rahmen drum oder ggf andere farbe
@@ -17,9 +18,12 @@ export component MaterialTypePopUp inherits Rectangle {
             alignment: start;
             padding-top: 200px;
             Rectangle {
-                background: lightgray;
+                background: Palette.control-color;
                 width: 400px;
                 height: 200px;
+                border-width: 4px;
+                border-color: Palette.accent-color;
+                border-radius: 6px;
                 VerticalBox {
                     HorizontalBox {
                         Text {

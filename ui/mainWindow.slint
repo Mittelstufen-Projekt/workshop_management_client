@@ -78,14 +78,14 @@ export component WorkshopClient inherits Window {
 
     ProjectDetailView {
         //visible <=> Backend.projectDetailView;
-        visible: true;
+        visible: false;
         project: MockModel.projectWithMats;
         clients: MockModel.clientListAsString;
     }
 
     LagerOverview {
         //visible <=> Backend.lagerOverviewView;
-        visible: false;
+        visible: true;
         materials: MockModel.materialList;
     }
 
@@ -107,7 +107,7 @@ export component WorkshopClient inherits Window {
 
     MaterialPopUp {
         //visible <=> Backend.showMaterialPopUp;
-        visible: false;
+        visible: true;
     }
 
     MaterialTypePopUp {

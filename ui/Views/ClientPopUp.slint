@@ -4,6 +4,7 @@ import { Constants } from "../Constants.slint";
 import { Button } from "../Widgets/Button.slint";
 import { ClientModel } from "../models/ClientModel.slint";
 import { Backend } from "../Backend.slint";
+import { Palette } from "../Palette.slint";
 
 
 export component ClientPopUp inherits Rectangle {
@@ -16,9 +17,12 @@ export component ClientPopUp inherits Rectangle {
             alignment: start;
             padding-top: 200px;
             Rectangle {
-                background: lightgray;
+                background: Palette.control-color;
                 width: 400px;
                 height: 260px;
+                border-width: 4px;
+                border-color: Palette.accent-color;
+                border-radius: 6px;
                 VerticalBox {
                     HorizontalBox {
                         Text {

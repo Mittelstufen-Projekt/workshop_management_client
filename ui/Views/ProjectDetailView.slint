@@ -26,11 +26,9 @@ export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> clients;
 
-    property <Material> mock;
     property <MaterialType> type;
     type: { name: "matType", description: "descrip" };
 
-    mock: { name: "Name", m_type: type, description: "", price: 0, quantity: 0 };
 
     property <string> suffix: ": ";
     property <length> topPadding: 20px;
