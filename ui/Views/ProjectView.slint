@@ -22,17 +22,24 @@ import { MaterialAlertShort } from "../Widgets/MaterialAlertShort.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { ProjectRowShort } from "../Widgets/ProjectRowShort.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 export component ProjectView inherits Rectangle {
 
     property <length> txt;
     txt: Palette.font-size * 1px;
-
+    in-out property <string> errorMessage;
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
+
+    // TODO(jmeusel): delete, its just for testing
+    errorMessage: "This is an example Errormessage 500#";
     VerticalBox {
         HorizontalBox {
-            alignment: LayoutAlignment.end;
+            alignment: LayoutAlignment.space-between;
+                ErrorMessage {
+                    title: errorMessage;
+                }
             Button {
                 text: Constants.logout;
                 clicked => {

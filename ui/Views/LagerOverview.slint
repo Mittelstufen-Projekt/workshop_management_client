@@ -14,12 +14,14 @@ import { Material } from "../models/MaterialModel.slint";
 import { Constants } from "../Constants.slint";
 import { Backend } from "../Backend.slint";
 import { TitleSection } from "../Widgets/TitleSeciton.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 
 // TODO(jmeusel): Material Count sollte Rot angezeigt werden falls der Wert unterschritten wird
 export component LagerOverview inherits VerticalBox {
     in-out property <[Material]> materials;
     in-out property <string> searchText;
+    in-out property <string> errorMessage;
     property <length> topPadding: 20px;
 
     alignment: start;
@@ -30,6 +32,7 @@ export component LagerOverview inherits VerticalBox {
     TitleSection {
         title: Constants.warehouse_management;
     }
+    
 
     WMSAppbar {
         buttonTitleFirst: "Add Material";
@@ -46,9 +49,15 @@ export component LagerOverview inherits VerticalBox {
             Backend.showAddNewMaterialTypePopUp();
         }
     }
+    HorizontalLayout {
+        alignment: start;
+        ErrorMessage {
+            title: errorMessage;
+        }
+    }
 
     Rectangle {
-        height: 80px;
+        height: 30px;
     }
 
     HorizontalBox {
@@ -64,6 +73,7 @@ export component LagerOverview inherits VerticalBox {
         rememberWhen: "never";
         description: materials[i].description;
         onEditClicked => {
+            // TODO(jmeusel): hinzufügen im BE glaube ich und hier aufrufen .. 
         }
         onDeleteClicked => {}
     }

@@ -14,14 +14,21 @@ import { Button } from "../Widgets/Button.slint";
 import { ProjectModel } from "../models/ProjectModel.slint";
 import { TitleSection } from "../Widgets/TitleSeciton.slint";
 import { Backend } from "../Backend.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 
 export component ProjectManagement inherits ScrollView {
 
     in-out property <[ProjectModel]> allProjects;
+    in-out property <string> errorMessage;
 
     VerticalBox {
         alignment: start;
+
+        Rectangle {
+            height: 20px;
+        }
+
         TitleSection {
             title: Constants.project_overview;
         }
@@ -42,6 +49,13 @@ export component ProjectManagement inherits ScrollView {
             }
         }
 
+        HorizontalLayout {
+            alignment: start;
+            ErrorMessage {
+                title: errorMessage;
+            }
+        }
+
         Rectangle {
             height: 50px;
         }
@@ -54,12 +68,14 @@ export component ProjectManagement inherits ScrollView {
                 deadline: "Deadline";
                 turnOffBackgroundAndBorder: true;
             }
+
             // invisible Rectangle to align with the listView lower in the Code
             Rectangle {
-            width: 35px;
-            height: 40px;
+                width: 35px;
+                height: 40px;
+            }
         }
-        }
+
         // iterates over the list of AllProjects
         for project[i] in allProjects: HorizontalLayout {
             ProjectRowShort {
@@ -71,19 +87,24 @@ export component ProjectManagement inherits ScrollView {
                     Backend.route-to-project-i(allProjects[i].id);
                 }
             }
-            Rectangle {width: 10px;}
-            Button {
-            width: 35px;
-            height: 50px;
-            text: "X";
-            fontSizeMultiplier: 1.5px;
-            clicked => {
-                Backend.delete-project-i(allProjects[i].id);
+
+            Rectangle {
+                width: 10px;
             }
-        }
+
+            Button {
+                width: 35px;
+                height: 50px;
+                text: "X";
+                fontSizeMultiplier: 1.5px;
+                clicked => {
+                    Backend.delete-project-i(allProjects[i].id);
+                }
+            }
         }
         Rectangle {
             max-width: 20px;
+            height: 50px;
         }
     }
 }

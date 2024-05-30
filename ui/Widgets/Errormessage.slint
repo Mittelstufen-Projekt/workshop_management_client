@@ -1,0 +1,11 @@
+import { TitleSection } from "TitleSeciton.slint";
+import { Palette } from "../Palette.slint";
+export component ErrorMessage inherits Rectangle{
+    in-out property <string> title;
+    Text {
+        text: title;
+        color: Palette.error-color;
+        font-size: Palette.font-size * 1px;
+        horizontal-alignment: TextHorizontalAlignment.left;
+    }
+}

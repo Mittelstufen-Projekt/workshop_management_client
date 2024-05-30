@@ -20,11 +20,13 @@ import { Backend } from "../Backend.slint";
 import { ClientModel } from "../models/ClientModel.slint";
 import { MaterialType } from "../models/MaterialTypeModel.slint";
 import { ProjectDetailRow } from "../Widgets/ProjectDetailRow.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> clients;
+    in-out property <string> errorMessage;
 
     property <MaterialType> type;
     type: { name: "matType", description: "descrip" };
@@ -43,7 +45,13 @@ export component ProjectDetailView inherits VerticalLayout {
         TitleSection {
             title: project.name;
         }
-
+        Rectangle {height: 10px;}
+        HorizontalLayout {
+            alignment: start;
+            ErrorMessage {
+                title: errorMessage;
+            }
+        }
         HorizontalLayout {
             alignment: start;
             VerticalBox {

@@ -5,11 +5,13 @@ import { Button } from "../Widgets/Button.slint";
 import { ClientModel } from "../models/ClientModel.slint";
 import { Backend } from "../Backend.slint";
 import { Palette } from "../Palette.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 
 export component ClientPopUp inherits Rectangle {
 
     in-out property <ClientModel> client;
+    in-out property <string> errorMessage;
 
     HorizontalLayout {
         alignment: center;
@@ -72,6 +74,10 @@ export component ClientPopUp inherits Rectangle {
                                       );
                             }
                         }
+                    }
+                    alignment: center;
+                    ErrorMessage {
+                        title: errorMessage;
                     }
                 }
             }

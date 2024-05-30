@@ -5,13 +5,15 @@ import { Button } from "../Widgets/Button.slint";
 import { Material } from "../models/MaterialModel.slint";
 import { Backend } from "../Backend.slint";
 import { Palette } from "../Palette.slint";
+import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 
-// TODO(jmeusel): Rahmen drum oder ggf andere farbe
 
 export component MaterialTypePopUp inherits Rectangle {
     // TODO(jmeusel): Type ändern
     in-out property <Material> material;
+    in-out property <string> errorMessage;
+    
     HorizontalLayout {
         alignment: center;
         VerticalLayout {
@@ -20,7 +22,7 @@ export component MaterialTypePopUp inherits Rectangle {
             Rectangle {
                 background: Palette.control-color;
                 width: 400px;
-                height: 200px;
+                height: 250px;
                 border-width: 4px;
                 border-color: Palette.accent-color;
                 border-radius: 6px;
@@ -66,7 +68,11 @@ export component MaterialTypePopUp inherits Rectangle {
                                 );
                             }
                         }
+                     
                     }
+                    ErrorMessage {
+                        title: errorMessage;
+                     }   
                 }
             }
         }
