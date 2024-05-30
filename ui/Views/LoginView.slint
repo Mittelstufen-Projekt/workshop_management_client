@@ -12,7 +12,7 @@ import { Backend } from "../Backend.slint";
 import { Constants } from "../Constants.slint";
 
 // Importing the standard widgets
-import { VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox, LineEdit } from "std-widgets.slint";
 
 // Importing the self made widgets
 import { ToggleSwitch } from "../Widgets/ToggleSwitch.slint";
@@ -32,18 +32,22 @@ export component LoginView inherits Rectangle {
                 color: Palette.text-color;
                 font-size: Palette.font-size * 1.2px;
             }
-            username := TextField {
+            username := LineEdit {
                 height: root.width * 0.027;
                 width: root.width * 0.2;
+                font-size: 20px;
             }
             Text {
                 text: "Password";
                 color: Palette.text-color;
                 font-size: Palette.font-size * 1.2px;
             }
-            password := TextField {
+            password := LineEdit {
                 height: root.width * 0.027;
                 width: root.width * 0.2;
+                input-type: InputType.password;
+                font-size: 20px;
+            
             }
             Rectangle {
                 height: root.width * 0.02;

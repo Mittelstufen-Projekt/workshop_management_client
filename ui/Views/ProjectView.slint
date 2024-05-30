@@ -31,7 +31,6 @@ export component ProjectView inherits Rectangle {
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
 
-    // TODO(jmeusel): delete, its just for testing
     VerticalBox {
         HorizontalBox {
             alignment: LayoutAlignment.space-between;
@@ -67,7 +66,6 @@ export component ProjectView inherits Rectangle {
                 }
             }
 
-            // Empty rectangle to influence the alignment
             Rectangle { max-width: 350px;}
 
             Text {
