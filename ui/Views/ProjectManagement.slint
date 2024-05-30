@@ -20,7 +20,6 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 export component ProjectManagement inherits ScrollView {
 
     in-out property <[ProjectModel]> allProjects;
-    in-out property <string> errorMessage;
 
     VerticalBox {
         alignment: start;
@@ -52,7 +51,7 @@ export component ProjectManagement inherits ScrollView {
         HorizontalLayout {
             alignment: start;
             ErrorMessage {
-                title: errorMessage;
+                title: Backend.projectManagementErrorMessage;
             }
         }
 

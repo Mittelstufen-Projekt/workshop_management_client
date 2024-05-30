@@ -21,7 +21,6 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 export component LagerOverview inherits VerticalBox {
     in-out property <[Material]> materials;
     in-out property <string> searchText;
-    in-out property <string> errorMessage;
     property <length> topPadding: 20px;
 
     alignment: start;
@@ -52,7 +51,7 @@ export component LagerOverview inherits VerticalBox {
     HorizontalLayout {
         alignment: start;
         ErrorMessage {
-            title: errorMessage;
+            title: Backend.lagerOverviewErrorMessage;
         }
     }
 

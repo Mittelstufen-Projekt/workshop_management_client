@@ -26,7 +26,6 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 export component ProjectDetailView inherits VerticalLayout {
     in-out property <ProjectModel> project;
     in-out property <[string]> clients;
-    in-out property <string> errorMessage;
 
     property <MaterialType> type;
     type: { name: "matType", description: "descrip" };
@@ -49,7 +48,7 @@ export component ProjectDetailView inherits VerticalLayout {
         HorizontalLayout {
             alignment: start;
             ErrorMessage {
-                title: errorMessage;
+                title: Backend.projectDetailViewErrorMessage;
             }
         }
         HorizontalLayout {

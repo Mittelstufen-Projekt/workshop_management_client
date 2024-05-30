@@ -11,8 +11,9 @@ import { ProjectModel } from "../ui/models/ProjectModel.slint";
 export global Backend {
 
     // Folgende funktionen müssen noch zugeordnet und sortiert werden!!!!!!!!1
-    callback update_material();
-
+    callback update-material();
+    callback delete-material();
+    callback create-material();
 
     // Login View -------------------------------------------------------------------------------------
     callback request-login(); // Implemented
@@ -76,4 +77,12 @@ export global Backend {
     in-out property <bool> projectManagementView; // Implemented
     in-out property <bool> projectDetailView; // Implemented
     in-out property <bool> lagerOverviewView; // Implemented
+
+    in-out property <string> projectViewErrorMessage;
+    in-out property <string> projectManagementErrorMessage;
+    in-out property <string> projectDetailViewErrorMessage;
+    in-out property <string> lagerOverviewErrorMessage;
+    in-out property <string> clientPopUpErrorMessage;
+    in-out property <string> materialPopUpErrorMessage;
+    in-out property <string> materialTypePopUpErrorMessage;
 }

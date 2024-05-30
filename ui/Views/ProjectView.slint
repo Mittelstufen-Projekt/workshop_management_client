@@ -28,17 +28,15 @@ export component ProjectView inherits Rectangle {
 
     property <length> txt;
     txt: Palette.font-size * 1px;
-    in-out property <string> errorMessage;
     in-out property <[ProjectModel]> recentProjects;
     in-out property <[Material]> materialAlerts;
 
     // TODO(jmeusel): delete, its just for testing
-    errorMessage: "This is an example Errormessage 500#";
     VerticalBox {
         HorizontalBox {
             alignment: LayoutAlignment.space-between;
                 ErrorMessage {
-                    title: errorMessage;
+                    title: Backend.projectViewErrorMessage;
                 }
             Button {
                 text: Constants.logout;

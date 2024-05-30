@@ -12,7 +12,6 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 export component MaterialTypePopUp inherits Rectangle {
     // TODO(jmeusel): Type ändern
     in-out property <Material> material;
-    in-out property <string> errorMessage;
     
     HorizontalLayout {
         alignment: center;
@@ -71,7 +70,7 @@ export component MaterialTypePopUp inherits Rectangle {
                      
                     }
                     ErrorMessage {
-                        title: errorMessage;
+                        title: Backend.materialTypePopUpErrorMessage;
                      }   
                 }
             }

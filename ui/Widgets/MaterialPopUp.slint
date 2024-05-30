@@ -11,7 +11,6 @@ import { ErrorMessage } from "../Widgets/Errormessage.slint";
 
 export component MaterialPopUp inherits Rectangle {
     in-out property <Material> material;
-    in-out property <string> errorMessage;
 
     // TODO(jmeusel): ggf typ als ComboBox ändern    
     HorizontalLayout {
@@ -112,7 +111,7 @@ export component MaterialPopUp inherits Rectangle {
                         
                     }
                     ErrorMessage {
-                        title: errorMessage;
+                        title: Backend.materialPopUpErrorMessage;
                     }
                 }
             }

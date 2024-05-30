@@ -29,7 +29,7 @@ slint::include_modules!();
 fn main() -> Result<(), slint::PlatformError> {
     // Make the window fullscreen
     // DISABLE ON MACOS (crashes for some reason)
-    std::env::set_var("SLINT_FULLSCREEN", "1");
+    //std::env::set_var("SLINT_FULLSCREEN", "1");
 
     let ui = WorkshopClient::new()?;
 
