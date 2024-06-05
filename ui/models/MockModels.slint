@@ -26,12 +26,12 @@ export global MockModel {
     modelMock3: {name: "ProjName3", client: clientMock2, project_start: "heute", project_deadline: "deadline", calculated_costs:2929.99, current_costs: 194.72, mats: []};
 
     modelMock4: {name: "ProjName4", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2979.99, current_costs: 194.72, mats: []};
-    modelMock5: {name: "ProjName5", client: clientMock4, project_start: "heute", project_deadline: "deadline", calculated_costs:2959.99, current_costs: 19344.72, mats: []};
+    modelMock5: {name: "ProjName5", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2959.99, current_costs: 19344.72, mats: []};
     modelMock6: {name: "ProjName6", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2949.99, current_costs: 19224.7212, mats: []};
     modelMock7: {name: "ProjName7", client: clientMock1, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 19554.72, mats: []};
     modelMock8: {name: "ProjName8", client: clientMock2, project_start: "heute", project_deadline: "deadline", calculated_costs:99.99, current_costs: 19674.72, mats: []};
     modelMock9: {name: "ProjName9", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 19424.72, mats: []};
-    modelMock10: {name: "ProjName11", client: clientMock4, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 1494.72, mats: []};
+    modelMock10: {name: "ProjName11", client: clientMock3, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.99, current_costs: 1494.72, mats: []};
     modelMock11: {name: "ProjName12", client: clientMock, project_start: "heute", project_deadline: "deadline", calculated_costs:2939.949, current_costs: 19324.72, mats: []};
 
     recentProjects: [modelMock, modelMock1, modelMock2, modelMock];
@@ -43,37 +43,31 @@ export global MockModel {
     in-out property <ClientModel> clientMock1;
     in-out property <ClientModel> clientMock2;
     in-out property <ClientModel> clientMock3;
-    in-out property <ClientModel> clientMock4;
 
     clientMock: {firstName: "Max", lastName: "Mustermann", phone: 015730023345};
-    clientMock1: {firstName: "Mus", lastName: "Meeeee", phone: 015730023345};
-    clientMock2: {firstName: "Maas", lastName: "AAAAArNe", phone: 015730023345};
-    clientMock3: {firstName: "kemo", lastName: "Bröld", phone: 015730023345};
-    clientMock4: {firstName: "Tarek", lastName: "Asterix", phone: 015730023345};
+    clientMock1: {firstName: "Felix", lastName: "Lange", phone: 015730023345};
+    clientMock2: {firstName: "Maas", lastName: "Arndt", phone: 015730023345};
+    clientMock3: {firstName: "Fridolin", lastName: "Bröld", phone: 015730023345};
 
 
-    clientList: [clientMock, clientMock1, clientMock2, clientMock3, clientMock4];
+    clientList: [clientMock, clientMock1, clientMock2, clientMock3];
     //ClientList as Strings
     in-out property <[string]> clientListAsString;
-    clientListAsString: [clientMock.lastName, clientMock1.lastName, clientMock2.lastName, clientMock3.lastName, clientMock4.lastName];
+    clientListAsString: [clientMock.lastName, clientMock1.lastName, clientMock2.lastName, clientMock3.lastName];
 
     //List of Materials 
     in-out property <Material> mat1;
     in-out property <Material> mat2;
     in-out property <Material> mat3;
     in-out property <Material> mat4;
-    in-out property <Material> mat5;
-    in-out property <Material> mat6;
     in-out property <[Material]> materials;
 
-    mat1: {name: "Material1 ", m_type: mataType,description: "Description1", price: 11.11, quantity: 11, threshold_value: 10};
-    mat2: {name: "Material2", m_type: mataType1,description: "Description2", price: 22.22, quantity: 22, threshold_value: 0};
-    mat3: {name: "Material3", m_type: mataType2,description: "Description3", price: 33.33, quantity: 33, threshold_value: 80};
-    mat4: {name: "Material4", m_type: mataType3,description: "Description4", price: 44.44, quantity: 44, threshold_value: 10};
-    mat5: {name: "Material5", m_type: mataType2,description: "Description5", price: 55.55, quantity: 55, threshold_value: 10};
-    mat6: {name: "Material6", m_type: mataType3,description: "Description6", price: 66.66, quantity: 66, threshold_value: 10};
+    mat1: {name: "Kantholz Fichte 6x6 ", m_type: mataType,description: "3m Fichtenkanthölzer", price: 11.11, quantity: 11, threshold_value: 10};
+    mat2: {name: "Spax Schraube 6x15", m_type: mataType1,description: "Eloxiert", price: 22.22, quantity: 150, threshold_value: 20};
+    mat3: {name: "Eichen Bohlen", m_type: mataType2,description: "3m Bohle 60cm Breit und 4cm dick", price: 60, quantity: 10, threshold_value: 2};
+    mat4: {name: "Bessy Zwingen", m_type: mataType3,description: "Bessy Klemmzwingen", price: 44.44, quantity: 6, threshold_value: 2};
 
-    materials: [mat1,mat2,mat3,mat4,mat5,mat6];
+    materials: [mat1,mat2,mat3,mat4];
 
     //MaterialTypes
     in-out property <MaterialType> mataType;
@@ -81,10 +75,10 @@ export global MockModel {
     in-out property <MaterialType> mataType2;
     in-out property <MaterialType> mataType3;
     
-    mataType: {name: "t1", description: "d1"};
-    mataType1: {name: "t2", description: "d2"};
-    mataType2: {name: "t3", description: "d3"};
-    mataType3: {name: "t4", description: "d4"};
+    mataType: {name: "Kantholz", description: "Default für alle 4 Eckkanthölzer"};
+    mataType1: {name: "Schraube", description: "Default für alle Eloxierten Schrauben"};
+    mataType2: {name: "Eichen Bohle", description: "Default für alle Eichen Bohlen"};
+    mataType3: {name: "Zwinge", description: "Default für alle Zwingen"};
 
     in-out property <[MaterialType]> materialTypesList;
     materialTypesList: [mataType, mataType1, mataType2, mataType3];
@@ -93,7 +87,7 @@ export global MockModel {
     in-out property <[ProjectModel]> allProjectsMockList;
     allProjectsMockList: [modelMock, modelMock1, modelMock2, modelMock3, modelMock4, modelMock5, modelMock6, modelMock7, modelMock8, modelMock9, modelMock10, modelMock11,];
 
-    //Materials
+    /*//Materials
     in-out property <Material> material1;
     in-out property <Material> material2;
     in-out property <Material> material3;
@@ -101,14 +95,13 @@ export global MockModel {
     in-out property <Material> material5;
     in-out property <Material> material6;
 
-    material1: {name: "Holz", description: "Ich und mein Holz", price: 49.85, quantity: 12};
-    material2: {name: "Schraube 6x15", description: "Ich und die Schraube", price: 2.99, quantity: 36};
-    material3: {name: "Dübel 2x5", description: "Ich und mein Dübel", price: 0.36, quantity: 12};
-    material4: {name: "Nagel 0.5x4", description: "Nagelpiste", price: 2.12, quantity: 34};
-    material5: {name: "Baum", description: "Ich und mein Baum", price: 299.66, quantity: 2};
-    material6: {name: "Kohle", description: "Kooooooooohle ohne Ole", price: 44.12, quantity: 22};
+    material1: {name: "Kantholz Fichte 6x6", description: "3m Fichtenkanthölzer", price: 7.99, quantity: 12};
+    material2: {name: "Spax Schraube 6x15", description: "Eloxiert", price: 24.99, quantity: 150};
+    material3: {name: "Eichen Bohlen", description: "3m Bohle 60cm Breit und 4cm dick", price: 60, quantity: 5};
+    material4: {name: "Bessy Zwingen", description: "Bessy Klemmzwingen", price: 40, quantity: 6};*/
+
     in-out property <[Material]> materialList;
-    materialList: [material1,material2,material3,material4,material5, material6, mat1, mat2,mat3,mat4,mat5,mat6,];
+    materialList: [mat1, mat2,mat3,mat4];
     in property <ProjectModel> projectWithMats;
     projectWithMats: {name: "Project with mats", client: clientMock, project_start: "2024-04-18", project_deadline: "2024-06-02", calculated_costs:666, current_costs: 667-1, mats: materialList};
 
